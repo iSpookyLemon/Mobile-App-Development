@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,6 +16,7 @@
 		63197F062658388100AB17A9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63197F042658388100AB17A9 /* LaunchScreen.storyboard */; };
 		63197F112658388200AB17A9 /* FBLAMobileAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63197F102658388200AB17A9 /* FBLAMobileAppTests.swift */; };
 		63197F1C2658388200AB17A9 /* FBLAMobileAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63197F1B2658388200AB17A9 /* FBLAMobileAppUITests.swift */; };
+		63197F4C26583AA900AB17A9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 63197F4B26583AA900AB17A9 /* GoogleService-Info.plist */; };
 		7B85A2F885E06F6B1F7585DE /* Pods_FBLAMobileApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D826CC8CA317E059E34E811 /* Pods_FBLAMobileApp.framework */; };
 		967DCDED134FB25274128318 /* Pods_FBLAMobileApp_FBLAMobileAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC3108A2195FEAC0DF1412D0 /* Pods_FBLAMobileApp_FBLAMobileAppUITests.framework */; };
 /* End PBXBuildFile section */
@@ -56,6 +57,7 @@
 		63197F172658388200AB17A9 /* FBLAMobileAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FBLAMobileAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		63197F1B2658388200AB17A9 /* FBLAMobileAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBLAMobileAppUITests.swift; sourceTree = "<group>"; };
 		63197F1D2658388200AB17A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		63197F4B26583AA900AB17A9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6541701F0344698897562332 /* Pods-FBLAMobileApp-FBLAMobileAppUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FBLAMobileApp-FBLAMobileAppUITests.debug.xcconfig"; path = "Target Support Files/Pods-FBLAMobileApp-FBLAMobileAppUITests/Pods-FBLAMobileApp-FBLAMobileAppUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		730BBB9E5A06588E7B8690E4 /* Pods-FBLAMobileApp-FBLAMobileAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FBLAMobileApp-FBLAMobileAppUITests.release.xcconfig"; path = "Target Support Files/Pods-FBLAMobileApp-FBLAMobileAppUITests/Pods-FBLAMobileApp-FBLAMobileAppUITests.release.xcconfig"; sourceTree = "<group>"; };
 		7D826CC8CA317E059E34E811 /* Pods_FBLAMobileApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FBLAMobileApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -132,6 +134,7 @@
 				63197EFF2658387C00AB17A9 /* Main.storyboard */,
 				63197F022658388100AB17A9 /* Assets.xcassets */,
 				63197F042658388100AB17A9 /* LaunchScreen.storyboard */,
+				63197F4B26583AA900AB17A9 /* GoogleService-Info.plist */,
 				63197F072658388100AB17A9 /* Info.plist */,
 			);
 			path = FBLAMobileApp;
@@ -165,7 +168,6 @@
 				3C29D33A777B96546724AFCF /* Pods-FBLAMobileAppTests.debug.xcconfig */,
 				AB891E144210CF5DEA2D5808 /* Pods-FBLAMobileAppTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -280,6 +282,7 @@
 				63197F062658388100AB17A9 /* LaunchScreen.storyboard in Resources */,
 				63197F032658388100AB17A9 /* Assets.xcassets in Resources */,
 				63197F012658387C00AB17A9 /* Main.storyboard in Resources */,
+				63197F4C26583AA900AB17A9 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
