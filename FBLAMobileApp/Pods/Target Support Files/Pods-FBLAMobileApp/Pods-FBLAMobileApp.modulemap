@@ -1,6 +1,0 @@
-framework module Pods_FBLAMobileApp {
-  umbrella header "Pods-FBLAMobileApp-umbrella.h"
-
-  export *
-  module * { export * }
-}
