@@ -82,21 +82,39 @@
             </objects>
             <point key="canvasLocation" x="2352.1739130434785" y="54.910714285714285"/>
         </scene>
-        <!--View Controller-->
+        <!--Feed View Controller-->
         <scene sceneID="Ejz-5Y-Wel">
             <objects>
-                <viewController id="69Q-ip-E0e" sceneMemberID="viewController">
+                <viewController id="69Q-ip-E0e" customClass="FeedViewController" customModule="Voyage" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gmD-Sq-pc9">
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="fSB-db-ME7">
+                                <rect key="frame" x="20" y="64" width="388" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <scopeButtonTitles>
+                                    <string>Title</string>
+                                    <string>Title</string>
+                                </scopeButtonTitles>
+                            </searchBar>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="cEq-R0-x6t"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="cEq-R0-x6t" firstAttribute="trailing" secondItem="fSB-db-ME7" secondAttribute="trailing" constant="20" id="YlX-tI-7WW"/>
+                            <constraint firstItem="fSB-db-ME7" firstAttribute="top" secondItem="cEq-R0-x6t" secondAttribute="top" constant="20" id="l09-lF-Yqa"/>
+                            <constraint firstItem="fSB-db-ME7" firstAttribute="leading" secondItem="cEq-R0-x6t" secondAttribute="leading" constant="20" id="lBp-6e-bI7"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="homekit" catalog="system" id="06G-0G-mBA"/>
+                    <connections>
+                        <outlet property="searchBar" destination="fSB-db-ME7" id="nmO-y4-h9k"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hGW-m4-TXM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4214" y="-667"/>
+            <point key="canvasLocation" x="4212.6168224299063" y="-667.38660907127439"/>
         </scene>
         <!--User View Controller-->
         <scene sceneID="efH-Yf-2Z3">
