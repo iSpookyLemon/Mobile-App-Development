@@ -21,7 +21,7 @@
 		63197FF6265B1D5A00AB17A9 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63197FF1265B1D5A00AB17A9 /* HomeViewController.swift */; };
 		63197FF7265B1D5A00AB17A9 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63197FF2265B1D5A00AB17A9 /* UserViewController.swift */; };
 		63197FF8265B1D5A00AB17A9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63197FF3265B1D5A00AB17A9 /* LoginViewController.swift */; };
-		63198000265B1DC200AB17A9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63197FFF265B1DC200AB17A9 /* Main.storyboard */; };
+		63198000265B1DC200AB17A9 /* Main.Storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63197FFF265B1DC200AB17A9 /* Main.Storyboard */; };
 		65735104C2DE96D6543BD68C /* Pods_VoyageTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DB6C3D146D22CBD55018835 /* Pods_VoyageTests.framework */; };
 		7521EFCE76E119FD2FAF2D2E /* Pods_Voyage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFC84B235F3BA6E42D9A4C28 /* Pods_Voyage.framework */; };
 		E0D3520D7F958B3656CBFF2A /* Pods_Voyage_VoyageUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ED74728024D6CDCD80A9F7E /* Pods_Voyage_VoyageUITests.framework */; };
@@ -71,7 +71,7 @@
 		63197FF1265B1D5A00AB17A9 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		63197FF2265B1D5A00AB17A9 /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		63197FF3265B1D5A00AB17A9 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		63197FFF265B1DC200AB17A9 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		63197FFF265B1DC200AB17A9 /* Main.Storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.Storyboard; sourceTree = "<group>"; };
 		6B41AFC4DC1F357FA4DEC22A /* Pods-Voyage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Voyage.debug.xcconfig"; path = "Target Support Files/Pods-Voyage/Pods-Voyage.debug.xcconfig"; sourceTree = "<group>"; };
 		A06A599F742045517BB5BEB2 /* Pods-Voyage-VoyageUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Voyage-VoyageUITests.release.xcconfig"; path = "Target Support Files/Pods-Voyage-VoyageUITests/Pods-Voyage-VoyageUITests.release.xcconfig"; sourceTree = "<group>"; };
 		FFC84B235F3BA6E42D9A4C28 /* Pods_Voyage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Voyage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -134,7 +134,7 @@
 				63197F92265B172500AB17A9 /* AppDelegate.swift */,
 				63197F94265B172500AB17A9 /* SceneDelegate.swift */,
 				63197FEE265B1D5A00AB17A9 /* View Controllers */,
-				63197FFF265B1DC200AB17A9 /* Main.storyboard */,
+				63197FFF265B1DC200AB17A9 /* Main.Storyboard */,
 				63197F9B265B172A00AB17A9 /* Assets.xcassets */,
 				63197F9D265B172A00AB17A9 /* LaunchScreen.storyboard */,
 				63197FDE265B18A500AB17A9 /* GoogleService-Info.plist */,
@@ -314,7 +314,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				63197FDF265B18A600AB17A9 /* GoogleService-Info.plist in Resources */,
-				63198000265B1DC200AB17A9 /* Main.storyboard in Resources */,
+				63198000265B1DC200AB17A9 /* Main.Storyboard in Resources */,
 				63197F9F265B172A00AB17A9 /* LaunchScreen.storyboard in Resources */,
 				63197F9C265B172A00AB17A9 /* Assets.xcassets in Resources */,
 			);
