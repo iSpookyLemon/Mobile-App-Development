@@ -72,39 +72,47 @@
             </objects>
             <point key="canvasLocation" x="2350.934579439252" y="54.427645788336939"/>
         </scene>
-        <!--Feed View Controller-->
-        <scene sceneID="Ejz-5Y-Wel">
+        <!--Search Table View Controller-->
+        <scene sceneID="UY7-Wb-opd">
             <objects>
-                <viewController id="69Q-ip-E0e" customClass="FeedViewController" customModule="Voyage" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="gmD-Sq-pc9">
+                <tableViewController id="3je-fD-2hc" customClass="SearchTableViewController" customModule="Voyage" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="q2H-a6-l1y">
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <searchBar contentMode="redraw" text="" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="fSB-db-ME7">
-                                <rect key="frame" x="20" y="64" width="388" height="56"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <scopeButtonTitles>
-                                    <string>Title</string>
-                                    <string>Title</string>
-                                </scopeButtonTitles>
-                            </searchBar>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="cEq-R0-x6t"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="cEq-R0-x6t" firstAttribute="trailing" secondItem="fSB-db-ME7" secondAttribute="trailing" constant="20" id="YlX-tI-7WW"/>
-                            <constraint firstItem="fSB-db-ME7" firstAttribute="top" secondItem="cEq-R0-x6t" secondAttribute="top" constant="20" id="l09-lF-Yqa"/>
-                            <constraint firstItem="fSB-db-ME7" firstAttribute="leading" secondItem="cEq-R0-x6t" secondAttribute="leading" constant="20" id="lBp-6e-bI7"/>
-                        </constraints>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="" image="magnifyingglass" catalog="system" id="06G-0G-mBA"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" showsScopeBar="YES" id="fw9-Us-6b5">
+                            <rect key="frame" x="0.0" y="0.0" width="428" height="56"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <scopeButtonTitles>
+                                <string>Users</string>
+                                <string>Location</string>
+                                <string>Service</string>
+                            </scopeButtonTitles>
+                        </searchBar>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="COm-az-RvQ">
+                                <rect key="frame" x="0.0" y="84" width="428" height="43.666667938232422"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="COm-az-RvQ" id="YE1-rK-Pbp">
+                                    <rect key="frame" x="0.0" y="0.0" width="428" height="43.666667938232422"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="3je-fD-2hc" id="K2V-wj-qb8"/>
+                            <outlet property="delegate" destination="3je-fD-2hc" id="Sge-kQ-yEH"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" title="" image="magnifyingglass" catalog="system" id="j8D-tm-tVo"/>
                     <connections>
-                        <outlet property="searchBar" destination="fSB-db-ME7" id="nmO-y4-h9k"/>
+                        <outlet property="searchBar" destination="fw9-Us-6b5" id="Tet-D0-Hiz"/>
                     </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hGW-m4-TXM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0eZ-ub-nZt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4609" y="-621"/>
+            <point key="canvasLocation" x="4607" y="-588"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="KBa-bf-4gG">
@@ -372,7 +380,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="O1H-ah-ShV" kind="relationship" relationship="viewControllers" id="tar-y1-jdm"/>
-                        <segue destination="69Q-ip-E0e" kind="relationship" relationship="viewControllers" id="6EX-WC-rIl"/>
+                        <segue destination="3je-fD-2hc" kind="relationship" relationship="viewControllers" id="FSU-96-PWF"/>
                         <segue destination="eUx-3K-rMi" kind="relationship" relationship="viewControllers" id="hgE-SG-VqZ"/>
                     </connections>
                 </tabBarController>
