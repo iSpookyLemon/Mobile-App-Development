@@ -24,19 +24,21 @@ class FeedViewController: UIViewController, UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
         let db = Firestore.firestore()
-        let searchString = searchBar.text!
+        let searchString = searchBar.text!.lowercased()
         
-        db.collection("users")
-            .whereField("firstname", isLessThanOrEqualTo: searchString + "z")
-            .whereField("firstname", isGreaterThanOrEqualTo: searchString)
-            .getDocuments() { (querySnapshot, err) in
-                if let err = err {
-                    print("Error getting documents: \(err)")
-                } else {
-                    for document in querySnapshot!.documents {
-                        print("\(document.documentID) => \(document.data())")
+        if searchString != "" {
+            db.collection("users")
+                .whereField("fullnamelower", isLessThanOrEqualTo: searchString + "\u{f8ff}")
+                .whereField("fullnamelower", isGreaterThanOrEqualTo: searchString)
+                .getDocuments() { (querySnapshot, err) in
+                    if let err = err {
+                        print("Error getting documents: \(err)")
+                    } else {
+                        for document in querySnapshot!.documents {
+                            print("\(document.documentID) => \(document.data())")
+                        }
                     }
-                }
+            }
         }
     }
     

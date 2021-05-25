@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="FVu-7m-eq4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="FVu-7m-eq4">
     <device id="retina6_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -46,7 +46,7 @@
                                     <constraint firstItem="V8j-5j-NlR" firstAttribute="height" secondItem="gJt-Ta-TcA" secondAttribute="height" id="pTX-Vd-gVY"/>
                                 </constraints>
                             </stackView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" semanticContentAttribute="spatial" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="sc9-Et-a8J">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" semanticContentAttribute="spatial" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="sc9-Et-a8J">
                                 <rect key="frame" x="10" y="170" width="408" height="467"/>
                             </imageView>
                         </subviews>
@@ -58,7 +58,7 @@
                             <constraint firstItem="BqT-md-RhS" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="JoQ-0C-Npd"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="sc9-Et-a8J" secondAttribute="trailing" constant="10" id="Tsu-ok-8Xu"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="BqT-md-RhS" secondAttribute="trailing" constant="40" id="cRS-TS-Wca"/>
-                            <constraint firstItem="BqT-md-RhS" firstAttribute="top" secondItem="sc9-Et-a8J" secondAttribute="bottom" constant="140" id="zGp-ZK-GJU"/>
+                            <constraint firstItem="BqT-md-RhS" firstAttribute="top" secondItem="sc9-Et-a8J" secondAttribute="bottom" constant="135" id="zGp-ZK-GJU"/>
                             <constraint firstItem="sc9-Et-a8J" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="126" id="zLf-xH-Lxg"/>
                         </constraints>
                     </view>
@@ -81,7 +81,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" text="" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="fSB-db-ME7">
-                                <rect key="frame" x="20" y="64" width="388" height="51"/>
+                                <rect key="frame" x="20" y="64" width="388" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <scopeButtonTitles>
                                     <string>Title</string>
