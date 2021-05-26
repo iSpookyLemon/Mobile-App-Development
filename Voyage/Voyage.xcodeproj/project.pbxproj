@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2AEC1B3B265EAE5900CA1D63 /* SellerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEC1B3A265EAE5900CA1D63 /* SellerViewController.swift */; };
+		2AEC1B3D265EAF3600CA1D63 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEC1B3C265EAF3600CA1D63 /* ProfileViewController.swift */; };
 		63197F93265B172500AB17A9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63197F92265B172500AB17A9 /* AppDelegate.swift */; };
 		63197F95265B172500AB17A9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63197F94265B172500AB17A9 /* SceneDelegate.swift */; };
 		63197F9C265B172A00AB17A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63197F9B265B172A00AB17A9 /* Assets.xcassets */; };
@@ -50,6 +52,8 @@
 		0F525FD0702571766EE7FAF7 /* Pods-VoyageTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VoyageTests.debug.xcconfig"; path = "Target Support Files/Pods-VoyageTests/Pods-VoyageTests.debug.xcconfig"; sourceTree = "<group>"; };
 		12086944CCE1B89EFBCF4B24 /* Pods-Voyage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Voyage.release.xcconfig"; path = "Target Support Files/Pods-Voyage/Pods-Voyage.release.xcconfig"; sourceTree = "<group>"; };
 		29EFA953A3C74A0F0589130D /* Pods-VoyageTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VoyageTests.release.xcconfig"; path = "Target Support Files/Pods-VoyageTests/Pods-VoyageTests.release.xcconfig"; sourceTree = "<group>"; };
+		2AEC1B3A265EAE5900CA1D63 /* SellerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SellerViewController.swift; sourceTree = "<group>"; };
+		2AEC1B3C265EAF3600CA1D63 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		3BB175F5D5D72C5FA34735D6 /* Pods-Voyage-VoyageUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Voyage-VoyageUITests.debug.xcconfig"; path = "Target Support Files/Pods-Voyage-VoyageUITests/Pods-Voyage-VoyageUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		3ED74728024D6CDCD80A9F7E /* Pods_Voyage_VoyageUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Voyage_VoyageUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		63197F8F265B172500AB17A9 /* Voyage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Voyage.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -181,6 +185,8 @@
 				63197FF2265B1D5A00AB17A9 /* UserViewController.swift */,
 				63197FF3265B1D5A00AB17A9 /* LoginViewController.swift */,
 				63FD14E7265D40720052459C /* SearchTableViewController.swift */,
+				2AEC1B3A265EAE5900CA1D63 /* SellerViewController.swift */,
+				2AEC1B3C265EAF3600CA1D63 /* ProfileViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -453,8 +459,10 @@
 				63197FF6265B1D5A00AB17A9 /* HomeViewController.swift in Sources */,
 				63197F95265B172500AB17A9 /* SceneDelegate.swift in Sources */,
 				63197FF5265B1D5A00AB17A9 /* ViewController.swift in Sources */,
+				2AEC1B3D265EAF3600CA1D63 /* ProfileViewController.swift in Sources */,
 				63197FEA265B1D4800AB17A9 /* Utilities.swift in Sources */,
 				63FD14E8265D40720052459C /* SearchTableViewController.swift in Sources */,
+				2AEC1B3B265EAE5900CA1D63 /* SellerViewController.swift in Sources */,
 				63197FF8265B1D5A00AB17A9 /* LoginViewController.swift in Sources */,
 				63197FE9265B1D4800AB17A9 /* Constants.swift in Sources */,
 			);
