@@ -125,8 +125,26 @@
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="odK-0N-zLh">
                                 <rect key="frame" x="0.0" y="0.0" width="428" height="224"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Name" translatesAutoresizingMaskIntoConstraints="NO" id="9NK-rb-dYf">
+                                        <rect key="frame" x="10" y="52" width="410" height="164"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                </subviews>
                                 <color key="backgroundColor" red="1" green="0.52941176469999995" blue="0.023529411760000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="flA-yH-JfL">
+                                <rect key="frame" x="-5" y="783" width="438" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="0.52941176469999995" blue="0.023529411760000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Become a Seller">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <segue destination="sAM-JY-o7m" kind="show" id="zKA-gj-LUb"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="C2o-Z9-p3n"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -138,6 +156,22 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q6Q-jD-4o4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4606.5420560747662" y="702.37580993520521"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="7eR-1l-fdO">
+            <objects>
+                <viewController id="sAM-JY-o7m" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="NSo-Lz-zNS">
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="872"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="Eft-eQ-9i6"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="1KJ-6p-TrQ"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rhw-lY-VPN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4607" y="1396"/>
         </scene>
         <!--User View Controller-->
         <scene sceneID="efH-Yf-2Z3">
@@ -391,6 +425,7 @@
     </scenes>
     <resources>
         <image name="Logo" width="144" height="143"/>
+        <image name="Name" width="275.66665649414062" height="100.66666412353516"/>
         <image name="homekit" catalog="system" width="128" height="106"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="person.circle" catalog="system" width="128" height="121"/>
