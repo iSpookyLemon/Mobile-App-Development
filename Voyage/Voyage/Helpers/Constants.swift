@@ -15,5 +15,4 @@ struct Constants {
         static let viewController = "VC"
         
     }
-    
 }

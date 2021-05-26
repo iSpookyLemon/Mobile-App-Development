@@ -85,7 +85,6 @@ class SignUpViewController: UIViewController {
         if error != nil {
             
             // There's something wrong with the fields, show error message
-            // MIGHT NEED TO REMOVE SELF
             showError(error!)
         }
         else {
@@ -121,10 +120,7 @@ class SignUpViewController: UIViewController {
                     self.transitionToHome()
                 }
             }
-            
-            // Transition to the home screen
         }
-        
     }
     
     func showError(_ message:String) {
