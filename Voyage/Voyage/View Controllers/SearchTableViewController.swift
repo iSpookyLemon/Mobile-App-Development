@@ -47,7 +47,9 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
                     } else {
                         self.data.removeAll()
                         for document in querySnapshot!.documents {
-                            self.data.append(document.get("firstname") as! String)
+                            let firstName = document.get("firstname") as! String
+                            let lastName = document.get("lastname") as! String
+                            self.data.append(firstName + " " + lastName)
                             print("\(document.documentID) => \(document.data())")
                         }
                         self.tableView.reloadData()
