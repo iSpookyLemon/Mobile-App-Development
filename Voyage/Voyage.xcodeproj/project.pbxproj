@@ -183,7 +183,6 @@
 		63197FEE265B1D5A00AB17A9 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				63FD156D265FED3D0052459C /* UserTableViewCell.swift */,
 				63197FEF265B1D5A00AB17A9 /* SignUpViewController.swift */,
 				63197FF0265B1D5A00AB17A9 /* ViewController.swift */,
 				63197FF1265B1D5A00AB17A9 /* HomeViewController.swift */,
@@ -192,6 +191,7 @@
 				63FD14E7265D40720052459C /* SearchTableViewController.swift */,
 				2AEC1B3A265EAE5900CA1D63 /* SellerViewController.swift */,
 				2AEC1B3C265EAF3600CA1D63 /* ProfileViewController.swift */,
+				63FD156D265FED3D0052459C /* UserTableViewCell.swift */,
 				63FD1560265EB68B0052459C /* FeedTableViewController.swift */,
 			);
 			path = "View Controllers";

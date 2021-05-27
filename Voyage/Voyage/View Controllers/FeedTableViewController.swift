@@ -10,11 +10,11 @@ import FirebaseFirestore
 
 class FeedTableViewController: UITableViewController {
     
-    var data = [QueryDocumentSnapshot]()
+    var data = [DocumentSnapshot]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         let db = Firestore.firestore()
         
         db.collection("users").limit(to: 6).getDocuments() { (querySnapshot, err) in
@@ -25,6 +25,7 @@ class FeedTableViewController: UITableViewController {
                     print("\(document.documentID) => \(document.data())")
                 }
                 self.data = querySnapshot!.documents
+                self.tableView.reloadData()
             }
         }
 

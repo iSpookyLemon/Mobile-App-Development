@@ -341,10 +341,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="name" destination="tkx-Ma-0oh" id="gp8-1l-XIt"/>
-                                    <outlet property="price" destination="tdH-8L-Sw2" id="dwa-9O-9wE"/>
-                                    <outlet property="profileImage" destination="fWG-N9-DId" id="anU-Dd-vRV"/>
-                                    <outlet property="serviceDescription" destination="abX-Bk-pQY" id="nPc-bv-0Iv"/>
+                                    <outlet property="name" destination="tkx-Ma-0oh" id="azv-lA-clI"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
