@@ -8,7 +8,15 @@
 import UIKit
 
 class UserTableViewCell: UITableViewCell {
-
+    
+    @IBOutlet weak var profileImage: UIImageView!
+    
+    @IBOutlet weak var name: UILabel!
+    
+    @IBOutlet weak var serviceDescription: UILabel!
+    
+    @IBOutlet weak var price: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

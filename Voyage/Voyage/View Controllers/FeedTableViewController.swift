@@ -6,11 +6,27 @@
 //
 
 import UIKit
+import FirebaseFirestore
 
 class FeedTableViewController: UITableViewController {
+    
+    var data = [QueryDocumentSnapshot]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let db = Firestore.firestore()
+        
+        db.collection("users").limit(to: 6).getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    print("\(document.documentID) => \(document.data())")
+                }
+                self.data = querySnapshot!.documents
+            }
+        }
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -28,13 +44,21 @@ class FeedTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 15
+        return data.count
     }
 
     // Create the cell
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "userCell") as! UserTableViewCell
+        
+        // Fetch data for row
+        let person = data[indexPath.row]
+        
+        let firstName = person.get("firstname") as! String
+        let lastName = person.get("lastname") as! String
+        
+        cell.name.text = firstName + " " + lastName
         
         return cell
     }

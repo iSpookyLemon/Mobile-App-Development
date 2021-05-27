@@ -318,7 +318,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="This is my description" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bOQ-J3-z7v">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Description" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="abX-Bk-pQY">
                                                     <rect key="frame" x="0.0" y="205.33333333333334" width="348" height="88.333333333333343"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -340,6 +340,12 @@
                                         <constraint firstItem="MHL-8f-Le2" firstAttribute="leading" secondItem="L0g-Mb-4lD" secondAttribute="leadingMargin" constant="20" id="Rfy-bk-vqb"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="name" destination="tkx-Ma-0oh" id="gp8-1l-XIt"/>
+                                    <outlet property="price" destination="tdH-8L-Sw2" id="dwa-9O-9wE"/>
+                                    <outlet property="profileImage" destination="fWG-N9-DId" id="anU-Dd-vRV"/>
+                                    <outlet property="serviceDescription" destination="abX-Bk-pQY" id="nPc-bv-0Iv"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
