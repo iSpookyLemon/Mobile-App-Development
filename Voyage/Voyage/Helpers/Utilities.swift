@@ -76,4 +76,18 @@ class Utilities {
         return passwordTest.evaluate(with: password)
     }
     
+    static func isPhoneNumberValid(_ phoneNumber: String) -> Bool {
+        
+        let phoneNumberIsAllNumber = phoneNumber.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil
+        
+        if phoneNumber.count==10 && phoneNumberIsAllNumber{
+            return true
+        }
+        else{
+            return false
+        }
+        
+        
+    }
+    
 }
