@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseStorage
 
 class SellerViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
@@ -27,7 +28,6 @@ class SellerViewController: UIViewController, UINavigationControllerDelegate, UI
     
     @IBOutlet weak var errorLabel: UILabel!
     
-    
     @IBAction func importImageButton(_ sender: Any) {
         let image = UIImagePickerController()
         image.delegate = self
@@ -42,6 +42,8 @@ class SellerViewController: UIViewController, UINavigationControllerDelegate, UI
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
         {
             importImageImageView.image = image
+            
+            uploadImage(image)
         }
         else
         {
@@ -49,6 +51,34 @@ class SellerViewController: UIViewController, UINavigationControllerDelegate, UI
         }
         
         self.dismiss(animated:true, completion:nil)
+    }
+    
+    func uploadImage(_ image: UIImage) {
+        // Get a reference to the storage service using the default Firebase App
+        let storage = Storage.storage()
+
+        // Create a storage reference from our storage service
+        let storageRef = storage.reference()
+        
+        // Create a reference to the file you want to upload
+        let imageRef = storageRef.child("images/image.jpg")
+
+        // Upload the file to the path "images/rivers.jpg"
+        let uploadTask = imageRef.putData(image.jpegData(compressionQuality: 0.5)!, metadata: nil) { (metadata, error) in
+          guard let metadata = metadata else {
+            // Uh-oh, an error occurred!
+            return
+          }
+          // Metadata contains file metadata such as size, content-type.
+          let size = metadata.size
+          // You can also access to download URL after upload.
+          imageRef.downloadURL { (url, error) in
+            guard let downloadURL = url else {
+              // Uh-oh, an error occurred!
+              return
+            }
+          }
+        }
     }
     
     @IBOutlet weak var signUpServiceButton: UIButton!
@@ -96,15 +126,13 @@ class SellerViewController: UIViewController, UINavigationControllerDelegate, UI
         }
         //PUT AN ELSE
         
-        
-        
-        func showError(_ message:String) {
-            
-            errorLabel.text = message
-            errorLabel.alpha = 1
-        }
     }
     
+    func showError(_ message:String) {
+        
+        errorLabel.text = message
+        errorLabel.alpha = 1
+    }
 
     /*
     // MARK: - Navigation
