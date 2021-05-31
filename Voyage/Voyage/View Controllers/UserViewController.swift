@@ -8,9 +8,15 @@
 import UIKit
 
 class UserViewController: UIViewController {
-
+    
+    @IBOutlet weak var name: UILabel!
+    
+    var nameText = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.name.text = self.nameText
 
         // Do any additional setup after loading the view.
     }
