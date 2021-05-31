@@ -21,12 +21,12 @@
 		63197FF4265B1D5A00AB17A9 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63197FEF265B1D5A00AB17A9 /* SignUpViewController.swift */; };
 		63197FF5265B1D5A00AB17A9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63197FF0265B1D5A00AB17A9 /* ViewController.swift */; };
 		63197FF6265B1D5A00AB17A9 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63197FF1265B1D5A00AB17A9 /* HomeViewController.swift */; };
-		63197FF7265B1D5A00AB17A9 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63197FF2265B1D5A00AB17A9 /* UserViewController.swift */; };
 		63197FF8265B1D5A00AB17A9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63197FF3265B1D5A00AB17A9 /* LoginViewController.swift */; };
 		63198000265B1DC200AB17A9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63197FFF265B1DC200AB17A9 /* Main.storyboard */; };
 		63FD14E8265D40720052459C /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FD14E7265D40720052459C /* SearchTableViewController.swift */; };
 		63FD1561265EB68B0052459C /* FeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FD1560265EB68B0052459C /* FeedTableViewController.swift */; };
 		63FD156E265FED3D0052459C /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FD156D265FED3D0052459C /* UserTableViewCell.swift */; };
+		63FD1596266149420052459C /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FD1595266149420052459C /* UserViewController.swift */; };
 		65735104C2DE96D6543BD68C /* Pods_VoyageTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DB6C3D146D22CBD55018835 /* Pods_VoyageTests.framework */; };
 		7521EFCE76E119FD2FAF2D2E /* Pods_Voyage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFC84B235F3BA6E42D9A4C28 /* Pods_Voyage.framework */; };
 		E0D3520D7F958B3656CBFF2A /* Pods_Voyage_VoyageUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ED74728024D6CDCD80A9F7E /* Pods_Voyage_VoyageUITests.framework */; };
@@ -76,12 +76,12 @@
 		63197FEF265B1D5A00AB17A9 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		63197FF0265B1D5A00AB17A9 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		63197FF1265B1D5A00AB17A9 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		63197FF2265B1D5A00AB17A9 /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		63197FF3265B1D5A00AB17A9 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		63197FFF265B1DC200AB17A9 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		63FD14E7265D40720052459C /* SearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
 		63FD1560265EB68B0052459C /* FeedTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewController.swift; sourceTree = "<group>"; };
 		63FD156D265FED3D0052459C /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
+		63FD1595266149420052459C /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		6B41AFC4DC1F357FA4DEC22A /* Pods-Voyage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Voyage.debug.xcconfig"; path = "Target Support Files/Pods-Voyage/Pods-Voyage.debug.xcconfig"; sourceTree = "<group>"; };
 		A06A599F742045517BB5BEB2 /* Pods-Voyage-VoyageUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Voyage-VoyageUITests.release.xcconfig"; path = "Target Support Files/Pods-Voyage-VoyageUITests/Pods-Voyage-VoyageUITests.release.xcconfig"; sourceTree = "<group>"; };
 		FFC84B235F3BA6E42D9A4C28 /* Pods_Voyage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Voyage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -186,13 +186,13 @@
 				63197FEF265B1D5A00AB17A9 /* SignUpViewController.swift */,
 				63197FF0265B1D5A00AB17A9 /* ViewController.swift */,
 				63197FF1265B1D5A00AB17A9 /* HomeViewController.swift */,
-				63197FF2265B1D5A00AB17A9 /* UserViewController.swift */,
 				63197FF3265B1D5A00AB17A9 /* LoginViewController.swift */,
 				63FD14E7265D40720052459C /* SearchTableViewController.swift */,
 				2AEC1B3A265EAE5900CA1D63 /* SellerViewController.swift */,
 				2AEC1B3C265EAF3600CA1D63 /* ProfileViewController.swift */,
 				63FD156D265FED3D0052459C /* UserTableViewCell.swift */,
 				63FD1560265EB68B0052459C /* FeedTableViewController.swift */,
+				63FD1595266149420052459C /* UserViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -460,13 +460,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				63197FF4265B1D5A00AB17A9 /* SignUpViewController.swift in Sources */,
-				63197FF7265B1D5A00AB17A9 /* UserViewController.swift in Sources */,
 				63FD156E265FED3D0052459C /* UserTableViewCell.swift in Sources */,
 				63FD1561265EB68B0052459C /* FeedTableViewController.swift in Sources */,
 				63197F93265B172500AB17A9 /* AppDelegate.swift in Sources */,
 				63197FF6265B1D5A00AB17A9 /* HomeViewController.swift in Sources */,
 				63197F95265B172500AB17A9 /* SceneDelegate.swift in Sources */,
 				63197FF5265B1D5A00AB17A9 /* ViewController.swift in Sources */,
+				63FD1596266149420052459C /* UserViewController.swift in Sources */,
 				2AEC1B3D265EAF3600CA1D63 /* ProfileViewController.swift in Sources */,
 				63197FEA265B1D4800AB17A9 /* Utilities.swift in Sources */,
 				63FD14E8265D40720052459C /* SearchTableViewController.swift in Sources */,
