@@ -12,7 +12,7 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
     
     @IBOutlet weak var searchBar: UISearchBar!
     
-    var data = [String]()
+    var data = [DocumentSnapshot]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,9 +47,7 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
                     } else {
                         self.data.removeAll()
                         for document in querySnapshot!.documents {
-                            let firstName = document.get("firstname") as! String
-                            let lastName = document.get("lastname") as! String
-                            self.data.append(firstName + " " + lastName)
+                            self.data = querySnapshot!.documents
                             print("\(document.documentID) => \(document.data())")
                         }
                         self.tableView.reloadData()
@@ -87,9 +85,27 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell")! as UITableViewCell
         
-        cell.textLabel?.text = data[indexPath.row]
+        let document = data[indexPath.row]
+        
+        let firstName = document.get("firstname") as! String
+        let lastName = document.get("lastname") as! String
+        
+        cell.textLabel?.text = firstName + " " + lastName
         
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let selectedUser = data[indexPath.row]
+        
+        let firstName = selectedUser.get("firstname") as! String
+        let lastName = selectedUser.get("lastname") as! String
+        
+        if let viewController = storyboard?.instantiateViewController(identifier: Constants.Storyboard.userViewController) as? UserViewController {
+                viewController.nameText = firstName + " " + lastName
+                navigationController?.pushViewController(viewController, animated: true)
+            }
     }
 
     /*
