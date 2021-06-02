@@ -190,10 +190,26 @@
                                         <rect key="frame" x="10" y="52" width="410" height="164"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S8a-ao-I79">
+                                        <rect key="frame" x="348" y="40" width="40" height="40"/>
+                                        <accessibility key="accessibilityConfiguration">
+                                            <accessibilityTraits key="traits" button="YES" image="YES"/>
+                                        </accessibility>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="hmB-QX-13o"/>
+                                            <constraint firstAttribute="width" constant="40" id="vM3-cm-Eno"/>
+                                        </constraints>
+                                        <state key="normal" image="gearshape.fill" catalog="system"/>
+                                        <connections>
+                                            <segue destination="8Tn-KE-WVD" kind="show" id="MsP-RR-Y8g"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.52941176469999995" blue="0.023529411760000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="S8a-ao-I79" secondAttribute="trailing" constant="40" id="DlP-em-Uni"/>
                                     <constraint firstAttribute="height" constant="230" id="Wtf-PW-X7B"/>
+                                    <constraint firstItem="S8a-ao-I79" firstAttribute="top" secondItem="odK-0N-zLh" secondAttribute="top" constant="40" id="tmX-E0-qVl"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="flA-yH-JfL">
@@ -240,6 +256,36 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q6Q-jD-4o4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4606.5420560747662" y="702.37580993520521"/>
+        </scene>
+        <!--Settings View Controller-->
+        <scene sceneID="xsC-cG-Iz1">
+            <objects>
+                <viewController id="8Tn-KE-WVD" customClass="SettingsViewController" customModule="Voyage" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="eao-dy-w6g">
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="872"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z3H-a1-YzU">
+                                <rect key="frame" x="40" y="769" width="348" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Sign Out"/>
+                                <connections>
+                                    <action selector="signOut:" destination="8Tn-KE-WVD" eventType="touchUpInside" id="b1M-9H-GKE"/>
+                                    <action selector="signOutTapped:" destination="eUx-3K-rMi" eventType="touchUpInside" id="tnd-MS-e3Q"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Eb1-kP-GLD"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="4nh-EH-Fj1"/>
+                    <connections>
+                        <outlet property="signOut" destination="z3H-a1-YzU" id="CW4-qR-3mr"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vl9-Ic-bWa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5507" y="702"/>
         </scene>
         <!--Seller View Controller-->
         <scene sceneID="7eR-1l-fdO">
@@ -657,6 +703,7 @@
     <resources>
         <image name="Logo" width="144" height="143"/>
         <image name="Name" width="275.66665649414062" height="100.66666412353516"/>
+        <image name="gearshape.fill" catalog="system" width="128" height="121"/>
         <image name="homekit" catalog="system" width="128" height="106"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="person.circle" catalog="system" width="128" height="121"/>
