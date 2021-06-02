@@ -9,25 +9,11 @@ import UIKit
 import FirebaseAuth
 
 class ProfileViewController: UIViewController {
-
-    @IBOutlet weak var signOut: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-    }
-    
-    @IBAction func signOutTapped(_ sender: Any) {
-        do {
-            try Auth.auth().signOut()
-            let viewController = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.viewController) as? ViewController
-            
-            self.view.window?.rootViewController = viewController
-            self.view.window?.makeKeyAndVisible()
-        } catch let signOutError as NSError {
-            print("Error signing out: %@", signOutError)
-        }
     }
 
     /*

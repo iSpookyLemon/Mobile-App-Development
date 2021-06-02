@@ -131,19 +131,19 @@
                                             <constraint firstAttribute="height" constant="200" id="qZ3-O0-09y"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e7c-sa-vcG">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e7c-sa-vcG">
                                         <rect key="frame" x="0.0" y="220" width="388" height="20.333333333333343"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Description" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="26a-3L-aJ6">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Description" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="26a-3L-aJ6">
                                         <rect key="frame" x="0.0" y="260.33333333333337" width="388" height="507.33333333333337"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VQq-Uc-WxP">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VQq-Uc-WxP">
                                         <rect key="frame" x="0.0" y="787.66666666666663" width="388" height="20.333333333333371"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
@@ -224,34 +224,18 @@
                                     <segue destination="sAM-JY-o7m" kind="show" id="zKA-gj-LUb"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ryf-JB-r4z">
-                                <rect key="frame" x="40" y="250" width="348" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="dxB-Nc-Bq4"/>
-                                </constraints>
-                                <state key="normal" title="Sign Out"/>
-                                <connections>
-                                    <action selector="signOutTapped:" destination="eUx-3K-rMi" eventType="touchUpInside" id="xKz-Ot-vaE"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="C2o-Z9-p3n"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Ryf-JB-r4z" firstAttribute="leading" secondItem="C2o-Z9-p3n" secondAttribute="leading" constant="40" id="4iU-Kv-Oc5"/>
-                            <constraint firstItem="C2o-Z9-p3n" firstAttribute="trailing" secondItem="Ryf-JB-r4z" secondAttribute="trailing" constant="40" id="KgM-4a-adx"/>
                             <constraint firstItem="odK-0N-zLh" firstAttribute="top" secondItem="cGc-XG-37o" secondAttribute="top" id="PCg-mE-9nr"/>
                             <constraint firstItem="odK-0N-zLh" firstAttribute="trailing" secondItem="C2o-Z9-p3n" secondAttribute="trailing" id="dNq-Iu-Juc"/>
-                            <constraint firstItem="Ryf-JB-r4z" firstAttribute="top" secondItem="odK-0N-zLh" secondAttribute="bottom" constant="20" id="hJK-Ov-xL9"/>
                             <constraint firstItem="odK-0N-zLh" firstAttribute="leading" secondItem="C2o-Z9-p3n" secondAttribute="leading" id="wj7-Ne-18z"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="person.circle" catalog="system" id="kPl-O9-RrP"/>
                     <navigationItem key="navigationItem" id="D9y-WK-3kZ"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                    <connections>
-                        <outlet property="signOut" destination="Ryf-JB-r4z" id="Fvo-Rw-ict"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q6Q-jD-4o4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -271,7 +255,6 @@
                                 <state key="normal" title="Sign Out"/>
                                 <connections>
                                     <action selector="signOut:" destination="8Tn-KE-WVD" eventType="touchUpInside" id="b1M-9H-GKE"/>
-                                    <action selector="signOutTapped:" destination="eUx-3K-rMi" eventType="touchUpInside" id="tnd-MS-e3Q"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -279,9 +262,6 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="4nh-EH-Fj1"/>
-                    <connections>
-                        <outlet property="signOut" destination="z3H-a1-YzU" id="CW4-qR-3mr"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vl9-Ic-bWa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
