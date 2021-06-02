@@ -27,6 +27,7 @@
 		63FD1561265EB68B0052459C /* FeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FD1560265EB68B0052459C /* FeedTableViewController.swift */; };
 		63FD156E265FED3D0052459C /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FD156D265FED3D0052459C /* UserTableViewCell.swift */; };
 		63FD1596266149420052459C /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FD1595266149420052459C /* UserViewController.swift */; };
+		63FD15D4266720290052459C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FD15D3266720290052459C /* SettingsViewController.swift */; };
 		65735104C2DE96D6543BD68C /* Pods_VoyageTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DB6C3D146D22CBD55018835 /* Pods_VoyageTests.framework */; };
 		7521EFCE76E119FD2FAF2D2E /* Pods_Voyage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFC84B235F3BA6E42D9A4C28 /* Pods_Voyage.framework */; };
 		E0D3520D7F958B3656CBFF2A /* Pods_Voyage_VoyageUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ED74728024D6CDCD80A9F7E /* Pods_Voyage_VoyageUITests.framework */; };
@@ -82,6 +83,7 @@
 		63FD1560265EB68B0052459C /* FeedTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewController.swift; sourceTree = "<group>"; };
 		63FD156D265FED3D0052459C /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		63FD1595266149420052459C /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
+		63FD15D3266720290052459C /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		6B41AFC4DC1F357FA4DEC22A /* Pods-Voyage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Voyage.debug.xcconfig"; path = "Target Support Files/Pods-Voyage/Pods-Voyage.debug.xcconfig"; sourceTree = "<group>"; };
 		A06A599F742045517BB5BEB2 /* Pods-Voyage-VoyageUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Voyage-VoyageUITests.release.xcconfig"; path = "Target Support Files/Pods-Voyage-VoyageUITests/Pods-Voyage-VoyageUITests.release.xcconfig"; sourceTree = "<group>"; };
 		FFC84B235F3BA6E42D9A4C28 /* Pods_Voyage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Voyage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -193,6 +195,7 @@
 				63FD156D265FED3D0052459C /* UserTableViewCell.swift */,
 				63FD1560265EB68B0052459C /* FeedTableViewController.swift */,
 				63FD1595266149420052459C /* UserViewController.swift */,
+				63FD15D3266720290052459C /* SettingsViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -467,6 +470,7 @@
 				63197F95265B172500AB17A9 /* SceneDelegate.swift in Sources */,
 				63197FF5265B1D5A00AB17A9 /* ViewController.swift in Sources */,
 				63FD1596266149420052459C /* UserViewController.swift in Sources */,
+				63FD15D4266720290052459C /* SettingsViewController.swift in Sources */,
 				2AEC1B3D265EAF3600CA1D63 /* ProfileViewController.swift in Sources */,
 				63197FEA265B1D4800AB17A9 /* Utilities.swift in Sources */,
 				63FD14E8265D40720052459C /* SearchTableViewController.swift in Sources */,
