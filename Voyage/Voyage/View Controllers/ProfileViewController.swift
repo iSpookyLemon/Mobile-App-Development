@@ -15,6 +15,12 @@ class ProfileViewController: UIViewController {
 
     @IBOutlet weak var userDescription: UILabel!
     
+    @IBOutlet weak var sellerButton: UIButton!
+    
+    @IBOutlet weak var editProfileButton: UIButton!
+    
+    @IBOutlet weak var verticalStack: UIStackView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -26,6 +32,17 @@ class ProfileViewController: UIViewController {
         
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
+                
+                let isSeller = document.get("isSeller") as? Bool
+            
+                if isSeller == true{
+                    
+                    self.sellerButton.removeFromSuperview()
+                    let margins = self.view.layoutMarginsGuide
+ //                   self.verticalStack.bottomAnchor.constraint(equalTo: margins.bottomAnchor, constant:20)
+                    
+                }
+                
                 let firstName = document.get("firstname") as? String ?? ""
                 let lastName = document.get("lastname") as? String ?? ""
                 let description = document.get("description") as? String ?? "Hello, my name is " + firstName + " " + lastName
@@ -38,6 +55,7 @@ class ProfileViewController: UIViewController {
         }
         // Do any additional setup after loading the view.
     }
+    
 
     /*
     // MARK: - Navigation

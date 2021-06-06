@@ -87,4 +87,17 @@ class Utilities {
         
     }
     
+    static func isDollarsPerHourValid(_ dollarsPerHour: String) -> Bool {
+        
+        let dollarsPerHourIsAllNumber = dollarsPerHour.rangeOfCharacter(from:CharacterSet.decimalDigits.inverted) == nil
+        
+        if dollarsPerHourIsAllNumber{
+            return true
+        }
+        else {
+            return false
+        }
+        
+    }
+    
 }

@@ -8,6 +8,7 @@
 import UIKit
 import FirebaseAuth
 import FirebaseStorage
+import FirebaseFirestore
 
 class SellerViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
@@ -102,7 +103,15 @@ class SellerViewController: UIViewController, UINavigationControllerDelegate, UI
         
         if Utilities.isPhoneNumberValid(cleanedPhoneNumber) == false {
             //PhoneNumber is'nt secure enough
-            return "Please Recheck your Phone Number"
+            return "Make sure your phone number is only numbers (No Hyphens)"
+        }
+        
+        let cleanedDollarsPerHour = dollarsPerHourTextField.text!
+        
+        if Utilities.isDollarsPerHourValid(cleanedDollarsPerHour) == false {
+            
+            return "Make sure your dollars per hour is only numbers"
+            
         }
         
         return nil
@@ -117,24 +126,45 @@ class SellerViewController: UIViewController, UINavigationControllerDelegate, UI
             showError(error!)
             
         }
-        //PUT AN ELSE
         
-    }
+        else{
+            
+            
+            // Create cleaned verssions of the data
+            let freelanceService = freelanceServiceTextField.text!
+            let dollarsPerHour = dollarsPerHourTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+            let phoneNumber = phoneNumberTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+                    
+                    // User was created successfully, now store the first name and last name
+                let db = Firestore.firestore()
+
+            db.collection("users").document(Auth.auth().currentUser!.uid).setData(["isSeller":true, "freelanceService":freelanceService, "dollarsPerHour":dollarsPerHour, "phoneNumber":phoneNumber], merge: true) { (error) in
+                        
+                    if error != nil {
+                            // Show error message
+                        self.showError("Error saving user data")
+                    }
+                }
+            
+            self.transitionToHome()
+            
+            }
+        }
     
     func showError(_ message:String) {
         
         errorLabel.text = message
         errorLabel.alpha = 1
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    func transitionToHome(){
+        
+        let homeViewController = storyboard?.instantiateViewController(identifier: Constants.Storyboard.homeViewController) as? HomeViewController
+        
+        view.window?.rootViewController = homeViewController
+        
+        view.window?.makeKeyAndVisible()
+        
     }
-    */
-
+    
 }

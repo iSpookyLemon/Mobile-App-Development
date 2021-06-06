@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="FVu-7m-eq4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="FVu-7m-eq4">
     <device id="retina6_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -81,7 +81,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" showsScopeBar="YES" id="fw9-Us-6b5">
-                            <rect key="frame" x="0.0" y="0.0" width="428" height="56"/>
+                            <rect key="frame" x="0.0" y="0.0" width="428" height="51"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <textInputTraits key="textInputTraits"/>
                             <scopeButtonTitles>
@@ -92,7 +92,7 @@
                         </searchBar>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="COm-az-RvQ">
-                                <rect key="frame" x="0.0" y="84" width="428" height="43.666667938232422"/>
+                                <rect key="frame" x="0.0" y="75.333333969116211" width="428" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="COm-az-RvQ" id="YE1-rK-Pbp">
                                     <rect key="frame" x="0.0" y="0.0" width="428" height="43.666667938232422"/>
@@ -178,7 +178,7 @@
         <!--Profile View Controller-->
         <scene sceneID="KBa-bf-4gG">
             <objects>
-                <viewController id="eUx-3K-rMi" customClass="ProfileViewController" customModule="Voyage" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProfileVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="eUx-3K-rMi" customClass="ProfileViewController" customModule="Voyage" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cGc-XG-37o">
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -257,7 +257,7 @@
                             <constraint firstItem="flA-yH-JfL" firstAttribute="bottom" secondItem="C2o-Z9-p3n" secondAttribute="bottom" id="WU9-Bu-8ee"/>
                             <constraint firstItem="hJ6-Gu-Oiw" firstAttribute="leading" secondItem="C2o-Z9-p3n" secondAttribute="leading" constant="20" id="ctM-69-Zga"/>
                             <constraint firstItem="odK-0N-zLh" firstAttribute="trailing" secondItem="C2o-Z9-p3n" secondAttribute="trailing" id="dNq-Iu-Juc"/>
-                            <constraint firstItem="flA-yH-JfL" firstAttribute="top" secondItem="hJ6-Gu-Oiw" secondAttribute="bottom" constant="20" id="wMu-tF-R1T"/>
+                            <constraint firstItem="flA-yH-JfL" firstAttribute="top" secondItem="hJ6-Gu-Oiw" secondAttribute="bottom" constant="20" id="dTE-EQ-Hbm"/>
                             <constraint firstItem="odK-0N-zLh" firstAttribute="leading" secondItem="C2o-Z9-p3n" secondAttribute="leading" id="wj7-Ne-18z"/>
                         </constraints>
                     </view>
@@ -265,8 +265,11 @@
                     <navigationItem key="navigationItem" id="D9y-WK-3kZ"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="editProfileButton" destination="u5K-2n-0N8" id="ji3-NV-MvW"/>
                         <outlet property="name" destination="D1M-um-6ch" id="M9B-ho-m0o"/>
+                        <outlet property="sellerButton" destination="flA-yH-JfL" id="rdq-wa-I0K"/>
                         <outlet property="userDescription" destination="MAg-k1-jJM" id="QPr-dB-Ipq"/>
+                        <outlet property="verticalStack" destination="hJ6-Gu-Oiw" id="o0u-Nt-d3S"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q6Q-jD-4o4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -422,7 +425,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="userCell" rowHeight="386" id="s5b-pr-OVD" customClass="UserTableViewCell" customModule="Voyage" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="428" height="386"/>
+                                <rect key="frame" x="0.0" y="24.333333969116211" width="428" height="386"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="s5b-pr-OVD" id="L0g-Mb-4lD">
                                     <rect key="frame" x="0.0" y="0.0" width="428" height="386"/>
