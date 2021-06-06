@@ -56,8 +56,8 @@ class FeedTableViewController: UITableViewController {
         // Fetch data for row
         let person = data[indexPath.row]
         
-        let firstName = person.get("firstname") as! String
-        let lastName = person.get("lastname") as! String
+        let firstName = person.get("firstname") as? String ?? "I'll fix it later"
+        let lastName = person.get("lastname") as? String ?? "I'll fix it later"
         
         cell.name.text = firstName + " " + lastName
         
