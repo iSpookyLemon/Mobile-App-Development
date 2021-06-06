@@ -12,6 +12,8 @@ import FirebaseFirestore
 class ProfileViewController: UIViewController {
     
     @IBOutlet weak var name: UILabel!
+
+    @IBOutlet weak var userDescription: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,10 +28,10 @@ class ProfileViewController: UIViewController {
             if let document = document, document.exists {
                 let firstName = document.get("firstname") as? String ?? ""
                 let lastName = document.get("lastname") as? String ?? ""
+                let description = document.get("description") as? String ?? "Hello, my name is " + firstName + " " + lastName
                 
                 self.name.text = firstName + " " + lastName
-                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-                print("Document data: \(dataDescription)")
+                self.userDescription.text = description
             } else {
                 print("Document does not exist")
             }
