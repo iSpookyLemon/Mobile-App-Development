@@ -293,11 +293,34 @@
                                     <action selector="signOut:" destination="8Tn-KE-WVD" eventType="touchUpInside" id="b1M-9H-GKE"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4rE-4I-1Xw">
+                                <rect key="frame" x="0.0" y="812" width="428" height="60"/>
+                                <color key="backgroundColor" systemColor="systemRedColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="X1R-1R-9Gd"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Delete your Seller Account">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="deleteSellerAccountTapped:" destination="8Tn-KE-WVD" eventType="touchUpInside" id="rFk-uD-YUZ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Eb1-kP-GLD"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="4rE-4I-1Xw" secondAttribute="bottom" id="Af3-Lh-gef"/>
+                            <constraint firstItem="Eb1-kP-GLD" firstAttribute="trailing" secondItem="4rE-4I-1Xw" secondAttribute="trailing" id="tll-aI-oAP"/>
+                            <constraint firstItem="4rE-4I-1Xw" firstAttribute="leading" secondItem="Eb1-kP-GLD" secondAttribute="leading" id="uyD-U7-aM8"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="4nh-EH-Fj1"/>
+                    <connections>
+                        <outlet property="deleteSellerAccountButton" destination="4rE-4I-1Xw" id="68H-IA-6y3"/>
+                        <outlet property="signOut" destination="z3H-a1-YzU" id="3QR-LC-Dgo"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vl9-Ic-bWa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

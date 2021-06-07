@@ -7,27 +7,48 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseStorage
+import FirebaseFirestore
 
 class SettingsViewController: UIViewController {
 
     @IBOutlet weak var signOut: UIButton!
     
+    @IBOutlet weak var deleteSellerAccountButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+       
+        let uid = Auth.auth().currentUser!.uid
+        
+        let db = Firestore.firestore()
+        
+        let docRef = db.collection("users").document(uid)
+        
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists{
 
-        // Do any additional setup after loading the view.
+                let isSeller = document.get("isSeller") as? Bool
+        
+                let wasOnceSeller = document.get("wasOnceSeller") as? Bool
+                
+                if isSeller == false {
+                    
+                    self.deleteSellerAccountButton.removeFromSuperview()
+                    
+                }
+                
+                if isSeller == true {
+                    
+                    self.view.addSubview(self.deleteSellerAccountButton)
+                    
+                }
+                
+                
+            }
+        }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
     @IBAction func signOut(_ sender: Any) {
         do {
@@ -40,5 +61,24 @@ class SettingsViewController: UIViewController {
             print("Error signing out: %@", signOutError)
         }
     }
+    
+    @IBAction func deleteSellerAccountTapped(_ sender: Any) {
+        
+        let db = Firestore.firestore()
+        
+        db.collection("users").document("Auth.auth().currentUser!.uid").updateData([
+            "freelanceService": FieldValue.delete(), "dollarsPerHour": FieldValue.delete(),
+            "phoneNumber": FieldValue.delete(), "isSeller": false, "wasOnceSeller": true
+        ]) { err in
+            if let err = err {
+                print("Error updating document: \(err)")
+            } else {
+                print("Document successfully updated")
+            }
+        }
+
+        
+    }
+    
     
 }

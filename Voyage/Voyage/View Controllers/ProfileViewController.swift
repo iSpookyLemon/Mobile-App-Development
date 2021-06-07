@@ -36,8 +36,10 @@ class ProfileViewController: UIViewController {
             if let document = document, document.exists {
                 
                 let isSeller = document.get("isSeller") as? Bool
+                
+                let wasOnceSeller = document.get("wasOnceSeller") as? Bool
             
-                if isSeller == true{
+                if isSeller == true && wasOnceSeller == false{
                     
                     // Delete become a seller and add new constraint
                     self.sellerButton.removeFromSuperview()
@@ -49,6 +51,20 @@ class ProfileViewController: UIViewController {
                             constraint.constant = 20
                         }
                     }
+                }
+                
+                if isSeller == false && wasOnceSeller == true {
+                    
+                    self.view.addSubview(self.sellerButton)
+                    
+                    for constraint in self.view.constraints{
+                        
+                        if constraint.identifier == "profileVCVerticalConstraint"{
+                            
+                            constraint.constant = 75
+                        }
+                    }
+                    
                 }
                 
                 let firstName = document.get("firstname") as? String ?? ""

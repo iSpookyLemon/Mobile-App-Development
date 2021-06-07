@@ -138,7 +138,7 @@ class SellerViewController: UIViewController, UINavigationControllerDelegate, UI
                     // User was created successfully, now store the first name and last name
                 let db = Firestore.firestore()
 
-            db.collection("users").document(Auth.auth().currentUser!.uid).setData(["isSeller":true, "freelanceService":freelanceService, "dollarsPerHour":dollarsPerHour, "phoneNumber":phoneNumber], merge: true) { (error) in
+            db.collection("users").document(Auth.auth().currentUser!.uid).setData(["isSeller":true, "freelanceService":freelanceService, "dollarsPerHour":dollarsPerHour, "phoneNumber":phoneNumber,"wasOnceSeller":false], merge: true) { (error) in
                         
                     if error != nil {
                             // Show error message
