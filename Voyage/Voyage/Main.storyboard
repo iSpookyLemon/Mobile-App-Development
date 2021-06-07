@@ -211,7 +211,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="hJ6-Gu-Oiw">
-                                <rect key="frame" x="20" y="250" width="388" height="513"/>
+                                <rect key="frame" x="20" y="250" width="388" height="518"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="szP-tp-7ce">
                                         <rect key="frame" x="0.0" y="1" width="388" height="148.66666666666666"/>
@@ -226,13 +226,13 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Description" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MAg-k1-jJM">
-                                        <rect key="frame" x="0.0" y="210.33333333333331" width="388" height="246.66666666666669"/>
+                                        <rect key="frame" x="0.0" y="210.33333333333331" width="388" height="251.66666666666669"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u5K-2n-0N8">
-                                        <rect key="frame" x="0.0" y="477" width="388" height="36"/>
+                                        <rect key="frame" x="0.0" y="482" width="388" height="36"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="Edit Profile"/>
                                         <connections>
@@ -255,9 +255,9 @@
                             <constraint firstItem="odK-0N-zLh" firstAttribute="top" secondItem="cGc-XG-37o" secondAttribute="top" id="PCg-mE-9nr"/>
                             <constraint firstItem="hJ6-Gu-Oiw" firstAttribute="top" secondItem="odK-0N-zLh" secondAttribute="bottom" constant="20" id="QrS-Xm-4tY"/>
                             <constraint firstItem="flA-yH-JfL" firstAttribute="bottom" secondItem="C2o-Z9-p3n" secondAttribute="bottom" id="WU9-Bu-8ee"/>
+                            <constraint firstItem="C2o-Z9-p3n" firstAttribute="bottom" secondItem="hJ6-Gu-Oiw" secondAttribute="bottom" constant="75" identifier="profileVCVerticalConstraint" id="ZMk-jV-Xmv"/>
                             <constraint firstItem="hJ6-Gu-Oiw" firstAttribute="leading" secondItem="C2o-Z9-p3n" secondAttribute="leading" constant="20" id="ctM-69-Zga"/>
                             <constraint firstItem="odK-0N-zLh" firstAttribute="trailing" secondItem="C2o-Z9-p3n" secondAttribute="trailing" id="dNq-Iu-Juc"/>
-                            <constraint firstItem="flA-yH-JfL" firstAttribute="top" secondItem="hJ6-Gu-Oiw" secondAttribute="bottom" constant="20" id="dTE-EQ-Hbm"/>
                             <constraint firstItem="odK-0N-zLh" firstAttribute="leading" secondItem="C2o-Z9-p3n" secondAttribute="leading" id="wj7-Ne-18z"/>
                         </constraints>
                     </view>
@@ -269,6 +269,7 @@
                         <outlet property="name" destination="D1M-um-6ch" id="M9B-ho-m0o"/>
                         <outlet property="sellerButton" destination="flA-yH-JfL" id="rdq-wa-I0K"/>
                         <outlet property="userDescription" destination="MAg-k1-jJM" id="QPr-dB-Ipq"/>
+                        <outlet property="verticalConstraint" destination="ZMk-jV-Xmv" id="pO5-wd-pZs"/>
                         <outlet property="verticalStack" destination="hJ6-Gu-Oiw" id="o0u-Nt-d3S"/>
                     </connections>
                 </viewController>

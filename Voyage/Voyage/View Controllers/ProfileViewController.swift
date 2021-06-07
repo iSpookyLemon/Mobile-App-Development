@@ -21,6 +21,8 @@ class ProfileViewController: UIViewController {
     
     @IBOutlet weak var verticalStack: UIStackView!
     
+    @IBOutlet weak var verticalConstraint: NSLayoutConstraint!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,10 +39,16 @@ class ProfileViewController: UIViewController {
             
                 if isSeller == true{
                     
+                    // Delete become a seller and add new constraint
                     self.sellerButton.removeFromSuperview()
-                    let margins = self.view.layoutMarginsGuide
- //                   self.verticalStack.bottomAnchor.constraint(equalTo: margins.bottomAnchor, constant:20)
                     
+                    for constraint in self.view.constraints{
+                        
+                        if constraint.identifier == "profileVCVerticalConstraint"{
+                            
+                            constraint.constant = 20
+                        }
+                    }
                 }
                 
                 let firstName = document.get("firstname") as? String ?? ""
