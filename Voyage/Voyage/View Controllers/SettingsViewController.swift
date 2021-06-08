@@ -64,20 +64,43 @@ class SettingsViewController: UIViewController {
     
     @IBAction func deleteSellerAccountTapped(_ sender: Any) {
         
-        let db = Firestore.firestore()
-        
-        db.collection("users").document("Auth.auth().currentUser!.uid").updateData([
-            "freelanceService": FieldValue.delete(), "dollarsPerHour": FieldValue.delete(),
-            "phoneNumber": FieldValue.delete(), "isSeller": false, "wasOnceSeller": true
-        ]) { err in
-            if let err = err {
-                print("Error updating document: \(err)")
-            } else {
-                print("Document successfully updated")
-            }
-        }
+        let alert = UIAlertController(title: "Are you sure you want to Delete your Seller Account?", message: "This will remove all seller related information of yours from Voyage.", preferredStyle: UIAlertController.Style.alert)
 
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction!) in
+
+            let db = Firestore.firestore()
+            
+            db.collection("users").document(Auth.auth().currentUser!.uid).updateData([
+                "freelanceService": FieldValue.delete(), "dollarsPerHour": FieldValue.delete(),
+                "phoneNumber": FieldValue.delete(), "isSeller": false, "wasOnceSeller": true
+            ]) { err in
+                if let err = err {
+                    print("Error updating document: \(err)")
+                } else {
+                    print("Document successfully updated")
+                }
+            }
+            
+            self.viewDidLoad()
+            
+        }))
+
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+
+            transitionToHome()
+            
+        }))
+
+        present(alert, animated: true, completion: nil)
         
+        func transitionToHome() {
+            
+            let homeViewController = storyboard?.instantiateViewController(identifier: Constants.Storyboard.homeViewController) as? HomeViewController
+            
+            view.window?.rootViewController = homeViewController
+            view.window?.makeKeyAndVisible()
+            
+        }
     }
     
     

@@ -305,6 +305,7 @@
                                 </state>
                                 <connections>
                                     <action selector="deleteSellerAccountTapped:" destination="8Tn-KE-WVD" eventType="touchUpInside" id="rFk-uD-YUZ"/>
+                                    <segue destination="8Vg-tP-BWN" kind="presentation" animates="NO" modalPresentationStyle="fullScreen" id="Vuc-Wq-vCk"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -739,6 +740,9 @@
             <point key="canvasLocation" x="4606.5420560747662" y="-588.33693304535643"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Vuc-Wq-vCk"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="Logo" width="144" height="143"/>
         <image name="Name" width="275.66665649414062" height="100.66666412353516"/>
