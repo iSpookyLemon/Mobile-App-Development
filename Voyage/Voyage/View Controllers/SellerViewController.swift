@@ -12,6 +12,8 @@ import FirebaseFirestore
 
 class SellerViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
+    var userImage = UIImage()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -43,9 +45,8 @@ class SellerViewController: UIViewController, UINavigationControllerDelegate, UI
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
         {
             importImageImageView.image = image
+            userImage = image
             
-            // Upload profile image
-            uploadImage(image)
         }
         else
         {
@@ -145,6 +146,8 @@ class SellerViewController: UIViewController, UINavigationControllerDelegate, UI
                         self.showError("Error saving user data")
                     }
                 }
+            
+            uploadImage(userImage)
             
             self.transitionToHome()
             
