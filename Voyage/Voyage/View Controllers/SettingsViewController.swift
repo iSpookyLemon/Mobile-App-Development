@@ -12,9 +12,29 @@ import FirebaseFirestore
 
 class SettingsViewController: UIViewController {
 
+    @IBOutlet weak var profilePictureImage: UIImageView!
+    
+    @IBOutlet weak var changeProfilePictureButton: UIButton!
+    
+    @IBOutlet weak var changeProfileNameTextField: UITextField!
+    
+    @IBOutlet weak var changeFreelanceServiceTextField: UITextField!
+    
+    @IBOutlet weak var changeWageTextField: UITextField!
+    
+    @IBOutlet weak var changePhoneNumberTextField: UITextField!
+    
+    @IBOutlet weak var changeUserDescriptionTextField: UITextField!
+    
+    @IBOutlet weak var errorLabel: UIStackView!
+    
+    @IBOutlet weak var changeProfileButton: UIButton!
+    
     @IBOutlet weak var signOut: UIButton!
     
     @IBOutlet weak var deleteSellerAccountButton: UIButton!
+    
+    @IBOutlet weak var deleteFillAccountButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -85,23 +105,43 @@ class SettingsViewController: UIViewController {
             
         }))
 
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+        alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (action: UIAlertAction!) in
+            
+        }))
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    
+    @IBAction func deleteFullAccountTapped(_ sender: Any) {
+        
+        let alert = UIAlertController(title: "Are you sure you want to Delete your Full Account?", message: "This will remove all information of yours from Voyage.", preferredStyle: UIAlertController.Style.alert)
 
-            transitionToHome()
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction!) in
+            
+            let db = Firestore.firestore()
+            
+            db.collection("users").document(Auth.auth().currentUser!.uid).delete()
             
         }))
 
+        alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (action: UIAlertAction!) in
+            
+            self.transitionToVC()
+            
+        }))
+        
         present(alert, animated: true, completion: nil)
         
-        func transitionToHome() {
-            
-            let homeViewController = storyboard?.instantiateViewController(identifier: Constants.Storyboard.homeViewController) as? HomeViewController
-            
-            view.window?.rootViewController = homeViewController
-            view.window?.makeKeyAndVisible()
-            
-        }
     }
     
+    func transitionToVC() {
+        
+        let viewController = storyboard?.instantiateViewController(identifier: Constants.Storyboard.viewController) as? ViewController
+        
+        view.window?.rootViewController = viewController
+        view.window?.makeKeyAndVisible()
+        
+    }
     
 }
