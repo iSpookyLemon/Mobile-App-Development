@@ -7,33 +7,93 @@
 
 import UIKit
 import FirebaseFirestore
+import FirebaseAuth
+import FirebaseStorage
 
 class FeedTableViewController: UITableViewController {
     
-    var data = [DocumentSnapshot]()
+    class Person {
+        var firstName: String!
+        var lastName: String!
+        var description: String!
+        var uid: String!
+        var profileImage: UIImage!
+    }
+    
+    var data = [Person]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let db = Firestore.firestore()
         
-        db.collection("users").limit(to: 6).getDocuments() { (querySnapshot, err) in
-            if let err = err {
-                print("Error getting documents: \(err)")
-            } else {
-                for document in querySnapshot!.documents {
-                    print("\(document.documentID) => \(document.data())")
-                }
-                self.data = querySnapshot!.documents
-                self.tableView.reloadData()
-            }
+        getFeed() {
+            print("no")
+            self.tableView.reloadData()
         }
-
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    
+    func getFeed(completion: @escaping () -> Void) {
+        let db = Firestore.firestore()
+        
+        db.collection("users").limit(to: 6).getDocuments() { (querySnapshot, err) in
+            
+            if let err = err {
+                print("Error getting documents: \(err)")
+                completion()
+            } else {
+                let group = DispatchGroup()
+                
+                for document in querySnapshot!.documents {
+                    
+                    let person = Person()
+                    
+                    let uid = document.documentID
+                    
+                    group.enter()
+                    self.downloadImage(uid: uid, person: person) {
+                        print("hello")
+                        person.firstName = document.get("firstname") as? String
+                        person.lastName = document.get("lastname") as? String
+                        person.description = document.get("description") as? String ?? "Hello, my name is " + person.firstName + " " + person.lastName
+                        self.data.append(person)
+                        group.leave()
+                    }
+                }
+                group.notify(queue: .main) {
+                    completion()
+                }
+            }
+        }
+    }
+    
+    func downloadImage(uid: String, person: Person, completion: @escaping () -> Void) {
+        // Get a reference to the storage service using the default Firebase App
+        let storage = Storage.storage()
+
+        // Create a storage reference from our storage service
+        let storageRef = storage.reference()
+        
+        // Create a reference to the file you want to upload
+        let imageRef = storageRef.child(uid + "/profile.jpg")
+        
+        print("hi")
+        // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
+        imageRef.getData(maxSize: 1 * 2048 * 2048) { data, error in
+            print("a")
+            if error != nil {
+                // Uh-oh, an error occurred!
+                person.profileImage = UIImage(systemName: "person.circle")
+            } else {
+                // Data is returned
+                person.profileImage = UIImage(data: data!)
+            }
+            completion()
+        }
     }
 
     // MARK: - Table view data source
@@ -50,17 +110,19 @@ class FeedTableViewController: UITableViewController {
 
     // Create the cell
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "userCell") as! UserTableViewCell
         
         // Fetch data for row
         let person = data[indexPath.row]
         
-        let firstName = person.get("firstname") as? String ?? "I'll fix it later"
-        let lastName = person.get("lastname") as? String ?? "I'll fix it later"
+            cell.profileImage.image = person.profileImage
+            if person.profileImage == nil {
+                print("nil")
+            }
         
-        cell.name.text = firstName + " " + lastName
-        
+            cell.name.text = person.firstName + " " + person.lastName
+            cell.userDescription.text = person.description
+            
         return cell
     }
 
@@ -73,15 +135,6 @@ class FeedTableViewController: UITableViewController {
 
        // Use the default size for all other rows.
        return UITableView.automaticDimension
-    }
-    */
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
     }
     */
 
