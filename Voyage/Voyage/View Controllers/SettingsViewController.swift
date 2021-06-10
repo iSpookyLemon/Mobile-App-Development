@@ -131,15 +131,20 @@ class SettingsViewController: UIViewController {
     
     @IBAction func deleteFullAccountTapped(_ sender: Any) {
         
+
+        
         let alert = UIAlertController(title: "Are you sure you want to Delete your Full Account?", message: "This will remove all information of yours from Voyage.", preferredStyle: UIAlertController.Style.alert)
 
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction!) in
             
             let db = Firestore.firestore()
             
-            db.collection("users").document(Auth.auth().currentUser!.uid).updateData(["dollarsPerHour":FieldValue.delete(), "freelanceService":FieldValue.delete(), "phoneNumber":FieldValue.delete(), "isSeller":FieldValue.delete(), "wasOnceSeller":FieldValue.delete(), "firstName":FieldValue.delete(), "lastName":FieldValue.delete(), "fullNameLower":FieldValue.delete()])
+            db.collection("users").document(Auth.auth().currentUser!.uid).delete()
             
             self.transitionToVC()
+            
+            //updateData(["dollarsPerHour":FieldValue.delete(), "freelanceService":FieldValue.delete(), "phoneNumber":FieldValue.delete(), "isSeller":FieldValue.delete(), "wasOnceSeller":FieldValue.delete(), "firstName":FieldValue.delete(), "lastName":FieldValue.delete(), "fullNameLower":FieldValue.delete()])
+
             
         }))
         
