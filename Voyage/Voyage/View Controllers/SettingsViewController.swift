@@ -12,9 +12,13 @@ import FirebaseFirestore
 
 class SettingsViewController: UIViewController {
 
-    @IBOutlet weak var profilePictureImage: UIImageView!
+    @IBOutlet weak var profileImage: UIImageView!
     
     @IBOutlet weak var changeProfilePictureButton: UIButton!
+    
+    @IBOutlet weak var sellerImage: UIImageView!
+    
+    @IBOutlet weak var changeSellerImageButton: UIButton!
     
     @IBOutlet weak var changeProfileNameTextField: UITextField!
     
@@ -26,7 +30,7 @@ class SettingsViewController: UIViewController {
     
     @IBOutlet weak var changeUserDescriptionTextField: UITextField!
     
-    @IBOutlet weak var errorLabel: UIStackView!
+    @IBOutlet weak var errorLabel: UILabel!
     
     @IBOutlet weak var changeProfileButton: UIButton!
     
@@ -55,21 +59,33 @@ class SettingsViewController: UIViewController {
                 if isSeller == false {
                     
                     self.deleteSellerAccountButton.removeFromSuperview()
+                    self.changeFreelanceServiceTextField.removeFromSuperview()
+                    self.changeWageTextField.removeFromSuperview()
+                    self.changePhoneNumberTextField.removeFromSuperview()
                     
                 }
                 
                 if isSeller == true {
                     
                     self.view.addSubview(self.deleteSellerAccountButton)
+                    self.view.addSubview(self.changeFreelanceServiceTextField)
+                    self.view.addSubview(self.changeWageTextField)
+                    self.view.addSubview(self.changePhoneNumberTextField)
                     
                 }
                 
+                self.errorLabel.alpha = 0
                 
             }
         }
     }
     
-
+    @IBAction func applyChangesToProfileTapped(_ sender: Any) {
+        
+        
+        
+    }
+    
     @IBAction func signOut(_ sender: Any) {
         do {
             try Auth.auth().signOut()
@@ -121,13 +137,17 @@ class SettingsViewController: UIViewController {
             
             let db = Firestore.firestore()
             
-            db.collection("users").document(Auth.auth().currentUser!.uid).delete()
+            db.collection("users").document(Auth.auth().currentUser!.uid).updateData(["dollarsPerHour":FieldValue.delete(), "freelanceService":FieldValue.delete(), "phoneNumber":FieldValue.delete(), "isSeller":FieldValue.delete(), "wasOnceSeller":FieldValue.delete(), "firstName":FieldValue.delete(), "lastName":FieldValue.delete(), "fullNameLower":FieldValue.delete()])
+            
+            self.transitionToVC()
             
         }))
+        
+
 
         alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (action: UIAlertAction!) in
             
-            self.transitionToVC()
+
             
         }))
         
@@ -142,6 +162,12 @@ class SettingsViewController: UIViewController {
         view.window?.rootViewController = viewController
         view.window?.makeKeyAndVisible()
         
+    }
+    
+    func showError(_ message:String) {
+        
+        errorLabel.text = message
+        errorLabel.alpha = 1
     }
     
 }
