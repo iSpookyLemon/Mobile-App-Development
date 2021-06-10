@@ -68,11 +68,16 @@ class SellerViewController: UIViewController, UINavigationControllerDelegate, UI
         let imageRef = storageRef.child(uid + "/profile.jpg")
 
         // Upload the file to the path "images/rivers.jpg"
-        _ = imageRef.putData(image.jpegData(compressionQuality: 0.5)!, metadata: nil) { (metadata, error) in
+        let uploadTask = imageRef.putData(image.jpegData(compressionQuality: 0.5)!, metadata: nil) { (metadata, error) in
             guard metadata != nil else {
-            // Uh-oh, an error occurred!
+                // Uh-oh, an error occurred
+                return
+            }
+        }
+        // Add a success observer to an upload task
+        uploadTask.observe(.success) { snapshot in
+            //Makes sure the screen does not transition until image is uploaded
             return
-          }
         }
     }
     
@@ -148,7 +153,7 @@ class SellerViewController: UIViewController, UINavigationControllerDelegate, UI
                 }
             
             uploadImage(userImage)
-            
+
             self.transitionToHome()
             
             }
