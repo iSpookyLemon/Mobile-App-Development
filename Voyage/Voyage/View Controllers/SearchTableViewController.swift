@@ -45,17 +45,13 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
                     if let err = err {
                         print("Error getting documents: \(err)")
                     } else {
-                        self.data.removeAll()
-                        for document in querySnapshot!.documents {
-                            self.data = querySnapshot!.documents
-                            print("\(document.documentID) => \(document.data())")
-                        }
+                        //self.data.removeAll()
+                        self.data = querySnapshot!.documents
                         self.tableView.reloadData()
                     }
             }
         }
         else {
-            self.data.removeAll()
             self.tableView.reloadData()
         }
     }

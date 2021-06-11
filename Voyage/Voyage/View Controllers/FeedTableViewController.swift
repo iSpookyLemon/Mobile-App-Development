@@ -15,8 +15,10 @@ class FeedTableViewController: UITableViewController {
     class Person {
         var firstName: String!
         var lastName: String!
-        var description: String!
+        var service: String!
         var uid: String!
+        var price: String!
+        var contact: String!
         var profileImage: UIImage!
     }
     
@@ -39,7 +41,7 @@ class FeedTableViewController: UITableViewController {
     func getFeed(completion: @escaping () -> Void) {
         let db = Firestore.firestore()
         
-        db.collection("users").limit(to: 6).getDocuments() { (querySnapshot, err) in
+        db.collection("users").whereField("isSeller", isEqualTo : true).limit(to: 6).getDocuments() { (querySnapshot, err) in
             
             if let err = err {
                 print("Error getting documents: \(err)")
@@ -53,11 +55,14 @@ class FeedTableViewController: UITableViewController {
                     
                     let uid = document.documentID
                     
+                    person.firstName = document.get("firstname") as? String ?? "Error"
+                    person.lastName = document.get("lastname") as? String ?? "Error"
+                    person.service = document.get("freelanceService") as? String ?? "Error"
+                    person.price = document.get("dollarsPerHour") as? String ?? "Error"
+                    person.contact = document.get("phoneNumber") as? String ?? "Error"
+                    
                     group.enter()
                     self.downloadImage(uid: uid, person: person) {
-                        person.firstName = document.get("firstname") as? String
-                        person.lastName = document.get("lastname") as? String
-                        person.description = document.get("description") as? String ?? "Hello, my name is " + person.firstName + " " + person.lastName
                         self.data.append(person)
                         group.leave()
                     }
@@ -116,8 +121,10 @@ class FeedTableViewController: UITableViewController {
                 print("nil")
             }
         
-            cell.name.text = person.firstName + " " + person.lastName
-            cell.userDescription.text = person.description
+        cell.name.text = person.firstName + " " + person.lastName
+        cell.service.text = person.service
+        cell.price.text = "$" + person.price
+        cell.contact.text = person.contact
             
         return cell
     }
