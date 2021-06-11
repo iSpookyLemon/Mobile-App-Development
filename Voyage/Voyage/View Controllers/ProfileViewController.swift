@@ -8,6 +8,7 @@
 import UIKit
 import FirebaseAuth
 import FirebaseFirestore
+import FirebaseStorage
 
 class ProfileViewController: UIViewController {
     
@@ -23,6 +24,10 @@ class ProfileViewController: UIViewController {
     
     @IBOutlet weak var verticalConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var profileImage: UIImageView!
+    
+    var image: UIImage!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -31,6 +36,11 @@ class ProfileViewController: UIViewController {
         let db = Firestore.firestore()
         
         let docRef = db.collection("users").document(uid)
+        
+        downloadImage(uid) {
+            print("2")
+            self.profileImage.image = self.image
+        }
         
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
@@ -78,6 +88,30 @@ class ProfileViewController: UIViewController {
             }
         }
         // Do any additional setup after loading the view.
+    }
+    
+    func downloadImage(_ uid: String, completion: @escaping () -> Void){
+        // Get a reference to the storage service using the default Firebase App
+        let storage = Storage.storage()
+
+        // Create a storage reference from our storage service
+        let storageRef = storage.reference()
+        
+        // Create a reference to the file you want to upload
+        let imageRef = storageRef.child(uid + "/profile.jpg")
+        
+        // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
+        imageRef.getData(maxSize: 1 * 2048 * 2048) { data, error in
+            if error != nil {
+                // Uh-oh, an error occurred!
+                self.image = UIImage(systemName: "person.circle")
+            } else {
+                // Data is returned
+                self.image = UIImage(data: data!)
+                print("1")
+            }
+            completion()
+        }
     }
     
 

@@ -285,6 +285,7 @@
                     <connections>
                         <outlet property="editProfileButton" destination="u5K-2n-0N8" id="ji3-NV-MvW"/>
                         <outlet property="name" destination="D1M-um-6ch" id="M9B-ho-m0o"/>
+                        <outlet property="profileImage" destination="szP-tp-7ce" id="Pxl-5t-kqT"/>
                         <outlet property="sellerButton" destination="flA-yH-JfL" id="rdq-wa-I0K"/>
                         <outlet property="userDescription" destination="MAg-k1-jJM" id="QPr-dB-Ipq"/>
                         <outlet property="verticalConstraint" destination="ZMk-jV-Xmv" id="pO5-wd-pZs"/>
@@ -927,7 +928,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="hgE-SG-VqZ"/>
+        <segue reference="FaQ-KR-Lq5"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Logo" width="144" height="143"/>
