@@ -7,17 +7,23 @@
 
 import UIKit
 import FirebaseFirestore
+import FirebaseStorage
 
 class SearchTableViewController: UITableViewController, UISearchBarDelegate {
     
     @IBOutlet weak var searchBar: UISearchBar!
     
+    var image: UIImage!
+    
     var data = [DocumentSnapshot]()
+    
+    var searchType: String!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         searchBar.delegate = self
+        setSearchBarType(searchBar.selectedScopeButtonIndex)
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -27,25 +33,39 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
     
     // MARK: Search bar config
     
+    func setSearchBarType(_ index: Int) {
+        if index == 0 {
+            searchType = "fullnamelower"
+        } else if index == 1 {
+            searchType = "fullnamelower"
+        } else {
+            searchType = "freelanceServiceLower"
+        }
+    }
+    
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.setShowsCancelButton(true, animated: true)
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        setSearchBarType(selectedScope)
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
         let db = Firestore.firestore()
         let searchString = searchBar.text!.lowercased()
+        
         self.data.removeAll()
         
         if searchString != "" {
             db.collection("users")
-                .whereField("fullnamelower", isLessThanOrEqualTo: searchString + "\u{f8ff}")
-                .whereField("fullnamelower", isGreaterThanOrEqualTo: searchString)
+                .whereField(searchType, isLessThanOrEqualTo: searchString + "\u{f8ff}")
+                .whereField(searchType, isGreaterThanOrEqualTo: searchString)
                 .getDocuments() { (querySnapshot, err) in
                     if let err = err {
                         print("Error getting documents: \(err)")
                     } else {
-                        //self.data.removeAll()
                         self.data = querySnapshot!.documents
                         self.tableView.reloadData()
                     }
@@ -81,12 +101,22 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell")! as UITableViewCell
         
+        var cellText = ""
+        
         let document = data[indexPath.row]
         
-        let firstName = document.get("firstname") as! String
-        let lastName = document.get("lastname") as! String
+        if searchType == "fullnamelower" {
+            let firstName = document.get("firstname") as! String
+            let lastName = document.get("lastname") as! String
+            cellText = firstName + " " + lastName
+        } else if searchType == "freelanceServiceLower" {
+            let firstName = document.get("firstname") as! String
+            let lastName = document.get("lastname") as! String
+            let service = document.get("freelanceService") as! String
+            cellText = firstName + " " + lastName + " (" + service + ")"
+        }
         
-        cell.textLabel?.text = firstName + " " + lastName
+        cell.textLabel?.text = cellText
         
         return cell
     }
@@ -97,11 +127,45 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
         
         let firstName = selectedUser.get("firstname") as! String
         let lastName = selectedUser.get("lastname") as! String
+        let description = selectedUser.get("description") as? String ?? "Hello, my name is " + firstName + " " + lastName
+        let contact = selectedUser.get("phoneNumber") as? String ?? "No phone number available"
+        
+        let uid = selectedUser.documentID
         
         if let viewController = storyboard?.instantiateViewController(identifier: Constants.Storyboard.userViewController) as? UserViewController {
-                viewController.nameText = firstName + " " + lastName
-                navigationController?.pushViewController(viewController, animated: true)
+            
+            viewController.person.name = firstName + " " + lastName
+            viewController.person.description = description
+            viewController.person.contact = contact
+            downloadImage(uid) {
+                viewController.person.profileImage = self.image
+                self.navigationController?.pushViewController(viewController, animated: true)
             }
+        }
+    }
+    
+    func downloadImage(_ uid: String, completion: @escaping () -> Void){
+        // Get a reference to the storage service using the default Firebase App
+        let storage = Storage.storage()
+
+        // Create a storage reference from our storage service
+        let storageRef = storage.reference()
+        
+        // Create a reference to the file you want to upload
+        let imageRef = storageRef.child(uid + "/profile.jpg")
+        
+        // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
+        imageRef.getData(maxSize: 1 * 2048 * 2048) { data, error in
+            if error != nil {
+                // Uh-oh, an error occurred!
+                self.image = UIImage(systemName: "person.circle")
+            } else {
+                // Data is returned
+                self.image = UIImage(data: data!)
+                print("1")
+            }
+            completion()
+        }
     }
 
     /*

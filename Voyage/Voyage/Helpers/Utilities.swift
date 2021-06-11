@@ -100,4 +100,10 @@ class Utilities {
         
     }
     
+    static func formatPhoneNumber(_ phoneNumber: String) -> String{
+        let s = phoneNumber
+        let formattedPhoneNumber = String(format: "(%@) %@-%@", String(s[...s.index(s.startIndex, offsetBy: 2)]), String(s[s.index(s.startIndex, offsetBy: 3)...s.index(s.startIndex, offsetBy: 5)]), String(s[s.index(s.startIndex, offsetBy: 6)...s.index(s.startIndex, offsetBy: 9)]))
+        return formattedPhoneNumber
+    }
+    
 }

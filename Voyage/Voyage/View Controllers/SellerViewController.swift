@@ -69,7 +69,7 @@ class SellerViewController: UIViewController, UINavigationControllerDelegate, UI
 
         let image = image.jpegData(compressionQuality: 0.5)!
         
-        if image.count <= 1 * 2048 * 2048 {
+        if image.count <= 2 * 1024 * 1024 {
             // Upload the file to the path "images/rivers.jpg"
             imageRef.putData(image, metadata: nil) { (metadata, error) in
                 guard metadata != nil else {
@@ -145,7 +145,7 @@ class SellerViewController: UIViewController, UINavigationControllerDelegate, UI
                     // User was created successfully, now store the first name and last name
                 let db = Firestore.firestore()
 
-            db.collection("users").document(Auth.auth().currentUser!.uid).setData(["isSeller":true, "freelanceService":freelanceService, "dollarsPerHour":dollarsPerHour, "phoneNumber":phoneNumber,"wasOnceSeller":false], merge: true) { (error) in
+            db.collection("users").document(Auth.auth().currentUser!.uid).setData(["isSeller":true, "freelanceService":freelanceService, "freelanceServiceLower": freelanceService.lowercased(), "dollarsPerHour":dollarsPerHour, "phoneNumber":phoneNumber,"wasOnceSeller":false], merge: true) { (error) in
                         
                     if error != nil {
                             // Show error message

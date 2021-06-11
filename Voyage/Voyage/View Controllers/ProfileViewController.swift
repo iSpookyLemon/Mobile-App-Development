@@ -38,7 +38,6 @@ class ProfileViewController: UIViewController {
         let docRef = db.collection("users").document(uid)
         
         downloadImage(uid) {
-            print("2")
             self.profileImage.image = self.image
         }
         
@@ -108,7 +107,6 @@ class ProfileViewController: UIViewController {
             } else {
                 // Data is returned
                 self.image = UIImage(data: data!)
-                print("1")
             }
             completion()
         }

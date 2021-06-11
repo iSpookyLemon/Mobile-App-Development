@@ -11,12 +11,28 @@ class UserViewController: UIViewController {
     
     @IBOutlet weak var name: UILabel!
     
-    var nameText = ""
+    @IBOutlet weak var profileImage: UIImageView!
+    
+    @IBOutlet weak var userDescription: UILabel!
+    
+    @IBOutlet weak var contact: UILabel!
+    
+    class Person {
+        var name: String!
+        var profileImage: UIImage!
+        var description: String!
+        var contact: String!
+    }
+    
+    var person = Person()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.name.text = self.nameText
+        self.name.text = person.name
+        self.profileImage.image = person.profileImage
+        self.userDescription.text = person.description
+        self.contact.text = Utilities.formatPhoneNumber(person.contact)
 
         // Do any additional setup after loading the view.
     }
