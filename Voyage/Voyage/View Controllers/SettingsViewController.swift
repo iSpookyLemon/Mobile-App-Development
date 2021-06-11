@@ -10,11 +10,16 @@ import FirebaseAuth
 import FirebaseStorage
 import FirebaseFirestore
 
-class SettingsViewController: UIViewController {
+class SettingsViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
+    var userImage = UIImage()
+    var userSeller_Image = UIImage()
+    
     @IBOutlet weak var profileImage: UIImageView!
     
     @IBOutlet weak var changeProfilePictureButton: UIButton!
+    
+    @IBOutlet weak var sellerImageVerticalStackView: UIStackView!
     
     @IBOutlet weak var sellerImage: UIImageView!
     
@@ -43,6 +48,8 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
        
+        Utilities.invertedStyleFilledButton(changeProfileButton)
+        
         let uid = Auth.auth().currentUser!.uid
         
         let db = Firestore.firestore()
@@ -56,12 +63,17 @@ class SettingsViewController: UIViewController {
         
                 let wasOnceSeller = document.get("wasOnceSeller") as? Bool
                 
+
+                
+                
+                
                 if isSeller == false {
                     
                     self.deleteSellerAccountButton.removeFromSuperview()
                     self.changeFreelanceServiceTextField.removeFromSuperview()
                     self.changeWageTextField.removeFromSuperview()
                     self.changePhoneNumberTextField.removeFromSuperview()
+                    self.sellerImageVerticalStackView.removeFromSuperview()
                     
                 }
                 
@@ -71,6 +83,7 @@ class SettingsViewController: UIViewController {
                     self.view.addSubview(self.changeFreelanceServiceTextField)
                     self.view.addSubview(self.changeWageTextField)
                     self.view.addSubview(self.changePhoneNumberTextField)
+                    self.view.addSubview(self.sellerImageVerticalStackView)
                     
                 }
                 
@@ -80,9 +93,164 @@ class SettingsViewController: UIViewController {
         }
     }
     
+    @IBAction func changeProfileImageTapped(_ sender: Any) {
+        
+        let image = UIImagePickerController()
+        image.delegate = self
+        image.sourceType = UIImagePickerController.SourceType.photoLibrary
+        image.allowsEditing = false
+        self.present(image, animated:true){
+
+        }
+        
+ 
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+        {
+            self.profileImage.image = image
+            self.userImage = image
+            
+        }
+        else
+        {
+            //error message
+        }
+        
+        self.dismiss(animated:true, completion:nil)
+    }
+    
+    
+    @IBAction func changeSellerImageTapped(_ sender: Any) {
+        
+        let seller_image = UIImagePickerController()
+            seller_image.delegate = self
+            seller_image.sourceType = UIImagePickerController.SourceType.photoLibrary
+            seller_image.allowsEditing = false
+        self.present(seller_image, animated:true){
+
+        }
+        
+    }
+    
+    
+    func seller_imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+        {
+            self.sellerImage.image = image
+            self.userSeller_Image = image
+            
+        }
+        else
+        {
+            //error message
+        }
+            
+        self.dismiss(animated:true, completion:nil)
+    }
+
+
     @IBAction func applyChangesToProfileTapped(_ sender: Any) {
         
+        let error = validateFields()
         
+        if error != nil{
+            
+            showError(error!)
+            
+        }
+        
+        else{
+            
+            let uid = Auth.auth().currentUser!.uid
+            
+            let db = Firestore.firestore()
+            
+            let docRef = db.collection("users").document(uid)
+            
+            docRef.getDocument { (document, error) in
+                if let document = document, document.exists{
+
+                    let isSeller = document.get("isSeller") as? Bool
+            
+                    let profileName = self.changeProfileNameTextField.text!
+            
+                    if profileName != ""{
+                
+                        db.collection("users").document(Auth.auth().currentUser!.uid).setData(["fullnamelower":profileName.lowercased()]) { (error) in
+                    
+                            if error != nil {
+                        // Show error message
+                                self.showError("Error saving user data")
+                            }
+                        }
+                
+                    }
+            
+                    if isSeller == true{
+            
+                        let freelanceService = self.changeFreelanceServiceTextField.text!
+                        let wage = self.changeWageTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+                        let phoneNumber = self.changePhoneNumberTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+                        
+                        if freelanceService != ""{
+                
+                            db.collection("users").document(Auth.auth().currentUser!.uid).setData(["freelanceService":freelanceService]) { (error) in
+                    
+                                if error != nil {
+                        // Show error message
+                                    self.showError("Error saving user data")
+                                }
+                            }
+                
+                        }
+            
+                        if wage != ""{
+                            
+                            db.collection("users").document(Auth.auth().currentUser!.uid).setData(  ["dollarsPerHour":wage]) { (error) in
+                    
+                                if error != nil {
+                                    // Show error message
+                                    self.showError("Error saving user data")
+                                }
+                            }
+                
+                        }
+            
+                        if phoneNumber != ""{
+                
+                            db.collection("users").document(Auth.auth().currentUser!.uid).setData(["phoneNumber":phoneNumber]) { (error) in
+                    
+                                if error != nil {
+                                    // Show error message
+                                    self.showError("Error saving user data")
+                                }
+                            }
+
+                        }
+            
+                    }
+            
+                }
+            
+            }
+            
+            let userDescription = self.changeUserDescriptionTextField.text!
+            
+            if userDescription != ""{
+                
+                db.collection("users").document(Auth.auth().currentUser!.uid).setData(["userDescription":userDescription]) { (error) in
+                    
+                    if error != nil {
+                        // Show error message
+                        self.showError("Error saving user data")
+                    }
+                }
+                
+            }
+            
+        }
         
     }
     
@@ -156,9 +324,6 @@ class SettingsViewController: UIViewController {
                 self.transitionToVC()
             }
             
-            //updateData(["dollarsPerHour":FieldValue.delete(), "freelanceService":FieldValue.delete(), "phoneNumber":FieldValue.delete(), "isSeller":FieldValue.delete(), "wasOnceSeller":FieldValue.delete(), "firstName":FieldValue.delete(), "lastName":FieldValue.delete(), "fullNameLower":FieldValue.delete()])
-
-            
         }))
         
 
@@ -188,4 +353,34 @@ class SettingsViewController: UIViewController {
         errorLabel.alpha = 1
     }
     
+    func validateFields() -> String? {
+        
+        let cleanedPhoneNumber = changePhoneNumberTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        if cleanedPhoneNumber != ""{
+        
+            if Utilities.isPhoneNumberValid(cleanedPhoneNumber) == false {
+            
+                return "Make sure your new phone number is only numbers (No Hyphens)"
+            
+            }
+        }
+        
+        let cleanedWage = changeWageTextField.text!.trimmingCharacters(in:.whitespacesAndNewlines)
+        
+        if cleanedWage != ""{
+        
+            if Utilities.isDollarsPerHourValid(cleanedWage) == false{
+            
+                return "Make sure your dollars per hour is only numbers"
+            
+            }
+        
+        }
+            
+        return nil
+        
+    }
 }
+
+
