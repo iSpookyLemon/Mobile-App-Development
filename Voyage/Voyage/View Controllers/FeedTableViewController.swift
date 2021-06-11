@@ -85,7 +85,7 @@ class FeedTableViewController: UITableViewController {
         let imageRef = storageRef.child(uid + "/profile.jpg")
         
         // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
-        imageRef.getData(maxSize: 1 * 2048 * 2048) { data, error in
+        imageRef.getData(maxSize: 2 * 1024 * 1024) { data, error in
             if error != nil {
                 // Uh-oh, an error occurred!
                 person.profileImage = UIImage(systemName: "person.circle")
@@ -124,7 +124,7 @@ class FeedTableViewController: UITableViewController {
         cell.name.text = person.firstName + " " + person.lastName
         cell.service.text = person.service
         cell.price.text = "$" + person.price
-        cell.contact.text = person.contact
+        cell.contact.text = Utilities.formatPhoneNumber(person.contact)
             
         return cell
     }
