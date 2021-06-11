@@ -22,18 +22,18 @@ class ViewController: UIViewController {
         
     }
     
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
         //Check auth status
-//        if Auth.auth().currentUser != nil {
-//            let homeViewController = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.homeViewController) as? HomeViewController
+        if Auth.auth().currentUser != nil {
+            let homeViewController = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.homeViewController) as? HomeViewController
             
-//            self.view.window?.rootViewController = homeViewController
-//            self.view.window?.makeKeyAndVisible()
-//        }
+            self.view.window?.rootViewController = homeViewController
+            self.view.window?.makeKeyAndVisible()
+        }
         
-//    }
+    }
 
 
     func setUpElements() {

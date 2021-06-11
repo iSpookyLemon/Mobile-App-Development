@@ -26,7 +26,6 @@ class FeedTableViewController: UITableViewController {
         super.viewDidLoad()
         
         getFeed() {
-            print("no")
             self.tableView.reloadData()
         }
         
@@ -56,7 +55,6 @@ class FeedTableViewController: UITableViewController {
                     
                     group.enter()
                     self.downloadImage(uid: uid, person: person) {
-                        print("hello")
                         person.firstName = document.get("firstname") as? String
                         person.lastName = document.get("lastname") as? String
                         person.description = document.get("description") as? String ?? "Hello, my name is " + person.firstName + " " + person.lastName
@@ -81,10 +79,8 @@ class FeedTableViewController: UITableViewController {
         // Create a reference to the file you want to upload
         let imageRef = storageRef.child(uid + "/profile.jpg")
         
-        print("hi")
         // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
         imageRef.getData(maxSize: 1 * 2048 * 2048) { data, error in
-            print("a")
             if error != nil {
                 // Uh-oh, an error occurred!
                 person.profileImage = UIImage(systemName: "person.circle")

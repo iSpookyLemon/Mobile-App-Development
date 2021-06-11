@@ -56,7 +56,7 @@ class SellerViewController: UIViewController, UINavigationControllerDelegate, UI
         self.dismiss(animated:true, completion:nil)
     }
     
-    func uploadImage(_ image: UIImage) {
+    func uploadImage(_ image: UIImage, completion: @escaping () -> Void) {
         // Get a reference to the storage service using the default Firebase App
         let storage = Storage.storage()
 
@@ -67,17 +67,18 @@ class SellerViewController: UIViewController, UINavigationControllerDelegate, UI
         // Create a reference to the file you want to upload
         let imageRef = storageRef.child(uid + "/profile.jpg")
 
-        // Upload the file to the path "images/rivers.jpg"
-        let uploadTask = imageRef.putData(image.jpegData(compressionQuality: 0.5)!, metadata: nil) { (metadata, error) in
-            guard metadata != nil else {
-                // Uh-oh, an error occurred
-                return
+        let image = image.jpegData(compressionQuality: 0.5)!
+        
+        if image.count <= 1 * 2048 * 2048 {
+            // Upload the file to the path "images/rivers.jpg"
+            imageRef.putData(image, metadata: nil) { (metadata, error) in
+                guard metadata != nil else {
+                    // Uh-oh, an error occurred
+                    completion()
+                    return
+                }
+                completion()
             }
-        }
-        // Add a success observer to an upload task
-        uploadTask.observe(.success) { snapshot in
-            //Makes sure the screen does not transition until image is uploaded
-            return
         }
     }
     
@@ -152,12 +153,11 @@ class SellerViewController: UIViewController, UINavigationControllerDelegate, UI
                     }
                 }
             
-            uploadImage(userImage)
-
-            self.transitionToHome()
-            
+            uploadImage(userImage) {
+                self.transitionToHome()
             }
         }
+    }
     
     func showError(_ message:String) {
         

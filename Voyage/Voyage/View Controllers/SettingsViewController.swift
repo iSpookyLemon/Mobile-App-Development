@@ -141,7 +141,20 @@ class SettingsViewController: UIViewController {
             
             db.collection("users").document(Auth.auth().currentUser!.uid).delete()
             
-            self.transitionToVC()
+            let group = DispatchGroup()
+            
+            group.enter()
+            Auth.auth().currentUser?.delete { error in
+                if error != nil {
+                // An error happened.
+                    print(error!)
+                }
+                group.leave()
+            }
+            
+            group.notify(queue: .main) {
+                self.transitionToVC()
+            }
             
             //updateData(["dollarsPerHour":FieldValue.delete(), "freelanceService":FieldValue.delete(), "phoneNumber":FieldValue.delete(), "isSeller":FieldValue.delete(), "wasOnceSeller":FieldValue.delete(), "firstName":FieldValue.delete(), "lastName":FieldValue.delete(), "fullNameLower":FieldValue.delete()])
 
