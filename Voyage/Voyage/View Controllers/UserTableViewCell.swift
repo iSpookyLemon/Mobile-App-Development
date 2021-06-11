@@ -11,7 +11,11 @@ class UserTableViewCell: UITableViewCell {
     
     @IBOutlet weak var name: UILabel!
     
-    @IBOutlet weak var userDescription: UILabel!
+    @IBOutlet weak var service: UILabel!
+    
+    @IBOutlet weak var price: UILabel!
+    
+    @IBOutlet weak var contact: UILabel!
     
     @IBOutlet weak var profileImage: UIImageView!
     

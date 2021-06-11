@@ -656,7 +656,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Description" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="abX-Bk-pQY">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Service" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="abX-Bk-pQY">
                                                     <rect key="frame" x="0.0" y="205.33333333333334" width="348" height="58.000000000000028"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -685,9 +685,11 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="contact" destination="J4L-3i-EwT" id="kDJ-ee-FHw"/>
                                     <outlet property="name" destination="tkx-Ma-0oh" id="azv-lA-clI"/>
+                                    <outlet property="price" destination="tdH-8L-Sw2" id="FHv-vJ-EHh"/>
                                     <outlet property="profileImage" destination="fWG-N9-DId" id="PLG-0g-Uit"/>
-                                    <outlet property="userDescription" destination="abX-Bk-pQY" id="S8t-Xg-jfA"/>
+                                    <outlet property="service" destination="abX-Bk-pQY" id="mKd-wd-Wnr"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
