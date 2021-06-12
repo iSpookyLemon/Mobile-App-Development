@@ -5,6 +5,9 @@
 
 import Foundation
 import UIKit
+import FirebaseAuth
+import FirebaseStorage
+import FirebaseFirestore
 
 class Utilities {
     
@@ -104,6 +107,29 @@ class Utilities {
         let s = phoneNumber
         let formattedPhoneNumber = String(format: "(%@) %@-%@", String(s[...s.index(s.startIndex, offsetBy: 2)]), String(s[s.index(s.startIndex, offsetBy: 3)...s.index(s.startIndex, offsetBy: 5)]), String(s[s.index(s.startIndex, offsetBy: 6)...s.index(s.startIndex, offsetBy: 9)]))
         return formattedPhoneNumber
+    }
+    
+    static func checkIfSeller() -> Bool{
+        
+        let uid = Auth.auth().currentUser!.uid
+        
+        let db = Firestore.firestore()
+        
+        let docRef = db.collection("users").document(uid)
+        
+        var isSeller = false
+        
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists{
+
+                isSeller = document.get("isSeller") as? Bool ?? false
+            
+                
+            }
+            
+        }
+        
+        return isSeller
     }
     
 }

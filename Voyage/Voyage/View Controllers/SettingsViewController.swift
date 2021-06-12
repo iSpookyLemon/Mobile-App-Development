@@ -176,7 +176,7 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
             
                     let profileName = self.changeProfileNameTextField.text!
             
-                    if profileName != ""{
+                    if let text = self.changeProfileNameTextField.text, text.isEmpty{
                 
                         db.collection("users").document(Auth.auth().currentUser!.uid).setData(["fullnamelower":profileName.lowercased()]) { (error) in
                     
@@ -194,7 +194,7 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
                         let wage = self.changeWageTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
                         let phoneNumber = self.changePhoneNumberTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
                         
-                        if freelanceService != ""{
+                        if let text = self.changeFreelanceServiceTextField.text, text.isEmpty{
                 
                             db.collection("users").document(Auth.auth().currentUser!.uid).setData(["freelanceService":freelanceService]) { (error) in
                     
@@ -206,7 +206,7 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
                 
                         }
             
-                        if wage != ""{
+                        if let text = self.changeWageTextField.text, text.isEmpty{
                             
                             db.collection("users").document(Auth.auth().currentUser!.uid).setData(  ["dollarsPerHour":wage]) { (error) in
                     
@@ -218,7 +218,7 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
                 
                         }
             
-                        if phoneNumber != ""{
+                        if let text = self.changePhoneNumberTextField.text, text.isEmpty{
                 
                             db.collection("users").document(Auth.auth().currentUser!.uid).setData(["phoneNumber":phoneNumber]) { (error) in
                     
@@ -238,7 +238,7 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
             
             let userDescription = self.changeUserDescriptionTextField.text!
             
-            if userDescription != ""{
+            if let text = self.changeUserDescriptionTextField.text, text.isEmpty{
                 
                 db.collection("users").document(Auth.auth().currentUser!.uid).setData(["userDescription":userDescription]) { (error) in
                     
@@ -355,31 +355,35 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
     
     func validateFields() -> String? {
         
-        let cleanedPhoneNumber = changePhoneNumberTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         
-        if cleanedPhoneNumber != ""{
         
-            if Utilities.isPhoneNumberValid(cleanedPhoneNumber) == false {
-            
-                return "Make sure your new phone number is only numbers (No Hyphens)"
-            
+        if Utilities.checkIfSeller() == true {
+                    
+            let cleanedPhoneNumber = self.changePhoneNumberTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+                    
+            if let text = self.changePhoneNumberTextField.text, text.isEmpty{
+                    
+                if Utilities.isPhoneNumberValid(cleanedPhoneNumber) == false {
+                        
+                    return "Make sure your new phone number is only numbers (No Hyphens)"
+                        
+                }
+            }
+                
+            let cleanedWage = self.changeWageTextField.text!.trimmingCharacters(in:.whitespacesAndNewlines)
+                    
+            if let text = self.changeWageTextField.text, text.isEmpty{
+                    
+                if Utilities.isDollarsPerHourValid(cleanedWage) == false{
+                        
+                    return "Make sure your dollars per hour is only numbers"
+                        
+                }
+                    
             }
         }
         
-        let cleanedWage = changeWageTextField.text!.trimmingCharacters(in:.whitespacesAndNewlines)
-        
-        if cleanedWage != ""{
-        
-            if Utilities.isDollarsPerHourValid(cleanedWage) == false{
-            
-                return "Make sure your dollars per hour is only numbers"
-            
-            }
-        
-        }
-            
         return nil
-        
     }
 }
 
