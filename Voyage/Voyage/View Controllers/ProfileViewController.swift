@@ -37,6 +37,9 @@ class ProfileViewController: UIViewController {
         
         let docRef = db.collection("users").document(uid)
         
+        self.profileImage.layer.cornerRadius = self.profileImage.frame.width / 2
+        self.profileImage.contentMode = .scaleAspectFill
+        
         downloadImage(uid) {
             self.profileImage.image = self.image
         }
