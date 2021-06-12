@@ -29,6 +29,9 @@ class UserViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.profileImage.layer.cornerRadius = self.profileImage.frame.width / 2
+        self.profileImage.contentMode = .scaleAspectFill
+        
         self.name.text = person.name
         self.profileImage.image = person.profileImage
         self.userDescription.text = person.description

@@ -21,6 +21,9 @@ class UserTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        self.profileImage.layer.cornerRadius = self.profileImage.frame.width / 2
+        self.profileImage.contentMode = .scaleAspectFill
         // Initialization code
     }
 
