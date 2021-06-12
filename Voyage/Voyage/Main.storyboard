@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="FVu-7m-eq4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="FVu-7m-eq4">
     <device id="retina6_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -81,7 +81,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" showsScopeBar="YES" id="fw9-Us-6b5">
-                            <rect key="frame" x="0.0" y="0.0" width="428" height="56"/>
+                            <rect key="frame" x="0.0" y="0.0" width="428" height="51"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <textInputTraits key="textInputTraits"/>
                             <scopeButtonTitles>
@@ -92,7 +92,7 @@
                         </searchBar>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="COm-az-RvQ">
-                                <rect key="frame" x="0.0" y="84" width="428" height="43.666667938232422"/>
+                                <rect key="frame" x="0.0" y="75.333333969116211" width="428" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="COm-az-RvQ" id="YE1-rK-Pbp">
                                     <rect key="frame" x="0.0" y="0.0" width="428" height="43.666667938232422"/>
@@ -368,8 +368,18 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Change Freelance Service" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mWU-n1-Lh4">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Edit User Description" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZJM-wH-LkT">
                                         <rect key="frame" x="0.0" y="290" width="388" height="50"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="HBK-qF-A0X"/>
+                                        </constraints>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Change Freelance Service" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mWU-n1-Lh4">
+                                        <rect key="frame" x="0.0" y="360" width="388" height="50"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="ZWb-2R-nvv"/>
@@ -379,7 +389,7 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Change Wage" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5NB-iK-rOZ">
-                                        <rect key="frame" x="0.0" y="360" width="388" height="50"/>
+                                        <rect key="frame" x="0.0" y="430" width="388" height="50"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="Kuz-YA-wuu"/>
@@ -389,20 +399,10 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Change Phone Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bXj-kU-1yy">
-                                        <rect key="frame" x="0.0" y="430" width="388" height="50"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="I8a-Zs-vVn"/>
-                                        </constraints>
-                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Edit User Description" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZJM-wH-LkT">
                                         <rect key="frame" x="0.0" y="500" width="388" height="50"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="HBK-qF-A0X"/>
+                                            <constraint firstAttribute="height" constant="50" id="I8a-Zs-vVn"/>
                                         </constraints>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -426,6 +426,7 @@
                                         <connections>
                                             <action selector="applyChangesToProfileTapped:" destination="8Tn-KE-WVD" eventType="touchUpInside" id="PrG-b1-8hC"/>
                                             <action selector="signUpSellerTapped:" destination="sAM-JY-o7m" eventType="touchUpInside" id="nLL-8o-nBd"/>
+                                            <segue destination="8Vg-tP-BWN" kind="presentation" modalPresentationStyle="fullScreen" id="3CF-dt-sq3"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -486,6 +487,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="4nh-EH-Fj1"/>
                     <connections>
+                        <outlet property="changeAccountInfoVertialStackView" destination="mJT-t7-5h1" id="aWh-It-3qz"/>
                         <outlet property="changeFreelanceServiceTextField" destination="mWU-n1-Lh4" id="8BI-GQ-y8W"/>
                         <outlet property="changePhoneNumberTextField" destination="bXj-kU-1yy" id="tho-Nx-M1C"/>
                         <outlet property="changeProfileButton" destination="ycS-38-1sU" id="ysa-qN-uN2"/>
@@ -494,9 +496,11 @@
                         <outlet property="changeSellerImageButton" destination="xZe-YO-UJx" id="3Zv-IO-Ebu"/>
                         <outlet property="changeUserDescriptionTextField" destination="ZJM-wH-LkT" id="E2o-2e-vYB"/>
                         <outlet property="changeWageTextField" destination="5NB-iK-rOZ" id="GY4-MU-7sN"/>
+                        <outlet property="deleteAccountsVerticalStackView" destination="H7n-Ed-g66" id="aJi-uw-i6t"/>
                         <outlet property="deleteFillAccountButton" destination="YHk-FY-UAu" id="4UN-3L-fEc"/>
                         <outlet property="deleteSellerAccountButton" destination="4rE-4I-1Xw" id="68H-IA-6y3"/>
                         <outlet property="errorLabel" destination="tfC-m9-Gyc" id="adi-re-NMd"/>
+                        <outlet property="imagesHorizontalStackView" destination="3C6-cD-i3Z" id="hYX-gw-yyT"/>
                         <outlet property="profileImage" destination="Xiw-gW-hDe" id="nDH-T0-3T5"/>
                         <outlet property="sellerImage" destination="QGd-ju-v2C" id="hnU-0e-isp"/>
                         <outlet property="sellerImageVerticalStackView" destination="ApQ-it-IRq" id="zPv-WR-M1M"/>
@@ -633,7 +637,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="userCell" rowHeight="386" id="s5b-pr-OVD" customClass="UserTableViewCell" customModule="Voyage" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="428" height="386"/>
+                                <rect key="frame" x="0.0" y="24.333333969116211" width="428" height="386"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="s5b-pr-OVD" id="L0g-Mb-4lD">
                                     <rect key="frame" x="0.0" y="0.0" width="428" height="386"/>
@@ -930,7 +934,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="FaQ-KR-Lq5"/>
+        <segue reference="3CF-dt-sq3"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Logo" width="144" height="143"/>

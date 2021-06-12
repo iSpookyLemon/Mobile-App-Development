@@ -45,6 +45,14 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
     
     @IBOutlet weak var deleteFillAccountButton: UIButton!
     
+    @IBOutlet weak var imagesHorizontalStackView: UIStackView!
+    
+    @IBOutlet weak var changeAccountInfoVertialStackView: UIStackView!
+    
+    @IBOutlet weak var deleteAccountsVerticalStackView: UIStackView!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
        
@@ -63,9 +71,6 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
         
                 let wasOnceSeller = document.get("wasOnceSeller") as? Bool
                 
-
-                
-                
                 
                 if isSeller == false {
                     
@@ -79,11 +84,13 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
                 
                 if isSeller == true {
                     
-                    self.view.addSubview(self.deleteSellerAccountButton)
-                    self.view.addSubview(self.changeFreelanceServiceTextField)
-                    self.view.addSubview(self.changeWageTextField)
-                    self.view.addSubview(self.changePhoneNumberTextField)
-                    self.view.addSubview(self.sellerImageVerticalStackView)
+                    
+                    
+                    self.deleteAccountsVerticalStackView.addSubview(self.deleteSellerAccountButton)
+                    self.changeAccountInfoVertialStackView.addSubview(self.changeFreelanceServiceTextField)
+                    self.changeAccountInfoVertialStackView.addSubview(self.changeWageTextField)
+                    self.changeAccountInfoVertialStackView.addSubview(self.changePhoneNumberTextField)
+                    self.imagesHorizontalStackView.addSubview(self.sellerImageVerticalStackView)
                     
                 }
                 
@@ -178,7 +185,11 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
             
                     if let text = self.changeProfileNameTextField.text, text.isEmpty{
                 
-                        db.collection("users").document(Auth.auth().currentUser!.uid).setData(["fullnamelower":profileName.lowercased()]) { (error) in
+                        //just need the else
+                        
+                    }else{
+                        
+                        db.collection("users").document(Auth.auth().currentUser!.uid).setData(["fullnamelower":profileName.lowercased()], merge:true) { (error) in
                     
                             if error != nil {
                         // Show error message
@@ -196,7 +207,11 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
                         
                         if let text = self.changeFreelanceServiceTextField.text, text.isEmpty{
                 
-                            db.collection("users").document(Auth.auth().currentUser!.uid).setData(["freelanceService":freelanceService]) { (error) in
+                            //just need the else
+                            
+                        }else{
+                            
+                            db.collection("users").document(Auth.auth().currentUser!.uid).setData(["freelanceService":freelanceService], merge:true) { (error) in
                     
                                 if error != nil {
                         // Show error message
@@ -208,7 +223,11 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
             
                         if let text = self.changeWageTextField.text, text.isEmpty{
                             
-                            db.collection("users").document(Auth.auth().currentUser!.uid).setData(  ["dollarsPerHour":wage]) { (error) in
+                            //just need the else
+                        
+                        }else{
+                            
+                            db.collection("users").document(Auth.auth().currentUser!.uid).setData(  ["dollarsPerHour":wage], merge:true) { (error) in
                     
                                 if error != nil {
                                     // Show error message
@@ -219,8 +238,12 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
                         }
             
                         if let text = self.changePhoneNumberTextField.text, text.isEmpty{
+                            
+                            //just need the else
+                            
+                        }else{
                 
-                            db.collection("users").document(Auth.auth().currentUser!.uid).setData(["phoneNumber":phoneNumber]) { (error) in
+                            db.collection("users").document(Auth.auth().currentUser!.uid).setData(["phoneNumber":phoneNumber], merge:true) { (error) in
                     
                                 if error != nil {
                                     // Show error message
@@ -240,8 +263,10 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
             
             if let text = self.changeUserDescriptionTextField.text, text.isEmpty{
                 
-                db.collection("users").document(Auth.auth().currentUser!.uid).setData(["userDescription":userDescription]) { (error) in
-                    
+                //just need the else
+                
+            }else{
+                db.collection("users").document(Auth.auth().currentUser!.uid).setData(["description":userDescription], merge:true) { (error) in
                     if error != nil {
                         // Show error message
                         self.showError("Error saving user data")
