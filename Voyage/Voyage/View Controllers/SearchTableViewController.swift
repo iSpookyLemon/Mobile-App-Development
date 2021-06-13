@@ -106,13 +106,13 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
         let document = data[indexPath.row]
         
         if searchType == "fullnamelower" {
-            let firstName = document.get("firstname") as! String
-            let lastName = document.get("lastname") as! String
+            let firstName = document.get("firstname") as? String ?? "Error"
+            let lastName = document.get("lastname") as? String ?? "Error"
             cellText = firstName + " " + lastName
         } else if searchType == "freelanceServiceLower" {
-            let firstName = document.get("firstname") as! String
-            let lastName = document.get("lastname") as! String
-            let service = document.get("freelanceService") as! String
+            let firstName = document.get("firstname") as? String ?? "Error"
+            let lastName = document.get("lastname") as? String ?? "Error"
+            let service = document.get("freelanceService") as? String ?? "Error"
             cellText = firstName + " " + lastName + " (" + service + ")"
         }
         
@@ -125,8 +125,8 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
         
         let selectedUser = data[indexPath.row]
         
-        let firstName = selectedUser.get("firstname") as! String
-        let lastName = selectedUser.get("lastname") as! String
+        let firstName = selectedUser.get("firstname") as? String ?? "Error"
+        let lastName = selectedUser.get("lastname") as? String ?? "Error"
         let description = selectedUser.get("description") as? String ?? "Hello, my name is " + firstName + " " + lastName
         let contact = selectedUser.get("phoneNumber") as? String ?? "No phone number available"
         

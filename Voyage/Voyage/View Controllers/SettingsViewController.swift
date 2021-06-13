@@ -11,19 +11,10 @@ import FirebaseStorage
 import FirebaseFirestore
 
 class SettingsViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-
-    var userImage = UIImage()
-    var userSeller_Image = UIImage()
     
     @IBOutlet weak var profileImage: UIImageView!
     
     @IBOutlet weak var changeProfilePictureButton: UIButton!
-    
-    @IBOutlet weak var sellerImageVerticalStackView: UIStackView!
-    
-    @IBOutlet weak var sellerImage: UIImageView!
-    
-    @IBOutlet weak var changeSellerImageButton: UIButton!
     
     @IBOutlet weak var changeProfileNameTextField: UITextField!
     
@@ -44,8 +35,6 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
     @IBOutlet weak var deleteSellerAccountButton: UIButton!
     
     @IBOutlet weak var deleteFillAccountButton: UIButton!
-    
-    @IBOutlet weak var imagesHorizontalStackView: UIStackView!
     
     @IBOutlet weak var changeAccountInfoVertialStackView: UIStackView!
     
@@ -78,7 +67,6 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
                     self.changeFreelanceServiceTextField.removeFromSuperview()
                     self.changeWageTextField.removeFromSuperview()
                     self.changePhoneNumberTextField.removeFromSuperview()
-                    self.sellerImageVerticalStackView.removeFromSuperview()
                     
                 }
                 
@@ -90,7 +78,6 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
                     self.changeAccountInfoVertialStackView.addSubview(self.changeFreelanceServiceTextField)
                     self.changeAccountInfoVertialStackView.addSubview(self.changeWageTextField)
                     self.changeAccountInfoVertialStackView.addSubview(self.changePhoneNumberTextField)
-                    self.imagesHorizontalStackView.addSubview(self.sellerImageVerticalStackView)
                     
                 }
                 
@@ -117,7 +104,6 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
         {
             self.profileImage.image = image
-            self.userImage = image
             
         }
         else
@@ -140,22 +126,6 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
         }
         
     }
-    
-    
-    func seller_imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
-        {
-            self.sellerImage.image = image
-            self.userSeller_Image = image
-            
-        }
-        else
-        {
-            //error message
-        }
-            
-        self.dismiss(animated:true, completion:nil)
-    }
 
 
     @IBAction func applyChangesToProfileTapped(_ sender: Any) {
@@ -176,6 +146,10 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
             
             let docRef = db.collection("users").document(uid)
             
+            if profileImage.image != UIImage(systemName: "person.circle") {
+                uploadImage(profileImage.image!)
+            }
+            
             docRef.getDocument { (document, error) in
                 if let document = document, document.exists{
 
@@ -183,13 +157,11 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
             
                     let profileName = self.changeProfileNameTextField.text!
             
-                    if let text = self.changeProfileNameTextField.text, text.isEmpty{
-                
-                        //just need the else
+                    if let text = self.changeProfileNameTextField.text, text.isEmpty == false {
+
+                        let nameArray = profileName.components(separatedBy: " ")
                         
-                    }else{
-                        
-                        db.collection("users").document(Auth.auth().currentUser!.uid).setData(["fullnamelower":profileName.lowercased()], merge:true) { (error) in
+                        db.collection("users").document(Auth.auth().currentUser!.uid).setData(["firstname": nameArray[0], "lastname": nameArray[1], "fullnamelower":profileName.lowercased()], merge:true) { (error) in
                     
                             if error != nil {
                         // Show error message
@@ -205,13 +177,9 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
                         let wage = self.changeWageTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
                         let phoneNumber = self.changePhoneNumberTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
                         
-                        if let text = self.changeFreelanceServiceTextField.text, text.isEmpty{
-                
-                            //just need the else
+                        if let text = self.changeFreelanceServiceTextField.text, text.isEmpty == false{
                             
-                        }else{
-                            
-                            db.collection("users").document(Auth.auth().currentUser!.uid).setData(["freelanceService":freelanceService], merge:true) { (error) in
+                            db.collection("users").document(Auth.auth().currentUser!.uid).setData(["freelanceService":freelanceService, "freelanceServiceLower": freelanceService.lowercased()], merge:true) { (error) in
                     
                                 if error != nil {
                         // Show error message
@@ -221,11 +189,7 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
                 
                         }
             
-                        if let text = self.changeWageTextField.text, text.isEmpty{
-                            
-                            //just need the else
-                        
-                        }else{
+                        if let text = self.changeWageTextField.text, text.isEmpty == false{
                             
                             db.collection("users").document(Auth.auth().currentUser!.uid).setData(  ["dollarsPerHour":wage], merge:true) { (error) in
                     
@@ -237,12 +201,8 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
                 
                         }
             
-                        if let text = self.changePhoneNumberTextField.text, text.isEmpty{
+                        if let text = self.changePhoneNumberTextField.text, text.isEmpty == false{
                             
-                            //just need the else
-                            
-                        }else{
-                
                             db.collection("users").document(Auth.auth().currentUser!.uid).setData(["phoneNumber":phoneNumber], merge:true) { (error) in
                     
                                 if error != nil {
@@ -261,11 +221,8 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
             
             let userDescription = self.changeUserDescriptionTextField.text!
             
-            if let text = self.changeUserDescriptionTextField.text, text.isEmpty{
-                
-                //just need the else
-                
-            }else{
+            if let text = self.changeUserDescriptionTextField.text, text.isEmpty == false {
+
                 db.collection("users").document(Auth.auth().currentUser!.uid).setData(["description":userDescription], merge:true) { (error) in
                     if error != nil {
                         // Show error message
@@ -277,6 +234,30 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
             
         }
         
+    }
+    
+    func uploadImage(_ image: UIImage) {
+        // Get a reference to the storage service using the default Firebase App
+        let storage = Storage.storage()
+
+        // Create a storage reference from our storage service
+        let storageRef = storage.reference()
+        let uid = Auth.auth().currentUser!.uid
+        
+        // Create a reference to the file you want to upload
+        let imageRef = storageRef.child(uid + "/profile.jpg")
+
+        let image = image.jpegData(compressionQuality: 0.5)!
+        
+        if image.count <= 2 * 1024 * 1024 {
+            // Upload the file to the path "images/rivers.jpg"
+            imageRef.putData(image, metadata: nil) { (metadata, error) in
+                guard metadata != nil else {
+                    // Uh-oh, an error occurred
+                    return
+                }
+            }
+        }
     }
     
     @IBAction func signOut(_ sender: Any) {
