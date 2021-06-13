@@ -79,8 +79,8 @@ class ProfileViewController: UIViewController {
                     
                 }
                 
-                let firstName = document.get("firstname") as? String ?? ""
-                let lastName = document.get("lastname") as? String ?? ""
+                let firstName = document.get("firstname") as? String ?? "Error"
+                let lastName = document.get("lastname") as? String ?? "Error"
                 let description = document.get("description") as? String ?? "Hello, my name is " + firstName + " " + lastName
                 
                 self.name.text = firstName + " " + lastName

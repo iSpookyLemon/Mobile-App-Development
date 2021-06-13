@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="FVu-7m-eq4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="FVu-7m-eq4">
     <device id="retina6_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -81,7 +81,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" showsScopeBar="YES" id="fw9-Us-6b5">
-                            <rect key="frame" x="0.0" y="0.0" width="428" height="51"/>
+                            <rect key="frame" x="0.0" y="0.0" width="428" height="56"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <textInputTraits key="textInputTraits"/>
                             <scopeButtonTitles>
@@ -92,7 +92,7 @@
                         </searchBar>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="COm-az-RvQ">
-                                <rect key="frame" x="0.0" y="75.333333969116211" width="428" height="43.666667938232422"/>
+                                <rect key="frame" x="0.0" y="84" width="428" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="COm-az-RvQ" id="YE1-rK-Pbp">
                                     <rect key="frame" x="0.0" y="0.0" width="428" height="43.666667938232422"/>
@@ -303,59 +303,29 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="mJT-t7-5h1">
                                 <rect key="frame" x="20" y="30" width="388" height="660.33333333333337"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="3C6-cD-i3Z">
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="TD0-HP-frN">
                                         <rect key="frame" x="0.0" y="0.0" width="388" height="200"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="TD0-HP-frN">
-                                                <rect key="frame" x="0.0" y="0.0" width="186.66666666666666" height="200"/>
-                                                <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Xiw-gW-hDe">
-                                                        <rect key="frame" x="0.0" y="1" width="186.66666666666666" height="148.66666666666666"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="150" id="X0k-xd-FVI"/>
-                                                        </constraints>
-                                                    </imageView>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ogs-Az-pOs">
-                                                        <rect key="frame" x="0.0" y="150" width="186.66666666666666" height="50"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="50" id="86i-bu-VB0"/>
-                                                        </constraints>
-                                                        <state key="normal" title="Change Profile Image">
-                                                            <color key="titleColor" red="1" green="0.52941176469999995" blue="0.023529411760000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        </state>
-                                                        <connections>
-                                                            <action selector="changeProfileImageTapped:" destination="8Tn-KE-WVD" eventType="touchUpInside" id="iUG-b7-TBZ"/>
-                                                            <action selector="importImageButton:" destination="sAM-JY-o7m" eventType="touchUpInside" id="lYh-3b-YHl"/>
-                                                        </connections>
-                                                    </button>
-                                                </subviews>
-                                            </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ApQ-it-IRq">
-                                                <rect key="frame" x="201.66666666666663" y="0.0" width="186.33333333333337" height="200"/>
-                                                <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="QGd-ju-v2C">
-                                                        <rect key="frame" x="0.0" y="1" width="186.33333333333334" height="148.66666666666666"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="150" id="DcO-3V-oBU"/>
-                                                        </constraints>
-                                                    </imageView>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xZe-YO-UJx">
-                                                        <rect key="frame" x="0.0" y="150" width="186.33333333333334" height="50"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="50" id="ChY-Jt-p1s"/>
-                                                        </constraints>
-                                                        <state key="normal" title="Change Seller Image">
-                                                            <color key="titleColor" red="1" green="0.52941176469999995" blue="0.023529411760000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        </state>
-                                                        <connections>
-                                                            <action selector="changeSellerImageTapped:" destination="8Tn-KE-WVD" eventType="touchUpInside" id="E8S-18-k9V"/>
-                                                            <action selector="importImageButton:" destination="sAM-JY-o7m" eventType="touchUpInside" id="Qao-Y6-OXc"/>
-                                                        </connections>
-                                                    </button>
-                                                </subviews>
-                                            </stackView>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Xiw-gW-hDe">
+                                                <rect key="frame" x="0.0" y="1" width="388" height="148.66666666666666"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="150" id="X0k-xd-FVI"/>
+                                                </constraints>
+                                            </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ogs-Az-pOs">
+                                                <rect key="frame" x="0.0" y="150" width="388" height="50"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="86i-bu-VB0"/>
+                                                </constraints>
+                                                <state key="normal" title="Change Profile Image">
+                                                    <color key="titleColor" red="1" green="0.52941176469999995" blue="0.023529411760000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="changeProfileImageTapped:" destination="8Tn-KE-WVD" eventType="touchUpInside" id="iUG-b7-TBZ"/>
+                                                    <action selector="importImageButton:" destination="sAM-JY-o7m" eventType="touchUpInside" id="lYh-3b-YHl"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                     </stackView>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Change Profile Full Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QQl-2E-Dh3">
@@ -493,17 +463,13 @@
                         <outlet property="changeProfileButton" destination="ycS-38-1sU" id="ysa-qN-uN2"/>
                         <outlet property="changeProfileNameTextField" destination="QQl-2E-Dh3" id="7d6-TI-SkJ"/>
                         <outlet property="changeProfilePictureButton" destination="Ogs-Az-pOs" id="QzX-er-dbN"/>
-                        <outlet property="changeSellerImageButton" destination="xZe-YO-UJx" id="3Zv-IO-Ebu"/>
                         <outlet property="changeUserDescriptionTextField" destination="ZJM-wH-LkT" id="E2o-2e-vYB"/>
                         <outlet property="changeWageTextField" destination="5NB-iK-rOZ" id="GY4-MU-7sN"/>
                         <outlet property="deleteAccountsVerticalStackView" destination="H7n-Ed-g66" id="aJi-uw-i6t"/>
                         <outlet property="deleteFillAccountButton" destination="YHk-FY-UAu" id="4UN-3L-fEc"/>
                         <outlet property="deleteSellerAccountButton" destination="4rE-4I-1Xw" id="68H-IA-6y3"/>
                         <outlet property="errorLabel" destination="tfC-m9-Gyc" id="adi-re-NMd"/>
-                        <outlet property="imagesHorizontalStackView" destination="3C6-cD-i3Z" id="hYX-gw-yyT"/>
                         <outlet property="profileImage" destination="Xiw-gW-hDe" id="nDH-T0-3T5"/>
-                        <outlet property="sellerImage" destination="QGd-ju-v2C" id="hnU-0e-isp"/>
-                        <outlet property="sellerImageVerticalStackView" destination="ApQ-it-IRq" id="zPv-WR-M1M"/>
                         <outlet property="signOut" destination="z3H-a1-YzU" id="3QR-LC-Dgo"/>
                     </connections>
                 </viewController>
@@ -573,9 +539,6 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstItem="HOc-c4-p7m" firstAttribute="top" secondItem="xuI-QO-EAM" secondAttribute="bottom" id="ZBJ-bi-zzm"/>
-                                </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="26" translatesAutoresizingMaskIntoConstraints="NO" id="oH4-8s-Gk1">
                                 <rect key="frame" x="40" y="741.66666666666663" width="348" height="96.333333333333371"/>
@@ -637,7 +600,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="userCell" rowHeight="386" id="s5b-pr-OVD" customClass="UserTableViewCell" customModule="Voyage" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="24.333333969116211" width="428" height="386"/>
+                                <rect key="frame" x="0.0" y="28" width="428" height="386"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="s5b-pr-OVD" id="L0g-Mb-4lD">
                                     <rect key="frame" x="0.0" y="0.0" width="428" height="386"/>
