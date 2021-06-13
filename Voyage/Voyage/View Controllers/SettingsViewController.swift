@@ -103,6 +103,8 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
         {
+            self.profileImage.layer.cornerRadius = self.profileImage.frame.width / 2
+            self.profileImage.contentMode = .scaleAspectFill
             self.profileImage.image = image
             
         }
@@ -112,19 +114,6 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
         }
         
         self.dismiss(animated:true, completion:nil)
-    }
-    
-    
-    @IBAction func changeSellerImageTapped(_ sender: Any) {
-        
-        let seller_image = UIImagePickerController()
-            seller_image.delegate = self
-            seller_image.sourceType = UIImagePickerController.SourceType.photoLibrary
-            seller_image.allowsEditing = false
-        self.present(seller_image, animated:true){
-
-        }
-        
     }
 
 

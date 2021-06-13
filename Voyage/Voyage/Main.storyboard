@@ -303,17 +303,18 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="mJT-t7-5h1">
                                 <rect key="frame" x="20" y="30" width="388" height="660.33333333333337"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="TD0-HP-frN">
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="TD0-HP-frN">
                                         <rect key="frame" x="0.0" y="0.0" width="388" height="200"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Xiw-gW-hDe">
-                                                <rect key="frame" x="0.0" y="1" width="388" height="148.66666666666666"/>
+                                                <rect key="frame" x="119" y="1" width="150" height="148.66666666666666"/>
                                                 <constraints>
+                                                    <constraint firstAttribute="width" constant="150" id="IwJ-DA-ACE"/>
                                                     <constraint firstAttribute="height" constant="150" id="X0k-xd-FVI"/>
                                                 </constraints>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ogs-Az-pOs">
-                                                <rect key="frame" x="0.0" y="150" width="388" height="50"/>
+                                                <rect key="frame" x="120.66666666666666" y="150" width="146.99999999999997" height="50"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="86i-bu-VB0"/>
