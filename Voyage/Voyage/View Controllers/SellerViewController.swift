@@ -13,6 +13,7 @@ import FirebaseFirestore
 class SellerViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
     var userImage = UIImage()
+    var didUploadImage = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,10 +43,36 @@ class SellerViewController: UIViewController, UINavigationControllerDelegate, UI
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        let storage = Storage.storage()
+
+        // Create a storage reference from our storage service
+        let storageRef = storage.reference()
+        
+        let uid = Auth.auth().currentUser!.uid
+        
+        // Create a reference to the file you want to upload
+        let imageRef = storageRef.child(uid + "/profile.jpg")
+        
+        // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
+        imageRef.getData(maxSize: 2 * 1024 * 1024) { data, error in
+            if error != nil {
+                
+                self.didUploadImage = false
+                
+            }else{
+                
+                self.didUploadImage = true
+                
+            }
+        }
+        
+        
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
         {
             importImageImageView.image = image
             userImage = image
+            didUploadImage = true
             
         }
         else
@@ -67,6 +94,8 @@ class SellerViewController: UIViewController, UINavigationControllerDelegate, UI
         // Create a reference to the file you want to upload
         let imageRef = storageRef.child(uid + "/profile.jpg")
 
+        
+        
         let image = image.jpegData(compressionQuality: 0.5)!
         
         if image.count <= 2 * 1024 * 1024 {
@@ -118,6 +147,12 @@ class SellerViewController: UIViewController, UINavigationControllerDelegate, UI
         if Utilities.isDollarsPerHourValid(cleanedDollarsPerHour) == false {
             
             return "Make sure your dollars per hour is only numbers"
+            
+        }
+        
+        if didUploadImage == false{
+            
+            return "Please choose a profile image"
             
         }
         
