@@ -23,6 +23,7 @@ class UserViewController: UIViewController {
     
     @IBOutlet weak var price: UILabel!
     
+    // Create the Person subclass that stores information about the user
     class Person {
         var name: String!
         var profileImage: UIImage!
@@ -39,13 +40,17 @@ class UserViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Create rounded profile image
         self.profileImage.layer.cornerRadius = self.profileImage.frame.width / 2
         self.profileImage.contentMode = .scaleAspectFill
         
+        // Set the uilabels to retrieved values
         self.name.text = person.name
         self.profileImage.image = person.profileImage
         self.userDescription.text = person.description
+        
         if person.isSeller {
+            // Also set the contact, location, service, and price if the user is a seller
             if person.contact != "No phone number available" {
                 self.contact.text = Utilities.formatPhoneNumber(person.contact)
             } else {
@@ -55,6 +60,7 @@ class UserViewController: UIViewController {
             self.service.text = person.service
             self.price.text = "$" + person.price
         } else {
+            // Remove uilabels if they are not a seller
             self.contact.removeFromSuperview()
             self.location.removeFromSuperview()
             self.service.removeFromSuperview()
@@ -63,16 +69,5 @@ class UserViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

@@ -16,8 +16,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         
+        // Style the elements
         setUpElements()
         
     }
@@ -25,8 +25,9 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        //Check auth status
+        //Check if user is signed in
         if Auth.auth().currentUser != nil {
+            // Automatically go to home screen if the user is signed in
             let homeViewController = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.homeViewController) as? HomeViewController
             
             self.view.window?.rootViewController = homeViewController
@@ -38,6 +39,7 @@ class ViewController: UIViewController {
 
     func setUpElements() {
         
+        // Style the buttons
         Utilities.styleFilledButton(signUpButton)
         Utilities.styleHollowButton(loginButton)
     }

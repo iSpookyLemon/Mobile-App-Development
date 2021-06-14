@@ -39,24 +39,31 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Get user id of current user
         let uid = Auth.auth().currentUser!.uid
         
+        // Create firestore object
         let db = Firestore.firestore()
         
+        // Create a reference to the user in firestore
         let docRef = db.collection("users").document(uid)
         
+        // Make profile image rounded
         self.profileImage.layer.cornerRadius = self.profileImage.frame.width / 2
         self.profileImage.contentMode = .scaleAspectFill
         
+        // download the profile image of the user
         downloadImage(uid) {
+            // set the image to the downloaded image on screen
             self.profileImage.image = self.image
         }
         
+        // get data from the reference
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
                 
+                // get boolean values about seller status
                 let isSeller = document.get("isSeller") as? Bool
-                
                 let wasOnceSeller = document.get("wasOnceSeller") as? Bool
             
                 if isSeller == true && wasOnceSeller == false{
@@ -117,6 +124,7 @@ class ProfileViewController: UIViewController {
                 self.name.text = firstName + " " + lastName
                 self.freelanceServiceLabel.text = freelanceService
                 self.dollarsPerHourLabel.text = "$" + dollarsPerHour
+                // Check if you have a phone number
                 if phoneNumber != "Error" {
                     self.phoneNumberLabel.text = Utilities.formatPhoneNumber(phoneNumber)
                 } else {
@@ -144,7 +152,7 @@ class ProfileViewController: UIViewController {
         // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
         imageRef.getData(maxSize: 2 * 1024 * 1024) { data, error in
             if error != nil {
-                // Uh-oh, an error occurred!
+                // The user either does not have an image or an error occured, so the default image shows
                 self.image = UIImage(systemName: "person.circle")
             } else {
                 // Data is returned
@@ -153,16 +161,5 @@ class ProfileViewController: UIViewController {
             completion()
         }
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

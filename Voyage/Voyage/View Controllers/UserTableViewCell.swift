@@ -24,15 +24,10 @@ class UserTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        // Create rounded profile image
         self.profileImage.layer.cornerRadius = self.profileImage.frame.width / 2
         self.profileImage.contentMode = .scaleAspectFill
         // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 
 }

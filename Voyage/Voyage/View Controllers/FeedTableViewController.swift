@@ -12,6 +12,7 @@ import FirebaseStorage
 
 class FeedTableViewController: UITableViewController {
     
+    // Create the Person subclass to store user information
     class Person {
         var firstName: String!
         var lastName: String!
@@ -23,12 +24,15 @@ class FeedTableViewController: UITableViewController {
         var location: String!
     }
     
+    // Create data that will populate table view
     var data = [Person]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Get user information
         getFeed() {
+            // Reload the table view with the retrieved data
             self.tableView.reloadData()
         }
         
@@ -40,22 +44,27 @@ class FeedTableViewController: UITableViewController {
     }
     
     func getFeed(completion: @escaping () -> Void) {
+        // Create a firestore object
         let db = Firestore.firestore()
         
+        // Query for users who are sellers
         db.collection("users").whereField("isSeller", isEqualTo : true).limit(to: 6).getDocuments() { (querySnapshot, err) in
             
             if let err = err {
+                // There was an error
                 print("Error getting documents: \(err)")
                 completion()
             } else {
+                // Dispatch Group makes the view wait for all of the data to be retrieved until loading the view
                 let group = DispatchGroup()
                 
                 for document in querySnapshot!.documents {
-                    
+                    // Create a Person object
                     let person = Person()
                     
                     let uid = document.documentID
                     
+                    // Set the attributes of person
                     person.firstName = document.get("firstname") as? String ?? "Error"
                     person.lastName = document.get("lastname") as? String ?? "Error"
                     person.service = document.get("freelanceService") as? String ?? "Error"
@@ -64,11 +73,14 @@ class FeedTableViewController: UITableViewController {
                     person.location = document.get("location") as? String ?? "Error"
                     
                     group.enter()
+                    
+                    // Doenload the image
                     self.downloadImage(uid: uid, person: person) {
                         self.data.append(person)
                         group.leave()
                     }
                 }
+                // When all tasks are complete the function is complete
                 group.notify(queue: .main) {
                     completion()
                 }
@@ -89,7 +101,7 @@ class FeedTableViewController: UITableViewController {
         // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
         imageRef.getData(maxSize: 2 * 1024 * 1024) { data, error in
             if error != nil {
-                // Uh-oh, an error occurred!
+                // No image was found or and error occured, so the profile image is default
                 person.profileImage = UIImage(systemName: "person.circle")
             } else {
                 // Data is returned
@@ -102,30 +114,29 @@ class FeedTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
+        // one section
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
+        // number of rows = count of data
         return data.count
     }
 
     // Create the cell
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // Create an instance of a user table view cell
         let cell = tableView.dequeueReusableCell(withIdentifier: "userCell") as! UserTableViewCell
         
         // Fetch data for row
         let person = data[indexPath.row]
         
-            cell.profileImage.image = person.profileImage
-            if person.profileImage == nil {
-                print("nil")
-            }
-        
+        // Set ui elements in cells to retrieved values
+        cell.profileImage.image = person.profileImage
         cell.name.text = person.firstName + " " + person.lastName
         cell.service.text = person.service
         cell.price.text = "$" + person.price
+        // Check to see of there is contact information
         if person.contact != "No phone number available" {
             cell.contact.text = Utilities.formatPhoneNumber(person.contact)
         } else {
@@ -135,62 +146,5 @@ class FeedTableViewController: UITableViewController {
             
         return cell
     }
-
-    /*
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-       // Make the first row larger to accommodate a custom cell.
-      if indexPath.row == 0 {
-          return 80
-       }
-
-       // Use the default size for all other rows.
-       return UITableView.automaticDimension
-    }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

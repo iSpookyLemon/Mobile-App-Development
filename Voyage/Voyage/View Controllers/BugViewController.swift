@@ -17,6 +17,7 @@ class BugViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Style the view
         let borderColor = UIColor.init(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.85)
         
         self.bugDescription.layer.borderWidth = 0.1
@@ -27,9 +28,10 @@ class BugViewController: UIViewController {
     
 
     @IBAction func submitButtonTapped(_ sender: Any) {
-        // User was created successfully, now store the first name and last name
+        // Create a firestore object
         let db = Firestore.firestore()
 
+        // add a document to the "bugs" collection
         db.collection("bugs").addDocument(data: ["bug": bugDescription.text!]) { (error) in
             
             if error != nil {
@@ -38,16 +40,5 @@ class BugViewController: UIViewController {
             }
         }
     }
-    
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

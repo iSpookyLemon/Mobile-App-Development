@@ -71,7 +71,7 @@ class Utilities {
     }
     
     static func isPasswordValid(_ password : String) -> Bool {
-        
+        // Test the strength of the password
         let passwordTest = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[$@$#!%*?&])[A-Za-z\\d$@$#!%*?&]{8,}")
         return passwordTest.evaluate(with: password)
     }
@@ -105,6 +105,8 @@ class Utilities {
     
     static func formatPhoneNumber(_ phoneNumber: String) -> String{
         let s = phoneNumber
+        
+        // String manipulation to format the phone number correctly
         let formattedPhoneNumber = String(format: "(%@) %@-%@", String(s[...s.index(s.startIndex, offsetBy: 2)]), String(s[s.index(s.startIndex, offsetBy: 3)...s.index(s.startIndex, offsetBy: 5)]), String(s[s.index(s.startIndex, offsetBy: 6)...s.index(s.startIndex, offsetBy: 9)]))
         return formattedPhoneNumber
     }

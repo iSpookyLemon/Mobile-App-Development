@@ -26,7 +26,7 @@ class SignUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        // Style the elements
         setUpElements()
     }
     
@@ -108,6 +108,7 @@ class SignUpViewController: UIViewController {
                     // User was created successfully, now store the first name and last name
                     let db = Firestore.firestore()
 
+                    // Upload user information to Firebase
                     db.collection("users").document(result!.user.uid).setData(["firstname":firstName, "lastname":lastName, "fullnamelower": firstName.lowercased() + " " + lastName.lowercased(), "isSeller":false, "wasOnceSeller":false, "description": "Hello, my name is " + firstName + " " + lastName]) { (error) in
                         
                         if error != nil {
@@ -125,12 +126,14 @@ class SignUpViewController: UIViewController {
     
     func showError(_ message:String) {
         
+        // Show the error message
         errorLabel.text = message
         errorLabel.alpha = 1
     }
     
     func transitionToHome() {
         
+        // Transition to home screen of app
         let homeViewController = storyboard?.instantiateViewController(identifier: Constants.Storyboard.homeViewController) as? HomeViewController
         
         view.window?.rootViewController = homeViewController

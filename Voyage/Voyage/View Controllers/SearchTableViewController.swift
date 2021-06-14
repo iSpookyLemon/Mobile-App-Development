@@ -13,15 +13,19 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
     
     @IBOutlet weak var searchBar: UISearchBar!
     
+    // create image variable to store the profile image
     var image: UIImage!
     
+    // create array to store data to be displayed on table view
     var data = [DocumentSnapshot]()
     
+    // String that identifies search type (i.e. user, location, or service)
     var searchType: String!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // Create the serach bar delegate
         searchBar.delegate = self
         setSearchBarType(searchBar.selectedScopeButtonIndex)
         // Uncomment the following line to preserve selection between presentations
@@ -34,6 +38,7 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
     // MARK: Search bar config
     
     func setSearchBarType(_ index: Int) {
+        // Determine the search type
         if index == 0 {
             searchType = "fullnamelower"
         } else if index == 1 {
@@ -43,31 +48,37 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
         }
     }
     
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        searchBar.setShowsCancelButton(true, animated: true)
-    }
-    
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        // set the search bar type if the scope bar is changed
         setSearchBarType(selectedScope)
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
+        // create a firestore object
         let db = Firestore.firestore()
+        
+        // create the search string
         let searchString = searchBar.text!.lowercased()
         
+        // Clear all data from the table view
         self.data.removeAll()
         
+        // Check if searchString is empty
         if searchString == "" {
+            // reload the table view
             self.tableView.reloadData()
         } else {
+            // Perform a query to find users/locations/services that being with the searchString
             db.collection("users")
                 .whereField(searchType, isLessThanOrEqualTo: searchString + "\u{f8ff}")
                 .whereField(searchType, isGreaterThanOrEqualTo: searchString)
                 .getDocuments() { (querySnapshot, err) in
                     if let err = err {
+                        // There was an error
                         print("Error getting documents: \(err)")
                     } else {
+                        // Fill the data array
                         self.data = querySnapshot!.documents
                         self.tableView.reloadData()
                     }
@@ -75,51 +86,65 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
         }
     }
     
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        // Show cancel button if the search bar text is edited
+        searchBar.setShowsCancelButton(true, animated: true)
+    }
+    
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        // Conceal cancel button when user stops editing earch bar
         searchBar.setShowsCancelButton(false, animated: true)
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        // Cancels editing when cancel button is clicked
         searchBar.endEditing(true)
     }
     
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
+        // one section
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
+        // number of rows = number of data values
 
         return data.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        // create tableviewcell
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell")! as UITableViewCell
         
+        // create cell text
         var cellText = ""
         
+        // get the document for the specific row
         let document = data[indexPath.row]
         
         if searchType == "fullnamelower" {
+            // Just display full name
             let firstName = document.get("firstname") as? String ?? "Error"
             let lastName = document.get("lastname") as? String ?? "Error"
             cellText = firstName + " " + lastName
         } else if searchType == "locationlower" {
+            // Display name and location
             let firstName = document.get("firstname") as? String ?? "Error"
             let lastName = document.get("lastname") as? String ?? "Error"
             let location = document.get("location") as? String ?? "Error"
             cellText = firstName + " " + lastName + " (" + location + ")"
         } else if searchType == "freelanceServiceLower" {
+            // Display name and service
             let firstName = document.get("firstname") as? String ?? "Error"
             let lastName = document.get("lastname") as? String ?? "Error"
             let service = document.get("freelanceService") as? String ?? "Error"
             cellText = firstName + " " + lastName + " (" + service + ")"
         }
         
+        // set the text of the cell to cellText
         cell.textLabel?.text = cellText
         
         return cell
@@ -127,8 +152,10 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        // Get info for the selected user
         let selectedUser = data[indexPath.row]
         
+        // Get details about selected user
         let firstName = selectedUser.get("firstname") as? String ?? "Error"
         let lastName = selectedUser.get("lastname") as? String ?? "Error"
         let description = selectedUser.get("description") as? String ?? "Hello, my name is " + firstName + " " + lastName
@@ -140,8 +167,10 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
         
         let uid = selectedUser.documentID
         
+        // Create a view controller to display
         if let viewController = storyboard?.instantiateViewController(identifier: Constants.Storyboard.userViewController) as? UserViewController {
             
+            // Assign values to the Person subclass in the view controller
             viewController.person.name = firstName + " " + lastName
             viewController.person.description = description
             viewController.person.contact = contact
@@ -149,6 +178,7 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
             viewController.person.isSeller = isSeller
             viewController.person.service = service
             viewController.person.price = price
+            // Download the user's profile image
             downloadImage(uid) {
                 viewController.person.profileImage = self.image
                 self.navigationController?.pushViewController(viewController, animated: true)
@@ -175,63 +205,9 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
                 // Data is returned
                 self.image = UIImage(data: data!)
             }
+            // Notify that the function is complete
             completion()
         }
     }
-
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
-    }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

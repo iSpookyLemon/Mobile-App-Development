@@ -11,13 +11,13 @@ import FirebaseStorage
 import FirebaseFirestore
 
 class SellerViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-
-    var userImage = UIImage()
+    
     var didUploadImage = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Create rounded profile images
         self.importImageImageView.layer.cornerRadius = self.importImageImageView.frame.width / 2
         self.importImageImageView.contentMode = .scaleAspectFill
 
@@ -49,23 +49,25 @@ class SellerViewController: UIViewController, UINavigationControllerDelegate, UI
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
+        // Create a firestore object
         let db = Firestore.firestore()
         
         let uid = Auth.auth().currentUser!.uid
         
+        // query for the current user
         db.collection("users").document(uid).getDocument() { (document, error) in
             if error == nil {
                 let wasOnceSeller = document!.get("wasOnceSeller") as? Bool ?? false
                 if wasOnceSeller == true {
+                    // if the user was once a seller, they did upload an image
                     self.didUploadImage = true
                 }
             }
         }
-
+        
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
         {
             importImageImageView.image = image
-            userImage = image
             didUploadImage = true
             
         }
@@ -88,10 +90,9 @@ class SellerViewController: UIViewController, UINavigationControllerDelegate, UI
         // Create a reference to the file you want to upload
         let imageRef = storageRef.child(uid + "/profile.jpg")
 
-        
-        
         let image = image.jpegData(compressionQuality: 0.5)!
         
+        // Check if the image size is less than some size
         if image.count <= 2 * 1024 * 1024 {
             // Upload the file to the path "images/rivers.jpg"
             imageRef.putData(image, metadata: nil) { (metadata, error) in
@@ -109,8 +110,10 @@ class SellerViewController: UIViewController, UINavigationControllerDelegate, UI
     
     func setUpElements() {
         
+        // hide the error label
         errorLabel.alpha = 0
         
+        // Style the elements
         Utilities.invertedStyleTextField(freelanceServiceTextField)
         Utilities.invertedStyleTextField(dollarsPerHourTextField)
         Utilities.invertedStyleTextField(phoneNumberTextField)
@@ -134,20 +137,20 @@ class SellerViewController: UIViewController, UINavigationControllerDelegate, UI
         let cleanedPhoneNumber = phoneNumberTextField.text!
         
         if Utilities.isPhoneNumberValid(cleanedPhoneNumber) == false {
-            //PhoneNumber is'nt secure enough
+            //PhoneNumber is'nt valid
             return "Make sure your phone number is only numbers (No Hyphens)"
         }
         
         let cleanedDollarsPerHour = dollarsPerHourTextField.text!
         
         if Utilities.isDollarsPerHourValid(cleanedDollarsPerHour) == false {
-            
+            // price is not a valid number
             return "Make sure your dollars per hour is only numbers"
             
         }
         
         if didUploadImage == false{
-            
+            // user did not upload an image
             return "Please choose a profile image"
             
         }
@@ -157,10 +160,11 @@ class SellerViewController: UIViewController, UINavigationControllerDelegate, UI
     
     @IBAction func signUpSellerTapped(_ sender: Any) {
         
+        // check if all fields are validated
         let error = validateFields()
         
         if error != nil{
-            
+            // show error
             showError(error!)
             
         }
@@ -174,31 +178,34 @@ class SellerViewController: UIViewController, UINavigationControllerDelegate, UI
             let phoneNumber = phoneNumberTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             let location = locationTextField.text!
                     
-                    // User was created successfully, now store the first name and last name
-                let db = Firestore.firestore()
+            // Create a firestore object
+            let db = Firestore.firestore()
 
+            // Query for data of current user
             db.collection("users").document(Auth.auth().currentUser!.uid).setData(["isSeller":true, "freelanceService":freelanceService, "freelanceServiceLower": freelanceService.lowercased(), "dollarsPerHour":dollarsPerHour, "phoneNumber":phoneNumber,"wasOnceSeller":false, "location":location, "locationlower":location.lowercased()], merge: true) { (error) in
                         
                     if error != nil {
-                            // Show error message
+                        // Show error message
                         self.showError("Error saving user data")
                     }
                 }
             
-            uploadImage(userImage) {
+            // upload the user's image to firebase storage
+            uploadImage(importImageImageView.image!) {
                 self.transitionToHome()
             }
         }
     }
     
     func showError(_ message:String) {
-        
+        // Show error
         errorLabel.text = message
         errorLabel.alpha = 1
     }
     
     func transitionToHome(){
         
+        // transition to home screen
         let homeViewController = storyboard?.instantiateViewController(identifier: Constants.Storyboard.homeViewController) as? HomeViewController
         
         view.window?.rootViewController = homeViewController

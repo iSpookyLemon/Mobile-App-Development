@@ -71,8 +71,6 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
             if let document = document, document.exists{
 
                 let isSeller = document.get("isSeller") as? Bool
-        
-                let wasOnceSeller = document.get("wasOnceSeller") as? Bool
                 
                 
                 if isSeller == false {
@@ -119,6 +117,7 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
         {
+            // Create a rounded profile image
             self.profileImage.layer.cornerRadius = self.profileImage.frame.width / 2
             self.profileImage.contentMode = .scaleAspectFill
             self.profileImage.image = image
@@ -127,6 +126,7 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
         else
         {
             //error message
+            print("error")
         }
         
         self.dismiss(animated:true, completion:nil)
@@ -163,7 +163,8 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
                     let profileName = self.changeProfileNameTextField.text!
             
                     if let text = self.changeProfileNameTextField.text, text.isEmpty == false {
-
+                        
+                        // create an array the contains the full name in order to split it into first name and last name
                         let nameArray = profileName.components(separatedBy: " ")
                         
                         db.collection("users").document(Auth.auth().currentUser!.uid).setData(["firstname": nameArray[0], "lastname": nameArray[1], "fullnamelower":profileName.lowercased()], merge:true) { (error) in
@@ -180,7 +181,7 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
                         db.collection("users").document(Auth.auth().currentUser!.uid).setData(["location": location, "locationlower": location.lowercased()], merge:true) { (error) in
                     
                             if error != nil {
-                        // Show error message
+                                // Show error message
                                 self.showError("Error saving user data")
                             }
                         }
@@ -265,6 +266,7 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
 
         let image = image.jpegData(compressionQuality: 0.5)!
         
+        // Check if image size is less than some size
         if image.count <= 2 * 1024 * 1024 {
             // Upload the file to the path "images/rivers.jpg"
             imageRef.putData(image, metadata: nil) { (metadata, error) in
@@ -278,12 +280,16 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
     
     @IBAction func signOut(_ sender: Any) {
         do {
+            // trye signing out
             try Auth.auth().signOut()
+            
+            // Transition to sign up/login screen
             let viewController = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.viewController) as? ViewController
             
             self.view.window?.rootViewController = viewController
             self.view.window?.makeKeyAndVisible()
         } catch let signOutError as NSError {
+            // Error signing out
             print("Error signing out: %@", signOutError)
         }
     }
@@ -332,6 +338,7 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
             
             db.collection("users").document(Auth.auth().currentUser!.uid).delete()
             
+            // Dispatch Group is used to wait until user is deleted to transition back to sign up/login screen
             let group = DispatchGroup()
             
             group.enter()
@@ -344,6 +351,7 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
             }
             
             group.notify(queue: .main) {
+                // transition back to sign up/login screen
                 self.transitionToVC()
             }
             
@@ -362,7 +370,7 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
     }
     
     func transitionToVC() {
-        
+        // Transitiont to login/sign up screen
         let viewController = storyboard?.instantiateViewController(identifier: Constants.Storyboard.viewController) as? ViewController
         
         view.window?.rootViewController = viewController
@@ -371,7 +379,7 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
     }
     
     func showError(_ message:String) {
-        
+        // show error message
         errorLabel.text = message
         errorLabel.alpha = 1
     }

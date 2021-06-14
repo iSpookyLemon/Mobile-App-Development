@@ -11,6 +11,7 @@ struct Constants {
     
     struct Storyboard {
         
+        // Store Storyboad IDs
         static let homeViewController = "HomeVC"
         static let viewController = "VC"
         static let userViewController = "UserVC"

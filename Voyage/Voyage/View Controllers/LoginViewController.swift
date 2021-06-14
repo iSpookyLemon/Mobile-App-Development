@@ -53,7 +53,7 @@ class LoginViewController: UIViewController {
         let email = emailTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         let password = passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         
-        // Signing in the user
+        // Signing in the user with Firebase Auth
         Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
             
             if error != nil {
@@ -62,7 +62,7 @@ class LoginViewController: UIViewController {
                 self.errorLabel.alpha = 1
             }
             else {
-                
+                // Transitition to app home screen
                 let homeViewController = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.homeViewController) as? HomeViewController
                 
                 self.view.window?.rootViewController = homeViewController
