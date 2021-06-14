@@ -20,6 +20,7 @@ class FeedTableViewController: UITableViewController {
         var price: String!
         var contact: String!
         var profileImage: UIImage!
+        var location: String!
     }
     
     var data = [Person]()
@@ -60,6 +61,7 @@ class FeedTableViewController: UITableViewController {
                     person.service = document.get("freelanceService") as? String ?? "Error"
                     person.price = document.get("dollarsPerHour") as? String ?? "Error"
                     person.contact = document.get("phoneNumber") as? String ?? "Error"
+                    person.location = document.get("location") as? String ?? "Error"
                     
                     group.enter()
                     self.downloadImage(uid: uid, person: person) {
@@ -124,7 +126,12 @@ class FeedTableViewController: UITableViewController {
         cell.name.text = person.firstName + " " + person.lastName
         cell.service.text = person.service
         cell.price.text = "$" + person.price
-        cell.contact.text = Utilities.formatPhoneNumber(person.contact)
+        if person.contact != "No phone number available" {
+            cell.contact.text = Utilities.formatPhoneNumber(person.contact)
+        } else {
+            cell.contact.text = person.contact
+        }
+        cell.location.text = person.location
             
         return cell
     }
