@@ -18,6 +18,8 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
     
     @IBOutlet weak var changeProfileNameTextField: UITextField!
     
+    @IBOutlet weak var changeLocationTextField: UITextField!
+    
     @IBOutlet weak var changeFreelanceServiceTextField: UITextField!
     
     @IBOutlet weak var changeWageTextField: UITextField!
@@ -40,10 +42,22 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
     
     @IBOutlet weak var deleteAccountsVerticalStackView: UIStackView!
     
+    @IBOutlet weak var scrollView: UIScrollView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.scrollView.addSubview(changeAccountInfoVertialStackView)
+        self.changeAccountInfoVertialStackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        self.changeAccountInfoVertialStackView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor).isActive = true
+        self.changeAccountInfoVertialStackView.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor).isActive = true
+        self.changeAccountInfoVertialStackView.topAnchor.constraint(equalTo: self.scrollView.topAnchor).isActive = true
+        self.changeAccountInfoVertialStackView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor).isActive = true
+        
+        self.changeAccountInfoVertialStackView.widthAnchor.constraint(equalTo: self.scrollView.widthAnchor).isActive = true
+        
        
         Utilities.invertedStyleFilledButton(changeProfileButton)
         
@@ -151,6 +165,16 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
                         let nameArray = profileName.components(separatedBy: " ")
                         
                         db.collection("users").document(Auth.auth().currentUser!.uid).setData(["firstname": nameArray[0], "lastname": nameArray[1], "fullnamelower":profileName.lowercased()], merge:true) { (error) in
+                    
+                            if error != nil {
+                        // Show error message
+                                self.showError("Error saving user data")
+                            }
+                        }
+                
+                    }
+                    if let location = self.changeLocationTextField.text, location.isEmpty == false {
+                        db.collection("users").document(Auth.auth().currentUser!.uid).setData(["location": location, "locationlower": location.lowercased()], merge:true) { (error) in
                     
                             if error != nil {
                         // Show error message
