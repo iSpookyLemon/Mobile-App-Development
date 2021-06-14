@@ -81,6 +81,7 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
                     self.changeFreelanceServiceTextField.removeFromSuperview()
                     self.changeWageTextField.removeFromSuperview()
                     self.changePhoneNumberTextField.removeFromSuperview()
+                    self.changeLocationTextField.removeFromSuperview()
                     
                 }
                 
@@ -92,6 +93,7 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
                     self.changeAccountInfoVertialStackView.addSubview(self.changeFreelanceServiceTextField)
                     self.changeAccountInfoVertialStackView.addSubview(self.changeWageTextField)
                     self.changeAccountInfoVertialStackView.addSubview(self.changePhoneNumberTextField)
+                    self.changeAccountInfoVertialStackView.addSubview(self.changeLocationTextField)
                     
                 }
                 
@@ -173,6 +175,7 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
                         }
                 
                     }
+                    
                     if let location = self.changeLocationTextField.text, location.isEmpty == false {
                         db.collection("users").document(Auth.auth().currentUser!.uid).setData(["location": location, "locationlower": location.lowercased()], merge:true) { (error) in
                     

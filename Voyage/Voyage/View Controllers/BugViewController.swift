@@ -16,8 +16,13 @@ class BugViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        let borderColor = UIColor.init(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.85)
+        
+        self.bugDescription.layer.borderWidth = 0.1
+        self.bugDescription.layer.cornerRadius = 8;
+        self.bugDescription.layer.borderColor = borderColor.cgColor
+        
     }
     
 

@@ -195,8 +195,8 @@
 				2AEC1B3A265EAE5900CA1D63 /* SellerViewController.swift */,
 				2AEC1B3C265EAF3600CA1D63 /* ProfileViewController.swift */,
 				63FD156D265FED3D0052459C /* UserTableViewCell.swift */,
-				63FD1560265EB68B0052459C /* FeedTableViewController.swift */,
 				63FD1595266149420052459C /* UserViewController.swift */,
+				63FD1560265EB68B0052459C /* FeedTableViewController.swift */,
 				63FD15D3266720290052459C /* SettingsViewController.swift */,
 				63F44BA52676EB85005B6C9E /* BugViewController.swift */,
 			);

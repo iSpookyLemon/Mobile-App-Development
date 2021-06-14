@@ -28,6 +28,8 @@ class SellerViewController: UIViewController, UINavigationControllerDelegate, UI
     
     @IBOutlet weak var phoneNumberTextField: UITextField!
     
+    @IBOutlet weak var locationTextField: UITextField!
+    
     @IBOutlet weak var importImageImageView: UIImageView!
     
     @IBOutlet weak var errorLabel: UILabel!
@@ -55,9 +57,9 @@ class SellerViewController: UIViewController, UINavigationControllerDelegate, UI
         let imageRef = storageRef.child(uid + "/profile.jpg")
         
         // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
-        imageRef.getData(maxSize: 2 * 1024 * 1024) { data, error in
-            if error != nil {
-                
+        imageRef.getData(maxSize: 2 * 1024 * 1024) { data, photoUploadError in
+            if photoUploadError != nil {
+                print(photoUploadError)
                 self.didUploadImage = false
                 
             }else{
@@ -121,6 +123,7 @@ class SellerViewController: UIViewController, UINavigationControllerDelegate, UI
         Utilities.invertedStyleTextField(dollarsPerHourTextField)
         Utilities.invertedStyleTextField(phoneNumberTextField)
         Utilities.invertedStyleFilledButton(signUpServiceButton)
+        Utilities.invertedStyleTextField(locationTextField)
     }
     
     // Check the fields and validate that the data is correct. If everything is correct, this method returns nil. Otherwide, it returns the error message
@@ -129,7 +132,8 @@ class SellerViewController: UIViewController, UINavigationControllerDelegate, UI
         //Check that all fields are filled in
         if freelanceServiceTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
             dollarsPerHourTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-            phoneNumberTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+            phoneNumberTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            locationTextField.text?.trimmingCharacters(in:.whitespacesAndNewlines) == ""{
             
             return "Please fill in all fields."
         }
@@ -176,11 +180,12 @@ class SellerViewController: UIViewController, UINavigationControllerDelegate, UI
             let freelanceService = freelanceServiceTextField.text!
             let dollarsPerHour = dollarsPerHourTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             let phoneNumber = phoneNumberTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+            let location = locationTextField.text!
                     
                     // User was created successfully, now store the first name and last name
                 let db = Firestore.firestore()
 
-            db.collection("users").document(Auth.auth().currentUser!.uid).setData(["isSeller":true, "freelanceService":freelanceService, "freelanceServiceLower": freelanceService.lowercased(), "dollarsPerHour":dollarsPerHour, "phoneNumber":phoneNumber,"wasOnceSeller":false], merge: true) { (error) in
+            db.collection("users").document(Auth.auth().currentUser!.uid).setData(["isSeller":true, "freelanceService":freelanceService, "freelanceServiceLower": freelanceService.lowercased(), "dollarsPerHour":dollarsPerHour, "phoneNumber":phoneNumber,"wasOnceSeller":false, "location":location, "locationlower":location.lowercased()], merge: true) { (error) in
                         
                     if error != nil {
                             // Show error message

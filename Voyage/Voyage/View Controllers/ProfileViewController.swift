@@ -14,6 +14,14 @@ class ProfileViewController: UIViewController {
     
     @IBOutlet weak var name: UILabel!
 
+    @IBOutlet weak var freelanceServiceLabel: UILabel!
+    
+    @IBOutlet weak var dollarsPerHourLabel: UILabel!
+    
+    @IBOutlet weak var phoneNumberLabel: UILabel!
+    
+    @IBOutlet weak var locationLabel: UILabel!
+    
     @IBOutlet weak var userDescription: UILabel!
     
     @IBOutlet weak var sellerButton: UIButton!
@@ -79,11 +87,38 @@ class ProfileViewController: UIViewController {
                     
                 }
                 
+                if isSeller == false{
+                    
+                    self.freelanceServiceLabel.removeFromSuperview()
+                    self.dollarsPerHourLabel.removeFromSuperview()
+                    self.phoneNumberLabel.removeFromSuperview()
+                    self.locationLabel.removeFromSuperview()
+                    
+                }
+                
+                if isSeller == true{
+                    
+                    self.verticalStack.addSubview(self.freelanceServiceLabel)
+                    self.verticalStack.addSubview(self.dollarsPerHourLabel)
+                    self.verticalStack.addSubview(self.phoneNumberLabel)
+                    self.verticalStack.addSubview(self.locationLabel)
+                    
+                }
+                
                 let firstName = document.get("firstname") as? String ?? "Error"
                 let lastName = document.get("lastname") as? String ?? "Error"
                 let description = document.get("description") as? String ?? "Hello, my name is " + firstName + " " + lastName
+                let freelanceService = document.get("freelanceService") as? String ?? "Error"
+                let dollarsPerHour = document.get("dollarsPerHour") as? String ?? "Error"
+                let phoneNumber = document.get("phoneNumber") as? String ?? "Error"
+                let location = document.get("location") as? String ?? "Error"
+                
                 
                 self.name.text = firstName + " " + lastName
+                self.freelanceServiceLabel.text = freelanceService
+                self.dollarsPerHourLabel.text = dollarsPerHour
+                self.phoneNumberLabel.text = phoneNumber
+                self.locationLabel.text = location
                 self.userDescription.text = description
             } else {
                 print("Document does not exist")
