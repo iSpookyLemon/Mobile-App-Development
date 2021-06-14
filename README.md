@@ -11,3 +11,7 @@ To run the app, you must have Mac OS and Xcode
 1. Click the green code button in github
 <img width="463" alt="Step 1" src="https://user-images.githubusercontent.com/77311956/121965148-39fef080-cd32-11eb-9b22-a44048637281.PNG">
 
+2. Then click "Download Zip"
+<img width="463" alt="Step 2" src="https://user-images.githubusercontent.com/77311956/121965329-7af70500-cd32-11eb-87a7-defea3ec8368.PNG">
+
+3. 
