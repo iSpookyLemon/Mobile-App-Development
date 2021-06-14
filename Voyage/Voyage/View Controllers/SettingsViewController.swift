@@ -308,6 +308,7 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
             }
             
             self.viewDidLoad()
+            self.transitionToVC()
             
         }))
 
@@ -348,7 +349,7 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
             
         }))
         
-
+        
 
         alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (action: UIAlertAction!) in
             
