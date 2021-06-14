@@ -297,7 +297,7 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
             let db = Firestore.firestore()
             
             db.collection("users").document(Auth.auth().currentUser!.uid).updateData([
-                "freelanceService": FieldValue.delete(), "dollarsPerHour": FieldValue.delete(),
+                "freelanceService": FieldValue.delete(), "freelanceServiceLower": FieldValue.delete(), "location": FieldValue.delete(), "locationlower": FieldValue.delete(), "dollarsPerHour": FieldValue.delete(),
                 "phoneNumber": FieldValue.delete(), "isSeller": false, "wasOnceSeller": true
             ]) { err in
                 if let err = err {

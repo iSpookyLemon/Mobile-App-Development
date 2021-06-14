@@ -174,7 +174,6 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
             } else {
                 // Data is returned
                 self.image = UIImage(data: data!)
-                print("1")
             }
             completion()
         }
