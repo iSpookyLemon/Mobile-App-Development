@@ -17,6 +17,9 @@ class SellerViewController: UIViewController, UINavigationControllerDelegate, UI
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.importImageImageView.layer.cornerRadius = self.importImageImageView.frame.width / 2
+        self.importImageImageView.contentMode = .scaleAspectFill
 
         // Do any additional setup after loading the view.
         setUpElements()
@@ -46,30 +49,19 @@ class SellerViewController: UIViewController, UINavigationControllerDelegate, UI
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
-        let storage = Storage.storage()
-
-        // Create a storage reference from our storage service
-        let storageRef = storage.reference()
+        let db = Firestore.firestore()
         
         let uid = Auth.auth().currentUser!.uid
         
-        // Create a reference to the file you want to upload
-        let imageRef = storageRef.child(uid + "/profile.jpg")
-        
-        // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
-        imageRef.getData(maxSize: 2 * 1024 * 1024) { data, photoUploadError in
-            if photoUploadError != nil {
-                print(photoUploadError)
-                self.didUploadImage = false
-                
-            }else{
-                
-                self.didUploadImage = true
-                
+        db.collection("users").document(uid).getDocument() { (document, error) in
+            if error == nil {
+                let wasOnceSeller = document!.get("wasOnceSeller") as? Bool ?? false
+                if wasOnceSeller == true {
+                    self.didUploadImage = true
+                }
             }
         }
-        
-        
+
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
         {
             importImageImageView.image = image

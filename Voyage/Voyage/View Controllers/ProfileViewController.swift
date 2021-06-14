@@ -116,8 +116,12 @@ class ProfileViewController: UIViewController {
                 
                 self.name.text = firstName + " " + lastName
                 self.freelanceServiceLabel.text = freelanceService
-                self.dollarsPerHourLabel.text = dollarsPerHour
-                self.phoneNumberLabel.text = phoneNumber
+                self.dollarsPerHourLabel.text = "$" + dollarsPerHour
+                if phoneNumber != "Error" {
+                    self.phoneNumberLabel.text = Utilities.formatPhoneNumber(phoneNumber)
+                } else {
+                    self.phoneNumberLabel.text = phoneNumber
+                }
                 self.locationLabel.text = location
                 self.userDescription.text = description
             } else {

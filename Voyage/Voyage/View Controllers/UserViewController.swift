@@ -17,11 +17,21 @@ class UserViewController: UIViewController {
     
     @IBOutlet weak var contact: UILabel!
     
+    @IBOutlet weak var location: UILabel!
+    
+    @IBOutlet weak var service: UILabel!
+    
+    @IBOutlet weak var price: UILabel!
+    
     class Person {
         var name: String!
         var profileImage: UIImage!
         var description: String!
         var contact: String!
+        var location: String!
+        var isSeller: Bool!
+        var service: String!
+        var price: String!
     }
     
     var person = Person()
@@ -35,7 +45,21 @@ class UserViewController: UIViewController {
         self.name.text = person.name
         self.profileImage.image = person.profileImage
         self.userDescription.text = person.description
-        self.contact.text = Utilities.formatPhoneNumber(person.contact)
+        if person.isSeller {
+            if person.contact != "No phone number available" {
+                self.contact.text = Utilities.formatPhoneNumber(person.contact)
+            } else {
+                self.contact.text = person.contact
+            }
+            self.location.text = person.location
+            self.service.text = person.service
+            self.price.text = "$" + person.price
+        } else {
+            self.contact.removeFromSuperview()
+            self.location.removeFromSuperview()
+            self.service.removeFromSuperview()
+            self.price.removeFromSuperview()
+        }
 
         // Do any additional setup after loading the view.
     }

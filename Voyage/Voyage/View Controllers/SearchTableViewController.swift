@@ -133,6 +133,10 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
         let lastName = selectedUser.get("lastname") as? String ?? "Error"
         let description = selectedUser.get("description") as? String ?? "Hello, my name is " + firstName + " " + lastName
         let contact = selectedUser.get("phoneNumber") as? String ?? "No phone number available"
+        let location = selectedUser.get("location") as? String ?? "No location available"
+        let isSeller = selectedUser.get("isSeller") as? Bool ?? false
+        let service = selectedUser.get("freelanceService") as? String ?? "No service"
+        let price = selectedUser.get("dollarsPerHour") as? String ?? "No price"
         
         let uid = selectedUser.documentID
         
@@ -141,6 +145,10 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
             viewController.person.name = firstName + " " + lastName
             viewController.person.description = description
             viewController.person.contact = contact
+            viewController.person.location = location
+            viewController.person.isSeller = isSeller
+            viewController.person.service = service
+            viewController.person.price = price
             downloadImage(uid) {
                 viewController.person.profileImage = self.image
                 self.navigationController?.pushViewController(viewController, animated: true)
