@@ -1,4 +1,3 @@
-![Screen Shot 2021-06-14 at 5 08 50 PM](https://user-images.githubusercontent.com/77311956/121965868-53ed0300-cd33-11eb-8fb4-4500870bc6c2.png)
 # Voyage
 
 By: Kevin Li and Shivam Kumar
