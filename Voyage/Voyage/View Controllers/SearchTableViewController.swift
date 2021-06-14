@@ -37,7 +37,7 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
         if index == 0 {
             searchType = "fullnamelower"
         } else if index == 1 {
-            searchType = "fullnamelower"
+            searchType = "locationlower"
         } else {
             searchType = "freelanceServiceLower"
         }
@@ -58,7 +58,9 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
         
         self.data.removeAll()
         
-        if searchString != "" {
+        if searchString == "" {
+            self.tableView.reloadData()
+        } else {
             db.collection("users")
                 .whereField(searchType, isLessThanOrEqualTo: searchString + "\u{f8ff}")
                 .whereField(searchType, isGreaterThanOrEqualTo: searchString)
@@ -70,9 +72,6 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
                         self.tableView.reloadData()
                     }
             }
-        }
-        else {
-            self.tableView.reloadData()
         }
     }
     
@@ -109,6 +108,11 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
             let firstName = document.get("firstname") as? String ?? "Error"
             let lastName = document.get("lastname") as? String ?? "Error"
             cellText = firstName + " " + lastName
+        } else if searchType == "locationlower" {
+            let firstName = document.get("firstname") as? String ?? "Error"
+            let lastName = document.get("lastname") as? String ?? "Error"
+            let location = document.get("location") as? String ?? "Error"
+            cellText = firstName + " " + lastName + " (" + location + ")"
         } else if searchType == "freelanceServiceLower" {
             let firstName = document.get("firstname") as? String ?? "Error"
             let lastName = document.get("lastname") as? String ?? "Error"
