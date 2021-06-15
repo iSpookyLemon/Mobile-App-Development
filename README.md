@@ -33,3 +33,18 @@ To run the app, you must have Mac OS and Xcode
 ![Screen Shot 2021-06-14 at 5 17 29 PM](https://user-images.githubusercontent.com/77311956/121966588-851a0300-cd34-11eb-9106-c6f06fb9be78.png)
 
 9. Once the project builds and loads, the app will start running on your phone!
+
+
+Once you are done with these steps, you can use our app for all of it's social media features.
+
+## Signing Up
+
+## Logging In
+
+## Using the Tab Bar
+
+## Using the Search Bar
+
+## Setting up your seller profile
+
+## Changing Information
