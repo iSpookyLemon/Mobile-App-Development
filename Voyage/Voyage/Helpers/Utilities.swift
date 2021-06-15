@@ -130,7 +130,7 @@ class Utilities {
             }
             
         }
-        
+        print (isSeller)
         return isSeller
     }
     

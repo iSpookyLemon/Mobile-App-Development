@@ -176,12 +176,14 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
                         }
                 
                     }
+                    
             
                     if isSeller == true{
             
                         let freelanceService = self.changeFreelanceServiceTextField.text!
                         let wage = self.changeWageTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
                         let phoneNumber = self.changePhoneNumberTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+                        
                         
                         if let location = self.changeLocationTextField.text, location.isEmpty == false {
                             db.collection("users").document(Auth.auth().currentUser!.uid).setData(["location": location, "locationlower": location.lowercased()], merge:true) { (error) in
@@ -229,8 +231,6 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
                             }
 
                         }
-                        
-                        self.transitionToHomeVC()
             
                     }
             
@@ -250,6 +250,8 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
                 }
                 
             }
+            
+            self.transitionToHomeVC()
             
         }
         
@@ -398,13 +400,15 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
     
     func validateFields() -> String? {
         
-        
-        
         if Utilities.checkIfSeller() == true {
-                    
+            
             let cleanedPhoneNumber = self.changePhoneNumberTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
                     
             if let text = self.changePhoneNumberTextField.text, text.isEmpty{
+                
+            }else{
+                
+                //Only Needed the Else
                     
                 if Utilities.isPhoneNumberValid(cleanedPhoneNumber) == false {
                         
@@ -416,9 +420,13 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
             let cleanedWage = self.changeWageTextField.text!.trimmingCharacters(in:.whitespacesAndNewlines)
                     
             if let text = self.changeWageTextField.text, text.isEmpty{
+                
+            }else{
+                
+                //Only needed the else
                     
                 if Utilities.isDollarsPerHourValid(cleanedWage) == false{
-                        
+                    
                     return "Make sure your dollars per hour is only numbers"
                         
                 }
@@ -427,6 +435,7 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
         }
         
         return nil
+        
     }
 }
 

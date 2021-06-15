@@ -410,7 +410,7 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Error" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tfC-m9-Gyc">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tfC-m9-Gyc">
                                 <rect key="frame" x="20" y="615.66666666666663" width="388" height="20.333333333333371"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" systemColor="systemRedColor"/>
@@ -429,7 +429,6 @@
                                 <connections>
                                     <action selector="applyChangesToProfileTapped:" destination="8Tn-KE-WVD" eventType="touchUpInside" id="PrG-b1-8hC"/>
                                     <action selector="signUpSellerTapped:" destination="sAM-JY-o7m" eventType="touchUpInside" id="nLL-8o-nBd"/>
-                                    <segue destination="8Vg-tP-BWN" kind="presentation" modalPresentationStyle="fullScreen" id="3CF-dt-sq3"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -448,7 +447,9 @@
                             <constraint firstItem="ycS-38-1sU" firstAttribute="leading" secondItem="Eb1-kP-GLD" secondAttribute="leading" constant="40" id="Y5S-30-uNz"/>
                             <constraint firstItem="fN6-ZJ-20T" firstAttribute="leading" secondItem="Eb1-kP-GLD" secondAttribute="leading" constant="20" id="b2c-2K-rah"/>
                             <constraint firstItem="cQj-xH-nTc" firstAttribute="top" secondItem="ycS-38-1sU" secondAttribute="bottom" constant="10" id="d1E-QS-NKL"/>
+                            <constraint firstItem="tfC-m9-Gyc" firstAttribute="leading" secondItem="Eb1-kP-GLD" secondAttribute="leading" constant="20" id="dPc-F2-bLU"/>
                             <constraint firstItem="H7n-Ed-g66" firstAttribute="leading" secondItem="Eb1-kP-GLD" secondAttribute="leading" id="hYk-7h-E1T"/>
+                            <constraint firstItem="Eb1-kP-GLD" firstAttribute="trailing" secondItem="tfC-m9-Gyc" secondAttribute="trailing" constant="20" id="kGI-1s-y6y"/>
                             <constraint firstItem="Eb1-kP-GLD" firstAttribute="trailing" secondItem="ycS-38-1sU" secondAttribute="trailing" constant="40" id="qEo-yU-2tw"/>
                         </constraints>
                     </view>
@@ -1061,8 +1062,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="hgE-SG-VqZ"/>
-        <segue reference="3CF-dt-sq3"/>
+        <segue reference="Vuc-Wq-vCk"/>
         <segue reference="FaQ-KR-Lq5"/>
     </inferredMetricsTieBreakers>
     <resources>
