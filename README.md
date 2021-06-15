@@ -82,5 +82,9 @@ Newly created accounts do not start off as seller accounts. If you have a servic
 To change your user information, you can navigate to your profile page and press the "Edit Profile" button. Once the button is pressed, you can enter any information you want to change as well as sign out, report a bug, or delete your seller account.
 
 ![Screen Shot 2021-06-14 at 9 54 49 PM](https://user-images.githubusercontent.com/77311956/121986261-cd005080-cd5b-11eb-8c70-8e375fdb47eb.png)
-![Screen Shot 2021-06-14 at 9 55 02 PM](https://user-images.githubusercontent.com/77311956/121986277-d1c50480-cd5b-11eb-8bb8-132ceb54f357.png)
+![Screen Shot 2021-06-15 at 12 21 20 PM](https://user-images.githubusercontent.com/77311956/122096537-49cf1100-cdd4-11eb-93ed-deab38c4cdfe.png)
 
+## Report a Bug
+To report a bug click on the red "Report a Bug" button on the edit profile screen
+
+![Screen Shot 2021-06-15 at 12 21 27 PM](https://user-images.githubusercontent.com/77311956/122096637-666b4900-cdd4-11eb-8e76-f6eb57084a29.png)
