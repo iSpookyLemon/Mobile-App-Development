@@ -12,6 +12,8 @@ import FirebaseFirestore
 
 class SettingsViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
+    //introduce all needed elements as variables
+    
     @IBOutlet weak var profileImage: UIImageView!
     
     @IBOutlet weak var changeProfilePictureButton: UIButton!
@@ -48,6 +50,8 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Add the scroll view along with its constraints into the view controller
+        
         self.scrollView.addSubview(changeAccountInfoVertialStackView)
         self.changeAccountInfoVertialStackView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -58,15 +62,20 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
         
         self.changeAccountInfoVertialStackView.widthAnchor.constraint(equalTo: self.scrollView.widthAnchor).isActive = true
         
-       
+       //Style elements
+        
         Utilities.invertedStyleFilledButton(changeProfileButton)
         
+        //Create a User Variable
         let uid = Auth.auth().currentUser!.uid
         
+        //Create a firestore object
         let db = Firestore.firestore()
         
+        //Access the data of current user
         let docRef = db.collection("users").document(uid)
         
+        //Check and see if the user is currently a seller
         docRef.getDocument { (document, error) in
             if let document = document, document.exists{
 
@@ -75,6 +84,7 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
                 
                 if isSeller == false {
                     
+                    //if the user is not a seller, delete all elements which are for sellers
                     self.deleteSellerAccountButton.removeFromSuperview()
                     self.changeFreelanceServiceTextField.removeFromSuperview()
                     self.changeWageTextField.removeFromSuperview()
@@ -85,8 +95,7 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
                 
                 if isSeller == true {
                     
-                    
-                    
+                    //if the user creates a seller account, retrieve the elements which were once deleted
                     self.deleteAccountsVerticalStackView.addSubview(self.deleteSellerAccountButton)
                     self.changeAccountInfoVertialStackView.addSubview(self.changeFreelanceServiceTextField)
                     self.changeAccountInfoVertialStackView.addSubview(self.changeWageTextField)
@@ -95,6 +104,7 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
                     
                 }
                 
+                //hide the error label since there is not currently an error
                 self.errorLabel.alpha = 0
                 
             }
@@ -102,7 +112,7 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
     }
     
     @IBAction func changeProfileImageTapped(_ sender: Any) {
-        
+        //Accesses the UIImagePicker
         let image = UIImagePickerController()
         image.delegate = self
         image.sourceType = UIImagePickerController.SourceType.photoLibrary
@@ -117,7 +127,7 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
         {
-            // Create a rounded profile image
+            // Create a rounded profile image in place of the placeholder image
             self.profileImage.layer.cornerRadius = self.profileImage.frame.width / 2
             self.profileImage.contentMode = .scaleAspectFill
             self.profileImage.image = image
@@ -135,31 +145,40 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
 
     @IBAction func applyChangesToProfileTapped(_ sender: Any) {
         
+        //Check if all fields are in the format which is asked for
         let error = validateFields()
         
         if error != nil{
-            
+            // if they are not in the correct format, instruct the user to change their input
             showError(error!)
             
         }
         
         else{
             
+            
+            //Create a user object
             let uid = Auth.auth().currentUser!.uid
             
+            //Create a firestore object
             let db = Firestore.firestore()
             
+            
+            //Create a document reference from our document service
             let docRef = db.collection("users").document(uid)
             
+            // if the user placed a new image, upload the image to the database
             if profileImage.image != UIImage(systemName: "person.circle") {
                 uploadImage(profileImage.image!)
             }
             
             docRef.getDocument { (document, error) in
                 if let document = document, document.exists{
-
+                    
+                    // check if the user is a seller
                     let isSeller = document.get("isSeller") as? Bool
-            
+                    
+                    // Set the new profile name if the user desires to change their profile name
                     let profileName = self.changeProfileNameTextField.text!
             
                     if let text = self.changeProfileNameTextField.text, text.isEmpty == false {
@@ -177,14 +196,15 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
                 
                     }
                     
-            
+                    // if the user is a seller, allow them to change fields which are in the context of sellers
                     if isSeller == true{
-            
+                        
+                        // Assign the text in each box to a variable
                         let freelanceService = self.changeFreelanceServiceTextField.text!
                         let wage = self.changeWageTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
                         let phoneNumber = self.changePhoneNumberTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
                         
-                        
+                        // if the user typed something in the location box, update the location of the user
                         if let location = self.changeLocationTextField.text, location.isEmpty == false {
                             db.collection("users").document(Auth.auth().currentUser!.uid).setData(["location": location, "locationlower": location.lowercased()], merge:true) { (error) in
                         
@@ -196,6 +216,7 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
                     
                         }
                         
+                        // if the user typed something in the freelance service box, update the freelance service of the user
                         if let text = self.changeFreelanceServiceTextField.text, text.isEmpty == false{
                             
                             db.collection("users").document(Auth.auth().currentUser!.uid).setData(["freelanceService":freelanceService, "freelanceServiceLower": freelanceService.lowercased()], merge:true) { (error) in
@@ -207,7 +228,8 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
                             }
                 
                         }
-            
+                        
+                        // if the user typed something in the change Wage box, update the wage information of the user
                         if let text = self.changeWageTextField.text, text.isEmpty == false{
                             
                             db.collection("users").document(Auth.auth().currentUser!.uid).setData(  ["dollarsPerHour":wage], merge:true) { (error) in
@@ -219,7 +241,8 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
                             }
                 
                         }
-            
+                        
+                        //if the user typed something in the phone Number box, update the phone Number of the user
                         if let text = self.changePhoneNumberTextField.text, text.isEmpty == false{
                             
                             db.collection("users").document(Auth.auth().currentUser!.uid).setData(["phoneNumber":phoneNumber], merge:true) { (error) in
@@ -238,8 +261,11 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
             
             }
             
+            
+            // assign the text in the user Description box a variable
             let userDescription = self.changeUserDescriptionTextField.text!
             
+            //if the user typed something in the user Description box, update the desiption of the user
             if let text = self.changeUserDescriptionTextField.text, text.isEmpty == false {
 
                 db.collection("users").document(Auth.auth().currentUser!.uid).setData(["description":userDescription], merge:true) { (error) in
@@ -251,6 +277,8 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
                 
             }
             
+            
+            // transition back to the home view controller when done updating fields
             self.transitionToHomeVC()
             
         }
@@ -284,7 +312,7 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
     
     @IBAction func signOut(_ sender: Any) {
         do {
-            // trye signing out
+            // try signing out
             try Auth.auth().signOut()
             
             // Transition to sign up/login screen
@@ -300,12 +328,14 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
     
     @IBAction func deleteSellerAccountTapped(_ sender: Any) {
         
+        
+        //Alert the user of what will happen if the delete their seller account
         let alert = UIAlertController(title: "Are you sure you want to Delete your Seller Account?", message: "This will remove all seller related information of yours from Voyage.", preferredStyle: UIAlertController.Style.alert)
-
+        //Give the user the option to proceed
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction!) in
-
+            // Create a firestore object
             let db = Firestore.firestore()
-            
+            //Delete all seller related fields in the firebase database
             db.collection("users").document(Auth.auth().currentUser!.uid).updateData([
                 "freelanceService": FieldValue.delete(), "freelanceServiceLower": FieldValue.delete(), "location": FieldValue.delete(), "locationlower": FieldValue.delete(), "dollarsPerHour": FieldValue.delete(),
                 "phoneNumber": FieldValue.delete(), "isSeller": false, "wasOnceSeller": true
@@ -316,12 +346,14 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
                     print("Document successfully updated")
                 }
             }
-            
+            // Update the screen to show the non-seller POV
             self.viewDidLoad()
+            
+            //Transition to main VC
             self.transitionToVC()
             
         }))
-
+        //Give the user the option to cancel
         alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (action: UIAlertAction!) in
             
         }))
@@ -333,13 +365,16 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
     @IBAction func deleteFullAccountTapped(_ sender: Any) {
         
 
-        
+        //Alert the user of what will happen if the delete their whole account
         let alert = UIAlertController(title: "Are you sure you want to Delete your Full Account?", message: "This will remove all information of yours from Voyage.", preferredStyle: UIAlertController.Style.alert)
-
+        
+        // Give them the option to proceed
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction!) in
             
+            //Create a firestore object
             let db = Firestore.firestore()
             
+            //Delete the users whole presence from our database
             db.collection("users").document(Auth.auth().currentUser!.uid).delete()
             
             // Dispatch Group is used to wait until user is deleted to transition back to sign up/login screen
@@ -362,7 +397,7 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
         }))
         
         
-
+        //give the user the option to cancel
         alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (action: UIAlertAction!) in
             
 
@@ -374,7 +409,7 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
     }
     
     func transitionToVC() {
-        // Transitiont to login/sign up screen
+        // Transition to login/sign up screen
         let viewController = storyboard?.instantiateViewController(identifier: Constants.Storyboard.viewController) as? ViewController
         
         view.window?.rootViewController = viewController
@@ -383,7 +418,7 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
     }
     
     func transitionToHomeVC() {
-        // Transitiont to login/sign up screen
+        // Transitiont to home view controller
         let homeViewController = storyboard?.instantiateViewController(identifier: Constants.Storyboard.homeViewController) as? HomeViewController
         
         view.window?.rootViewController = homeViewController
@@ -400,31 +435,38 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
     
     func validateFields() -> String? {
         
+        //check if the objects we are about to work on exist in the POV of the user (Check if seller)
         if Utilities.checkIfSeller() == true {
             
+            //define the text in the text field as a variable
             let cleanedPhoneNumber = self.changePhoneNumberTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-                    
+            //Can only operate on the text field if text is not empty
             if let text = self.changePhoneNumberTextField.text, text.isEmpty{
-                
+                //Only Needed the Else to see if the text is not empty
             }else{
                 
-                //Only Needed the Else
-                    
+                
+                //Check if the phone number is valid and in the correct format
                 if Utilities.isPhoneNumberValid(cleanedPhoneNumber) == false {
                         
                     return "Make sure your new phone number is only numbers (No Hyphens)"
                         
                 }
             }
-                
+            
+            
+            //define the text in the text field as a variable
             let cleanedWage = self.changeWageTextField.text!.trimmingCharacters(in:.whitespacesAndNewlines)
-                    
+            
+            
+            //Can only operate on the text field if text is not empty
             if let text = self.changeWageTextField.text, text.isEmpty{
+                
+                //Only needed the else to see if the text is not empty
                 
             }else{
                 
-                //Only needed the else
-                    
+                //Check if the wage is valid and in the correct format
                 if Utilities.isDollarsPerHourValid(cleanedWage) == false{
                     
                     return "Make sure your dollars per hour is only numbers"

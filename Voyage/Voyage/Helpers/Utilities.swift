@@ -76,28 +76,37 @@ class Utilities {
         return passwordTest.evaluate(with: password)
     }
     
+    //check if the phoneNumber the user entered is valid
     static func isPhoneNumberValid(_ phoneNumber: String) -> Bool {
         
+        //check if the phone number consists of only numbers
         let phoneNumberIsAllNumber = phoneNumber.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil
         
+        //check if the phone number consists of exactly 10 numbers and if both are right, then return true
         if phoneNumber.count==10 && phoneNumberIsAllNumber{
             return true
         }
         else{
+            //if one of the above parameters are wrong, return false
             return false
         }
         
         
     }
     
+    //check if the wage the user entered is valid
     static func isDollarsPerHourValid(_ dollarsPerHour: String) -> Bool {
         
+        //check if the wage the user entered consists of only numbers
         let dollarsPerHourIsAllNumber = dollarsPerHour.rangeOfCharacter(from:CharacterSet.decimalDigits.inverted) == nil
         
         if dollarsPerHourIsAllNumber{
+            
+            //If the wage is only numbers, return true
             return true
         }
         else {
+            //if the wage is not only numbers, return false
             return false
         }
         
@@ -111,16 +120,20 @@ class Utilities {
         return formattedPhoneNumber
     }
     
+    //function to check if the user is a seller
     static func checkIfSeller() -> Bool{
         
         let uid = Auth.auth().currentUser!.uid
-        
+    
+        //Create a firestore object
         let db = Firestore.firestore()
         
+        //Access the data of current user
         let docRef = db.collection("users").document(uid)
         
         var isSeller = false
         
+        //Check the variable of "isSeller" in the firebase database
         docRef.getDocument { (document, error) in
             if let document = document, document.exists{
 
@@ -130,7 +143,8 @@ class Utilities {
             }
             
         }
-        print (isSeller)
+        
+        //return the answer
         return isSeller
     }
     

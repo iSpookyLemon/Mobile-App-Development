@@ -82,6 +82,8 @@ class ProfileViewController: UIViewController {
                 
                 if isSeller == false && wasOnceSeller == true {
                     
+                    // Add back "Become a Seller" if user decides to delete their seller account and revert constraints
+                    
                     self.view.addSubview(self.sellerButton)
                     
                     for constraint in self.view.constraints{
@@ -96,6 +98,8 @@ class ProfileViewController: UIViewController {
                 
                 if isSeller == false{
                     
+                    //remove fields related only to sellers
+                    
                     self.freelanceServiceLabel.removeFromSuperview()
                     self.dollarsPerHourLabel.removeFromSuperview()
                     self.phoneNumberLabel.removeFromSuperview()
@@ -105,12 +109,16 @@ class ProfileViewController: UIViewController {
                 
                 if isSeller == true{
                     
+                    // add back fields related only to sellers if seller decides to delete seller account
+                    
                     self.verticalStack.addSubview(self.freelanceServiceLabel)
                     self.verticalStack.addSubview(self.dollarsPerHourLabel)
                     self.verticalStack.addSubview(self.phoneNumberLabel)
                     self.verticalStack.addSubview(self.locationLabel)
                     
                 }
+                
+                //obtain information of the user from the database and store them in variables
                 
                 let firstName = document.get("firstname") as? String ?? "Error"
                 let lastName = document.get("lastname") as? String ?? "Error"
@@ -120,6 +128,8 @@ class ProfileViewController: UIViewController {
                 let phoneNumber = document.get("phoneNumber") as? String ?? "Error"
                 let location = document.get("location") as? String ?? "Error"
                 
+                
+                // Set all text fields to users information in place of placeholders
                 
                 self.name.text = firstName + " " + lastName
                 self.freelanceServiceLabel.text = freelanceService

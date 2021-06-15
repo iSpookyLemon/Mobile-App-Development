@@ -25,6 +25,8 @@ class SellerViewController: UIViewController, UINavigationControllerDelegate, UI
         setUpElements()
     }
     
+    // introduce all needed elements as variables
+    
     @IBOutlet weak var freelanceServiceTextField: UITextField!
     
     @IBOutlet weak var dollarsPerHourTextField: UITextField!
@@ -38,6 +40,7 @@ class SellerViewController: UIViewController, UINavigationControllerDelegate, UI
     @IBOutlet weak var errorLabel: UILabel!
     
     @IBAction func importImageButton(_ sender: Any) {
+        //accesses the UIImagePicker
         let image = UIImagePickerController()
         image.delegate = self
         image.sourceType = UIImagePickerController.SourceType.photoLibrary
@@ -67,15 +70,12 @@ class SellerViewController: UIViewController, UINavigationControllerDelegate, UI
         
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
         {
+            
+            //replace the placeholder image with the image the user chose
             importImageImageView.image = image
             didUploadImage = true
             
         }
-        else
-        {
-            //error message
-        }
-        
         self.dismiss(animated:true, completion:nil)
     }
     
