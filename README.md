@@ -66,6 +66,7 @@ Once you login or sign up, you will see a page that has three buttons at the bot
 
 ## Using the Search Bar
 To use the search bar, you just need to start typing in the search bar and it will show results that are similar to what your are typing. You can change your search by using the scope bar, where you can select between searching for users, locations, and services. Once you are done searching for a user, you can select their name to open a page with more information about them.
+
 ![Screen Shot 2021-06-14 at 9 53 38 PM](https://user-images.githubusercontent.com/77311956/121986154-a93d0a80-cd5b-11eb-81b8-f311eaeabd60.png)
 ![Screen Shot 2021-06-14 at 9 55 19 PM](https://user-images.githubusercontent.com/77311956/121986177-b22ddc00-cd5b-11eb-9f09-a49014465c75.png)
 
