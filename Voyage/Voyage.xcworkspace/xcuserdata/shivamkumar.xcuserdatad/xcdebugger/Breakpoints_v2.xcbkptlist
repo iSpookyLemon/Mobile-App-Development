@@ -50,6 +50,38 @@
             endingLineNumber = "211"
             landmarkName = "applyChangesToProfileTapped(_:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "35D6C4D4-ED0B-40A4-AEC1-D775498BFD21 - 7fc01d54287a8258"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;__C.FIRDocumentSnapshot&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Voyage.SettingsViewController.applyChangesToProfileTapped(Any) -&gt; ()"
+                  moduleName = "Voyage"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/shivamkumar/Documents/Mobile-App-Development/Voyage/Voyage/View%20Controllers/SettingsViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "211"
+                  endingLineNumber = "211"
+                  offsetFromSymbolStart = "7220">
+               </Location>
+               <Location
+                  uuid = "35D6C4D4-ED0B-40A4-AEC1-D775498BFD21 - 3c0e8d9941428e7c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #4 (Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 (Swift.Optional&lt;__C.FIRDocumentSnapshot&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Voyage.SettingsViewController.applyChangesToProfileTapped(Any) -&gt; ()"
+                  moduleName = "Voyage"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/shivamkumar/Documents/Mobile-App-Development/Voyage/Voyage/View%20Controllers/SettingsViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "213"
+                  endingLineNumber = "213"
+                  offsetFromSymbolStart = "36">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

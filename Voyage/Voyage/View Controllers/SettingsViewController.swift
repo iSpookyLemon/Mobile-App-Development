@@ -176,23 +176,23 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
                         }
                 
                     }
-                    
-                    if let location = self.changeLocationTextField.text, location.isEmpty == false {
-                        db.collection("users").document(Auth.auth().currentUser!.uid).setData(["location": location, "locationlower": location.lowercased()], merge:true) { (error) in
-                    
-                            if error != nil {
-                                // Show error message
-                                self.showError("Error saving user data")
-                            }
-                        }
-                
-                    }
             
                     if isSeller == true{
             
                         let freelanceService = self.changeFreelanceServiceTextField.text!
                         let wage = self.changeWageTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
                         let phoneNumber = self.changePhoneNumberTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+                        
+                        if let location = self.changeLocationTextField.text, location.isEmpty == false {
+                            db.collection("users").document(Auth.auth().currentUser!.uid).setData(["location": location, "locationlower": location.lowercased()], merge:true) { (error) in
+                        
+                                if error != nil {
+                                    // Show error message
+                                    self.showError("Error saving user data")
+                                }
+                            }
+                    
+                        }
                         
                         if let text = self.changeFreelanceServiceTextField.text, text.isEmpty == false{
                             
@@ -229,6 +229,8 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
                             }
 
                         }
+                        
+                        self.transitionToHomeVC()
             
                     }
             
@@ -377,6 +379,16 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
         view.window?.makeKeyAndVisible()
         
     }
+    
+    func transitionToHomeVC() {
+        // Transitiont to login/sign up screen
+        let homeViewController = storyboard?.instantiateViewController(identifier: Constants.Storyboard.homeViewController) as? HomeViewController
+        
+        view.window?.rootViewController = homeViewController
+        view.window?.makeKeyAndVisible()
+        
+    }
+    
     
     func showError(_ message:String) {
         // show error message
