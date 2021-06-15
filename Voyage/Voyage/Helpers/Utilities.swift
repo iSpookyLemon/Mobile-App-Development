@@ -121,7 +121,7 @@ class Utilities {
     }
     
     //function to check if the user is a seller
-    static func checkIfSeller() -> Bool{
+    static func checkIfSeller(completion: @escaping (Bool) -> Void){
         
         let uid = Auth.auth().currentUser!.uid
     
@@ -138,14 +138,10 @@ class Utilities {
             if let document = document, document.exists{
 
                 isSeller = document.get("isSeller") as? Bool ?? false
-            
                 
             }
-            
+            completion(isSeller)
         }
-        
-        //return the answer
-        return isSeller
     }
     
 }

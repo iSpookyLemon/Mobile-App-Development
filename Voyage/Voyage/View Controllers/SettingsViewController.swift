@@ -50,6 +50,9 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //hide the error label since there is not currently an error
+        self.errorLabel.alpha = 0
+        
         //Add the scroll view along with its constraints into the view controller
         
         self.scrollView.addSubview(changeAccountInfoVertialStackView)
@@ -104,9 +107,6 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
                     
                 }
                 
-                //hide the error label since there is not currently an error
-                self.errorLabel.alpha = 0
-                
             }
         }
     }
@@ -146,141 +146,142 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
     @IBAction func applyChangesToProfileTapped(_ sender: Any) {
         
         //Check if all fields are in the format which is asked for
-        let error = validateFields()
+        validateFields() { error in
         
-        if error != nil{
-            // if they are not in the correct format, instruct the user to change their input
-            showError(error!)
-            
-        }
-        
-        else{
-            
-            
-            //Create a user object
-            let uid = Auth.auth().currentUser!.uid
-            
-            //Create a firestore object
-            let db = Firestore.firestore()
-            
-            
-            //Create a document reference from our document service
-            let docRef = db.collection("users").document(uid)
-            
-            // if the user placed a new image, upload the image to the database
-            if profileImage.image != UIImage(systemName: "person.circle") {
-                uploadImage(profileImage.image!)
+            if error != nil{
+                // if they are not in the correct format, instruct the user to change their input
+                self.showError(error!)
+                
             }
             
-            docRef.getDocument { (document, error) in
-                if let document = document, document.exists{
-                    
-                    // check if the user is a seller
-                    let isSeller = document.get("isSeller") as? Bool
-                    
-                    // Set the new profile name if the user desires to change their profile name
-                    let profileName = self.changeProfileNameTextField.text!
-            
-                    if let text = self.changeProfileNameTextField.text, text.isEmpty == false {
-                        
-                        // create an array the contains the full name in order to split it into first name and last name
-                        let nameArray = profileName.components(separatedBy: " ")
-                        
-                        db.collection("users").document(Auth.auth().currentUser!.uid).setData(["firstname": nameArray[0], "lastname": nameArray[1], "fullnamelower":profileName.lowercased()], merge:true) { (error) in
-                    
-                            if error != nil {
-                        // Show error message
-                                self.showError("Error saving user data")
-                            }
-                        }
+            else{
                 
-                    }
-                    
-                    // if the user is a seller, allow them to change fields which are in the context of sellers
-                    if isSeller == true{
-                        
-                        // Assign the text in each box to a variable
-                        let freelanceService = self.changeFreelanceServiceTextField.text!
-                        let wage = self.changeWageTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-                        let phoneNumber = self.changePhoneNumberTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-                        
-                        // if the user typed something in the location box, update the location of the user
-                        if let location = self.changeLocationTextField.text, location.isEmpty == false {
-                            db.collection("users").document(Auth.auth().currentUser!.uid).setData(["location": location, "locationlower": location.lowercased()], merge:true) { (error) in
-                        
-                                if error != nil {
-                                    // Show error message
-                                    self.showError("Error saving user data")
-                                }
-                            }
-                    
-                        }
-                        
-                        // if the user typed something in the freelance service box, update the freelance service of the user
-                        if let text = self.changeFreelanceServiceTextField.text, text.isEmpty == false{
-                            
-                            db.collection("users").document(Auth.auth().currentUser!.uid).setData(["freelanceService":freelanceService, "freelanceServiceLower": freelanceService.lowercased()], merge:true) { (error) in
-                    
-                                if error != nil {
-                        // Show error message
-                                    self.showError("Error saving user data")
-                                }
-                            }
                 
-                        }
-                        
-                        // if the user typed something in the change Wage box, update the wage information of the user
-                        if let text = self.changeWageTextField.text, text.isEmpty == false{
-                            
-                            db.collection("users").document(Auth.auth().currentUser!.uid).setData(  ["dollarsPerHour":wage], merge:true) { (error) in
-                    
-                                if error != nil {
-                                    // Show error message
-                                    self.showError("Error saving user data")
-                                }
-                            }
+                //Create a user object
+                let uid = Auth.auth().currentUser!.uid
                 
-                        }
-                        
-                        //if the user typed something in the phone Number box, update the phone Number of the user
-                        if let text = self.changePhoneNumberTextField.text, text.isEmpty == false{
-                            
-                            db.collection("users").document(Auth.auth().currentUser!.uid).setData(["phoneNumber":phoneNumber], merge:true) { (error) in
-                    
-                                if error != nil {
-                                    // Show error message
-                                    self.showError("Error saving user data")
-                                }
-                            }
-
-                        }
-            
-                    }
-            
-                }
-            
-            }
-            
-            
-            // assign the text in the user Description box a variable
-            let userDescription = self.changeUserDescriptionTextField.text!
-            
-            //if the user typed something in the user Description box, update the desiption of the user
-            if let text = self.changeUserDescriptionTextField.text, text.isEmpty == false {
-
-                db.collection("users").document(Auth.auth().currentUser!.uid).setData(["description":userDescription], merge:true) { (error) in
-                    if error != nil {
-                        // Show error message
-                        self.showError("Error saving user data")
-                    }
+                //Create a firestore object
+                let db = Firestore.firestore()
+                
+                
+                //Create a document reference from our document service
+                let docRef = db.collection("users").document(uid)
+                
+                // if the user placed a new image, upload the image to the database
+                if self.profileImage.image != UIImage(systemName: "person.circle") {
+                    self.uploadImage(self.profileImage.image!)
                 }
                 
+                docRef.getDocument { (document, error) in
+                    if let document = document, document.exists{
+                        
+                        // check if the user is a seller
+                        let isSeller = document.get("isSeller") as? Bool
+                        
+                        // Set the new profile name if the user desires to change their profile name
+                        let profileName = self.changeProfileNameTextField.text!
+                
+                        if let text = self.changeProfileNameTextField.text, text.isEmpty == false {
+                            
+                            // create an array the contains the full name in order to split it into first name and last name
+                            let nameArray = profileName.components(separatedBy: " ")
+                            
+                            db.collection("users").document(Auth.auth().currentUser!.uid).setData(["firstname": nameArray[0], "lastname": nameArray[1], "fullnamelower":profileName.lowercased()], merge:true) { (error) in
+                        
+                                if error != nil {
+                            // Show error message
+                                    self.showError("Error saving user data")
+                                }
+                            }
+                    
+                        }
+                        
+                        // if the user is a seller, allow them to change fields which are in the context of sellers
+                        if isSeller == true{
+                            
+                            // Assign the text in each box to a variable
+                            let freelanceService = self.changeFreelanceServiceTextField.text!
+                            let wage = self.changeWageTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+                            let phoneNumber = self.changePhoneNumberTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+                            
+                            // if the user typed something in the location box, update the location of the user
+                            if let location = self.changeLocationTextField.text, location.isEmpty == false {
+                                db.collection("users").document(Auth.auth().currentUser!.uid).setData(["location": location, "locationlower": location.lowercased()], merge:true) { (error) in
+                            
+                                    if error != nil {
+                                        // Show error message
+                                        self.showError("Error saving user data")
+                                    }
+                                }
+                        
+                            }
+                            
+                            // if the user typed something in the freelance service box, update the freelance service of the user
+                            if let text = self.changeFreelanceServiceTextField.text, text.isEmpty == false{
+                                
+                                db.collection("users").document(Auth.auth().currentUser!.uid).setData(["freelanceService":freelanceService, "freelanceServiceLower": freelanceService.lowercased()], merge:true) { (error) in
+                        
+                                    if error != nil {
+                                        // Show error message
+                                        self.showError("Error saving user data")
+                                    }
+                                }
+                    
+                            }
+                            
+                            // if the user typed something in the change Wage box, update the wage information of the user
+                            if let text = self.changeWageTextField.text, text.isEmpty == false{
+                                
+                                db.collection("users").document(Auth.auth().currentUser!.uid).setData(  ["dollarsPerHour":wage], merge:true) { (error) in
+                        
+                                    if error != nil {
+                                        // Show error message
+                                        self.showError("Error saving user data")
+                                    }
+                                }
+                    
+                            }
+                            
+                            //if the user typed something in the phone Number box, update the phone Number of the user
+                            if let text = self.changePhoneNumberTextField.text, text.isEmpty == false{
+                                
+                                db.collection("users").document(Auth.auth().currentUser!.uid).setData(["phoneNumber":phoneNumber], merge:true) { (error) in
+                        
+                                    if error != nil {
+                                        // Show error message
+                                        self.showError("Error saving user data")
+                                    }
+                                }
+
+                            }
+                
+                        }
+                
+                    }
+                
+                }
+                
+                
+                // assign the text in the user Description box a variable
+                let userDescription = self.changeUserDescriptionTextField.text!
+                
+                //if the user typed something in the user Description box, update the desiption of the user
+                if let text = self.changeUserDescriptionTextField.text, text.isEmpty == false {
+
+                    db.collection("users").document(Auth.auth().currentUser!.uid).setData(["description":userDescription], merge:true) { (error) in
+                        if error != nil {
+                            // Show error message
+                            self.showError("Error saving user data")
+                        }
+                    }
+                    
+                }
+                
+                
+                // transition back to the home view controller when done updating fields
+                self.transitionToHomeVC()
+                
             }
-            
-            
-            // transition back to the home view controller when done updating fields
-            self.transitionToHomeVC()
-            
         }
         
     }
@@ -433,50 +434,45 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
         errorLabel.alpha = 1
     }
     
-    func validateFields() -> String? {
+    func validateFields(completion: @escaping (String?) -> Void) {
+        
+        var error: String?
         
         //check if the objects we are about to work on exist in the POV of the user (Check if seller)
-        if Utilities.checkIfSeller() == true {
+        Utilities.checkIfSeller() { isSeller in
+            if isSeller {
             
-            //define the text in the text field as a variable
-            let cleanedPhoneNumber = self.changePhoneNumberTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-            //Can only operate on the text field if text is not empty
-            if let text = self.changePhoneNumberTextField.text, text.isEmpty{
-                //Only Needed the Else to see if the text is not empty
-            }else{
+                //define the text in the text field as a variable
+                let cleanedPhoneNumber = self.changePhoneNumberTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+                //Can only operate on the text field if text is not empty
+                if let text = self.changePhoneNumberTextField.text, text.isEmpty{
+                    //Only Needed the Else to see if the text is not empty
+                }else{
+                    
+                    
+                    //Check if the phone number is valid and in the correct format
+                    if Utilities.isPhoneNumberValid(cleanedPhoneNumber) == false {
+                            
+                        error = "Make sure your new phone number is only numbers (No Hyphens)"
+                            
+                    }
+                }
                 
                 
-                //Check if the phone number is valid and in the correct format
-                if Utilities.isPhoneNumberValid(cleanedPhoneNumber) == false {
-                        
-                    return "Make sure your new phone number is only numbers (No Hyphens)"
+                //define the text in the text field as a variable
+                let cleanedWage = self.changeWageTextField.text!.trimmingCharacters(in:.whitespacesAndNewlines)
+                
+                //Can only operate on the text field if text is not empty
+                if let text = self.changeWageTextField.text, text.isEmpty == false{
+                    if Utilities.isDollarsPerHourValid(cleanedWage) == false{
+                        error = "Make sure your dollars per hour is only numbers"
+                            
+                    }
                         
                 }
             }
-            
-            
-            //define the text in the text field as a variable
-            let cleanedWage = self.changeWageTextField.text!.trimmingCharacters(in:.whitespacesAndNewlines)
-            
-            
-            //Can only operate on the text field if text is not empty
-            if let text = self.changeWageTextField.text, text.isEmpty{
-                
-                //Only needed the else to see if the text is not empty
-                
-            }else{
-                
-                //Check if the wage is valid and in the correct format
-                if Utilities.isDollarsPerHourValid(cleanedWage) == false{
-                    
-                    return "Make sure your dollars per hour is only numbers"
-                        
-                }
-                    
-            }
+            completion(error)
         }
-        
-        return nil
         
     }
 }
